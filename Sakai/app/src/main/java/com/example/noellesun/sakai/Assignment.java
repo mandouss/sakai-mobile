@@ -1,5 +1,6 @@
 package com.example.noellesun.sakai;
 
+import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class Assignment extends AppCompatActivity {
         setContentView(R.layout.activity_assignment);
 
         findViewById(R.id.btn8).setOnClickListener(siteClickEvent);
+        findViewById(R.id.sites).setOnClickListener(sitesclick);
     }
     final OnClickListener siteClickEvent = new OnClickListener() {
         @Override
@@ -25,7 +27,13 @@ public class Assignment extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"sites clicked",Toast.LENGTH_SHORT).show();
         }
     };
-
+    final OnClickListener sitesclick = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent toSites = new Intent(Assignment.this, sites.class);
+            startActivity(toSites);
+        }
+    };
 }
 
 

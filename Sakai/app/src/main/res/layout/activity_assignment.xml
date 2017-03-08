@@ -217,25 +217,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/sites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
-            android:layout_weight="0.05" />
+            android:layout_weight="0.05"
+            android:text="Sites" />
 
         <Button
             android:id="@+id/button6"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="Button"
-            android:layout_weight="0.02" />
+            android:layout_weight="0.02"
+            android:text="Calender" />
 
         <Button
             android:id="@+id/btn8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
-            android:text="Button" />
+            android:text="Settings" />
     </LinearLayout>
 
 </LinearLayout>
