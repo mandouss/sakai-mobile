@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
                 Log.i("MyApp", view.getUrl());
                 if(view.getUrl() == "https://sakai.duke.edu/portal"){
                     //redirect to sites
-
+                    startActivity(new Intent(Login.this,sites.class));
                 }
             }
         });
