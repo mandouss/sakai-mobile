@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".sites">
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Assignment"></activity>
-        <activity android:name=".Gradebook"></activity>
-        <activity android:name=".eachSite"></activity>
+        <activity android:name=".Assignment" />
+        <activity android:name=".Gradebook" />
+        <activity android:name=".eachSite" />
+        <activity android:name=".sites"></activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
