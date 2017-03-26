@@ -16,8 +16,8 @@ public class Login extends AppCompatActivity {
 
         WebView browser = (WebView) findViewById(R.id.webview);
         browser .setWebViewClient(new WebViewClient() {
-            public void onReceivedError(WebView view, int errorCode, String description, String   failingUrl) {
-
+            public void onPageFinished(WebView view, String url) {
+                // 
             }
         });
 
