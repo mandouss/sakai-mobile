@@ -23,17 +23,18 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Login extends AppCompatActivity {
-    ArrayList<HashMap<String, String>> memberList;
+    List<String> idarray;
     private ProgressDialog pDialog;
     private String TAG = Login.class.getSimpleName();
-
+    String target = "site:";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        memberList = new ArrayList<>();
+        idarray = new ArrayList<>();
         WebView browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -81,35 +82,25 @@ public class Login extends AppCompatActivity {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
                     // Getting JSON Array node
-                    JSONArray contacts = jsonObj.getJSONArray("contacts");
+                    JSONArray members = jsonObj.getJSONArray("membership");
 
-                    // looping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
+                    // looping through All memberships
+                    for (int i = 0; i < members.length(); i++) {
+                        JSONObject c = members.getJSONObject(i);
 
-                        String id = c.getString("id");
-                        String name = c.getString("name");
-                        String email = c.getString("email");
-                        String address = c.getString("address");
-                        String gender = c.getString("gender");
+                        String userId = c.getString("userId");//get userId
+                        String id = c.getString("id");//userId::site::siteId
+                        int startIndex = id.indexOf(target);
+                        String siteId = id.substring(startIndex+5);//get siteId
 
-                        // Phone node is JSON Object
-                        JSONObject phone = c.getJSONObject("phone");
-                        String mobile = phone.getString("mobile");
-                        String home = phone.getString("home");
-                        String office = phone.getString("office");
-
-                        // tmp hash map for single contact
-                        HashMap<String, String> contact = new HashMap<>();
-
-                        // adding each child node to HashMap key => value
-                        contact.put("id", id);
-                        contact.put("name", name);
-                        contact.put("email", email);
-                        contact.put("mobile", mobile);
-
-                        // adding contact to contact list
-                        memberList.add(contact);
+                        // adding userId, each siteId into idarray
+                        if (i == 0){
+                            idarray.add(userId);
+                            idarray.add(siteId);
+                        }
+                        else {
+                            idarray.add(siteId);
+                        }
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
