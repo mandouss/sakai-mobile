@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Login extends AppCompatActivity {
-    List<String> idarray;
+    ArrayList<String> idarray;
     private ProgressDialog pDialog;
     private String TAG = Login.class.getSimpleName();
     String target = "site:";
@@ -46,7 +47,11 @@ public class Login extends AppCompatActivity {
 
                 if (url.equals("https://sakai.duke.edu/portal")) {
                     //redirect to sites
-                    startActivity(new Intent(Login.this, sites.class));
+                    Intent intent = new Intent(Login.this, sites.class);
+                    Bundle b=new Bundle();
+                    b.putStringArrayList("ID_ARRAY",idarray);
+                    intent.putExtras(b);
+                    startActivity(intent);
                 }
             }
         });

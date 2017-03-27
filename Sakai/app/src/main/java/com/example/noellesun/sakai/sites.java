@@ -10,8 +10,12 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class sites extends AppCompatActivity {
+    String userid;
+    ArrayList<String> sitesids;
     public void rowClick(View view) {
         switch(view.getId()) {
             case R.id.ece550:
@@ -35,6 +39,11 @@ public class sites extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b =  getIntent().getExtras();
+        ArrayList<String> idarray = b.getStringArrayList("ID_ARRAY");
+        userid = idarray.get(0);
+        idarray.remove(0);
+        sitesids = idarray;
         setContentView(R.layout.activity_sites);
         findViewById(R.id.sites).setOnClickListener(sitesclick);
     }
