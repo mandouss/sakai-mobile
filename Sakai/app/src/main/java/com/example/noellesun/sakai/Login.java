@@ -52,12 +52,13 @@ public class Login extends AppCompatActivity {
                     b.putStringArrayList("ID_ARRAY",idarray);
                     intent.putExtras(b);
                     startActivity(intent);
+                    new GetMember().execute();
                 }
             }
         });
 
         browser.loadUrl("https://sakai.duke.edu");
-        new GetMember().execute();
+
     }
 
     private class GetMember extends AsyncTask<Void, Void, Void> {
@@ -87,7 +88,7 @@ public class Login extends AppCompatActivity {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
                     // Getting JSON Array node
-                    JSONArray members = jsonObj.getJSONArray("membership");
+                    JSONArray members = jsonObj.getJSONArray("membership_collection");
 
                     // looping through All memberships
                     for (int i = 0; i < members.length(); i++) {

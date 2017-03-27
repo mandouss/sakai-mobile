@@ -44,6 +44,7 @@ public class sites extends AppCompatActivity {
         userid = idarray.get(0);
         idarray.remove(0);
         sitesids = idarray;
+        Toast.makeText(getApplicationContext(),userid,Toast.LENGTH_LONG).show();
         setContentView(R.layout.activity_sites);
         findViewById(R.id.sites).setOnClickListener(sitesclick);
     }
