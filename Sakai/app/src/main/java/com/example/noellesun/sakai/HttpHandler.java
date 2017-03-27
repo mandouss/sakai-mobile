@@ -6,6 +6,8 @@ package com.example.noellesun.sakai;
 
 import java.io.IOException;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,19 +23,21 @@ import java.net.URL;
  * www.androidhive.info
  */
 public class HttpHandler {
-
+    int bad = 10;
     private static final String TAG = HttpHandler.class.getSimpleName();
 
     public HttpHandler() {
     }
 
-    public String makeServiceCall(String reqUrl) {
+    public String makeServiceCall(String reqUrl, String myCookie) {
         String response = null;
         try {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("Cookie", myCookie);
             conn.setRequestMethod("GET");
             // read the response
+            bad = conn.getResponseCode();
             InputStream in = new BufferedInputStream(conn.getInputStream());
             response = convertStreamToString(in);
         } catch (MalformedURLException e) {
@@ -41,7 +45,7 @@ public class HttpHandler {
         } catch (ProtocolException e) {
             Log.e(TAG, "ProtocolException: " + e.getMessage());
         } catch (IOException e) {
-            Log.e(TAG, "IOException: " + e.getMessage());
+            Log.e(TAG, "IOException: " + Integer.toString( bad) );
         } catch (Exception e) {
             Log.e(TAG, "Exception: " + e.getMessage());
         }
