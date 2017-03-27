@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -31,7 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Login extends AppCompatActivity {
-    ArrayList<String> idarray = new ArrayList<>();;
+    ArrayList<String> idarray = new ArrayList<>();
     private ProgressDialog pDialog;
     private String TAG = Login.class.getSimpleName();
     String target = "site:";
@@ -46,12 +47,7 @@ public class Login extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         final CookieManager cookieManager = CookieManager.getInstance();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            cookieManager.setAcceptThirdPartyCookies(browser,true);
-        }
-        else {
-            cookieManager.setAcceptCookie(true);
-        }
+
         browser.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -162,6 +158,7 @@ public class Login extends AppCompatActivity {
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
+
         }
     }
 
