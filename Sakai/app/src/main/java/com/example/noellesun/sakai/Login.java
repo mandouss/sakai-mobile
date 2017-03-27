@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Login extends AppCompatActivity {
-    ArrayList<String> idarray;
+    ArrayList<String> idarray = new ArrayList<>();;
     private ProgressDialog pDialog;
     private String TAG = Login.class.getSimpleName();
     String target = "site:";
@@ -40,7 +40,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        idarray = new ArrayList<>();
 
         WebView browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
@@ -62,11 +61,7 @@ public class Login extends AppCompatActivity {
                     //redirect to sites
                     cookiestr = cookieManager.getCookie(url);
                     new GetMember().execute();
-                    Intent intent = new Intent(Login.this, sites.class);
-                    Bundle b=new Bundle();
-                    b.putStringArrayList("ID_ARRAY",idarray);
-                    intent.putExtras(b);
-                    startActivity(intent);
+
 
                 }
             }
@@ -76,7 +71,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private class GetMember extends AsyncTask<Void, Void, Void> {
+    class GetMember extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -124,6 +119,7 @@ public class Login extends AppCompatActivity {
                             idarray.add(siteId);
                         }
                     }
+
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
@@ -137,6 +133,8 @@ public class Login extends AppCompatActivity {
                     });
 
                 }
+
+                Log.e("ID_ARRAY1:",idarray.toString());
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
                 runOnUiThread(new Runnable() {
@@ -150,7 +148,11 @@ public class Login extends AppCompatActivity {
                 });
 
             }
-
+            Intent intent = new Intent(Login.this, sites.class);
+            Bundle b=new Bundle();
+            b.putStringArrayList("ID_ARRAY",idarray);
+            intent.putExtras(b);
+            startActivity(intent);
             return null;
         }
 
@@ -162,4 +164,5 @@ public class Login extends AppCompatActivity {
                 pDialog.dismiss();
         }
     }
+
 }

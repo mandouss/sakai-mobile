@@ -1,6 +1,7 @@
 package com.example.noellesun.sakai;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,9 +39,12 @@ public class sites extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("Sites:","now in sites create");
         super.onCreate(savedInstanceState);
         Bundle b =  getIntent().getExtras();
+        Log.e("Sites:","got intent");
         ArrayList<String> idarray = b.getStringArrayList("ID_ARRAY");
+        Log.e("Sites:",idarray.toString());
         userid = idarray.get(0);
         idarray.remove(0);
         sitesids = idarray;
