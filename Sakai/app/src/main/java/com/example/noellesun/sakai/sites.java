@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
@@ -39,6 +40,8 @@ public class sites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
+        lv.setClickable(true);
+        lv.setOnClickListener(listListener);
 
         sitetitleist = new ArrayList<>();
 
@@ -57,11 +60,12 @@ public class sites extends AppCompatActivity {
         Log.e("aftergetid:", "I am here!");
 
         new GetSites().execute();
-
-
-
     }
-
+    public OnClickListener listListener = new OnClickListener() {
+        public void onClick(View v) {
+            //code to be written to handle the click event
+        }
+    };
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -149,4 +153,3 @@ public class sites extends AppCompatActivity {
 
     }
 }
-
