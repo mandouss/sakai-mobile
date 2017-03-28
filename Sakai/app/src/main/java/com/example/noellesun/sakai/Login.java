@@ -148,6 +148,7 @@ public class Login extends AppCompatActivity {
             Bundle b=new Bundle();
             b.putStringArrayList("ID_ARRAY",idarray);
             intent.putExtras(b);
+            intent.putExtra("ID","Login");
             startActivity(intent);
             return null;
         }

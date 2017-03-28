@@ -28,7 +28,7 @@ public class eachSite extends AppCompatActivity {
         //assignments = (Button)findViewById(R.id.Assignments);
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
         findViewById(R.id.Gradebook).setOnClickListener(gradebookclick);
-        findViewById(R.id.sites).setOnClickListener(sitesclick);
+        findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
     }
     final OnClickListener assignclick = new OnClickListener() {
         @Override
@@ -41,6 +41,7 @@ public class eachSite extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent toSites = new Intent(eachSite.this, sites.class);
+            toSites.putExtra("ID","eachSite");
             startActivity(toSites);
         }
     };

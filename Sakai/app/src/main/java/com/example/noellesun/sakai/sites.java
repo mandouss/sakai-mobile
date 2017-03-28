@@ -27,36 +27,62 @@ import java.util.HashMap;
 
 public class sites extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
-    String userid;
-    ArrayList<String> sitesids;
+    static  String userid;
+    static ArrayList<String> sitesids;
     private ProgressDialog pDialog;
     private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/site/";
     String cookiestr;
-    ArrayList<HashMap<String, String>> sitetitleist;
+    static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>(); ;
+    static ArrayList<String> idarray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
-        sitetitleist = new ArrayList<>();
+        //sitetitleist = new ArrayList<>();
 
+        Log.e("sitetitlelist",Integer.toString(sitetitleist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        Log.e("Sites:", "now in sites create");
+        //Log.e("Sites:", "now in sites create");
 
-        Bundle b = getIntent().getExtras();
-        Log.e("Sites:", "got intent");
-        ArrayList<String> idarray = b.getStringArrayList("ID_ARRAY");
-        //Log.e("Sites:", idarray.toString());
-        userid = idarray.get(0);
-        idarray.remove(0);
-        sitesids = idarray;
-        Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
-        Log.e("aftergetid:", "I am here!");
+        if(getIntent().getExtras().getString("ID").equals("Login")){
+            Bundle b = getIntent().getExtras();
+            Log.e("Sites:", "got intent");
+            idarray = b.getStringArrayList("ID_ARRAY");
+            userid = idarray.get(0);
+            idarray.remove(0);
+            sitesids = idarray;
+            Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
+            Log.e("aftergetid:", "I am here!");
+            //new GetSites().execute();
+        }
+        else{
+            Log.e("redirect","From other activities!");
+            Log.e("Sites:", "now in sites create");
+            ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
+                    R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
 
+            /*lv.setAdapter(adapter);
+            //set click event
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+                    Intent intent = new Intent(sites.this, eachSite.class);
+                    String [] ids = {userid, sitesids.get(position)};
+                    Bundle b = new Bundle();
+                    b.putStringArray("IDS",ids);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+            });*/
+        }
         new GetSites().execute();
+        //Log.e("Sites:", idarray.toString());
+
     }
    /* public OnClickListener OnItemClickListener = new OnClickListener() {
         public void onClick(View v) {
