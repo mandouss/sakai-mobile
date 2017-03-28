@@ -15,21 +15,14 @@
 
 
         <Button
-            android:id="@+id/sites"
+            android:id="@+id/sitesbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.11"
+            android:layout_weight="0.20"
             android:text="Sites" />
 
         <Button
-            android:id="@+id/Announcements"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.49"
-            android:text="Calender" />
-
-        <Button
-            android:id="@+id/button3"
+            android:id="@+id/profilebtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.37"
