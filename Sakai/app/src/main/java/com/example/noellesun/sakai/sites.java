@@ -62,10 +62,10 @@ public class sites extends AppCompatActivity {
         else{
             Log.e("redirect","From other activities!");
             Log.e("Sites:", "now in sites create");
-            ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
+            /*ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
                     R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
 
-            /*lv.setAdapter(adapter);
+            lv.setAdapter(adapter);
             //set click event
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
