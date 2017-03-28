@@ -34,7 +34,9 @@ public class HttpHandler {
         try {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("Cookie", myCookie);
+            if(!(myCookie.length()==0 )){
+                conn.setRequestProperty("Cookie", myCookie);
+            }
             conn.setRequestMethod("GET");
             // read the response
             bad = conn.getResponseCode();

@@ -18,14 +18,14 @@ public class Profile extends AppCompatActivity {
     String userid;
     String fixurl = "https://sakai.duke.edu/direct/profile/";
     private String TAG = Login.class.getSimpleName();
-    String cookiestr;
+    String cookiestr = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        final CookieManager cookieManager = CookieManager.getInstance();
-        cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
+//        final CookieManager cookieManager = CookieManager.getInstance();
+  //      cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         Bundle b = getIntent().getExtras();
         userid = b.getString("USERID");
         Log.e("PROFILE", userid);
