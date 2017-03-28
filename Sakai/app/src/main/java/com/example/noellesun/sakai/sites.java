@@ -40,8 +40,8 @@ public class sites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
-        lv.setClickable(true);
-        lv.setOnClickListener(listListener);
+        //lv.setClickable(true);
+        //lv.setOnClickListener(listListener);
 
         sitetitleist = new ArrayList<>();
 
@@ -61,7 +61,7 @@ public class sites extends AppCompatActivity {
 
         new GetSites().execute();
     }
-    public OnClickListener listListener = new OnClickListener() {
+   /* public OnClickListener OnItemClickListener = new OnClickListener() {
         public void onClick(View v) {
             //code to be written to handle the click event
         }
@@ -69,10 +69,10 @@ public class sites extends AppCompatActivity {
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent toSites = new Intent(sites.this, sites.class);
+            Intent toSites = new Intent(sites.this, eachSite.class);
             startActivity(toSites);
         }
-    };
+    };*/
 
     private class GetSites extends AsyncTask<Void, Void, Void> {
         @Override
@@ -148,6 +148,17 @@ public class sites extends AppCompatActivity {
                     R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
 
             lv.setAdapter(adapter);
+            //set click event
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+                    Intent intent = new Intent(sites.this, eachSite.class);
+                    //String message = "abc";
+                    //intent.putExtra(EXTRA_MESSAGE, message);
+                    startActivity(intent);
+                }
+            });
             //findViewById(R.id.sites).setOnClickListener(sitesclick);
         }
 
