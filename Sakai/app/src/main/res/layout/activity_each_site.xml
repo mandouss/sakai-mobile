@@ -29,11 +29,11 @@
             android:text="Calender" />
 
         <Button
-            android:text="Settings"
+            android:id="@+id/button3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/button3"
-            android:layout_weight="0.37" />
+            android:layout_weight="0.37"
+            android:text="Profile" />
     </LinearLayout>
 
 

@@ -49,7 +49,7 @@ public class sites extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         Log.e("Sites:", "got intent");
         ArrayList<String> idarray = b.getStringArrayList("ID_ARRAY");
-        Log.e("Sites:", idarray.toString());
+        //Log.e("Sites:", idarray.toString());
         userid = idarray.get(0);
         idarray.remove(0);
         sitesids = idarray;
