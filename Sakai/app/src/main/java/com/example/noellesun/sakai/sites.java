@@ -40,9 +40,6 @@ public class sites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
-        //lv.setClickable(true);
-        //lv.setOnClickListener(listListener);
-
         sitetitleist = new ArrayList<>();
 
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -154,8 +151,10 @@ public class sites extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
-                    //String message = "abc";
-                    //intent.putExtra(EXTRA_MESSAGE, message);
+                    String [] ids = {userid, sitesids.get(position)};
+                    Bundle b = new Bundle();
+                    b.putStringArray("IDS",ids);
+                    intent.putExtras(b);
                     startActivity(intent);
                 }
             });

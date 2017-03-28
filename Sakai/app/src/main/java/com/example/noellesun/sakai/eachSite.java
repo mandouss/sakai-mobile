@@ -12,9 +12,18 @@ import android.widget.Toast;
 
 public class eachSite extends AppCompatActivity {
     public Button assignments;
+    String userid;
+    String siteid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        Log.e("EachSite:", "got intent");
+        String[] ids = b.getStringArray("IDS");
+
+        userid = ids[0];
+        siteid = ids[1];
+        Log.e("EachSite:",userid);
         setContentView(R.layout.activity_each_site);
         //assignments = (Button)findViewById(R.id.Assignments);
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
