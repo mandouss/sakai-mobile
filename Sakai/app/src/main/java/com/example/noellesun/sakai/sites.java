@@ -57,12 +57,12 @@ public class sites extends AppCompatActivity {
             sitesids = idarray;
             Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
             Log.e("aftergetid:", "I am here!");
-            //new GetSites().execute();
+            new GetSites().execute();
         }
         else{
             Log.e("redirect","From other activities!");
             Log.e("Sites:", "now in sites create");
-            /*ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
+            ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
                     R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
 
             lv.setAdapter(adapter);
@@ -78,24 +78,12 @@ public class sites extends AppCompatActivity {
                     intent.putExtras(b);
                     startActivity(intent);
                 }
-            });*/
+            });
         }
-        new GetSites().execute();
+
         //Log.e("Sites:", idarray.toString());
 
     }
-   /* public OnClickListener OnItemClickListener = new OnClickListener() {
-        public void onClick(View v) {
-            //code to be written to handle the click event
-        }
-    };
-    final OnClickListener sitesclick = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent toSites = new Intent(sites.this, eachSite.class);
-            startActivity(toSites);
-        }
-    };*/
 
     private class GetSites extends AsyncTask<Void, Void, Void> {
         @Override
