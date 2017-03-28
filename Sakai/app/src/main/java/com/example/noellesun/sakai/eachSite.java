@@ -29,8 +29,20 @@ public class eachSite extends AppCompatActivity {
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
         findViewById(R.id.Gradebook).setOnClickListener(gradebookclick);
         findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
+        findViewById(R.id.profilebtn).setOnClickListener(profilelclick);
     }
-    final OnClickListener assignclick = new OnClickListener() {
+    final OnClickListener profilelclick = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent toProfile = new Intent(eachSite.this, Profile.class);
+            Bundle b = new Bundle();
+            b.putString("USERID", userid);
+            toProfile.putExtras(b);
+            startActivity(toProfile);
+        }
+    };
+
+    public final OnClickListener assignclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent toAssignments = new Intent(eachSite.this, Assignment.class);
