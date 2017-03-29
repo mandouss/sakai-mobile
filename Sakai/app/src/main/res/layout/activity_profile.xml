@@ -19,22 +19,22 @@
         android:id="@+id/nameview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
         android:text="TextView"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_above="@+id/emailview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp" />
 
     <TextView
         android:id="@+id/emailview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/nameview"
-        android:layout_toRightOf="@+id/nameview"
         android:text="TextView"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" />
 
     <TextView
         android:id="@+id/nicknameview"
@@ -62,12 +62,15 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/nameview"
-        android:layout_toStartOf="@+id/nameview"
         android:text="E-mail:"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/emailview"
+        android:layout_alignBottom="@+id/emailview"
+        android:layout_toLeftOf="@+id/nameview"
+        android:layout_toStartOf="@+id/nameview"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp" />
 
     <TextView
         android:id="@+id/textView8"

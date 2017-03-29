@@ -20,7 +20,10 @@ public class Profile extends AppCompatActivity {
     private String TAG = Login.class.getSimpleName();
     String cookiestr = "";
     private ProgressDialog pDialog;
-
+    String jsonname;
+    String jsonemail;
+    String jsonnickname;
+    String jsondegree;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +36,17 @@ public class Profile extends AppCompatActivity {
         Log.e("PROFILE", userid);
         new GetProfile().execute();
 
-
     }
-
+    void loadText(){
+        TextView name = (TextView) findViewById(R.id.nameview);
+        name.setText(jsonname);
+        TextView email = (TextView) findViewById(R.id.emailview);
+        email.setText(jsonemail);
+        TextView nickname = (TextView) findViewById(R.id.nicknameview);
+        nickname.setText(jsonnickname);
+        TextView degree = (TextView) findViewById(R.id.degreeview);
+        degree.setText(jsondegree);
+    }
     private class GetProfile extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -62,12 +73,11 @@ public class Profile extends AppCompatActivity {
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    TextView name = (TextView) findViewById(R.id.nameview);
-                    //Log.e("TextView",name.toString());
-                    //name.setText(jsonObj.getString("displayname"));
-                    TextView email = (TextView) findViewById(R.id.emailview);
-                    //name.setText(jsonObj.getString("email"));
-
+                    jsonname = jsonObj.getString("displayName");
+                    jsonemail = jsonObj.getString("email");
+                    jsonnickname = jsonObj.getString("nickname");
+                    jsondegree = jsonObj.getString("course");
+                    loadText();
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
