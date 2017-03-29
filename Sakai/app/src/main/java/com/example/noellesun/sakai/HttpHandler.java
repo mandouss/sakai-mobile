@@ -34,13 +34,16 @@ public class HttpHandler {
         try {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            if(!(myCookie.length()==0 )){
-                conn.setRequestProperty("Cookie", myCookie);
-            }
+
+            conn.setRequestProperty("Cookie", myCookie);
+            Log.e("aftersetcookie","aftersetcookie");
             conn.setRequestMethod("GET");
+            Log.e("aftersetget","aftersetget");
             // read the response
             bad = conn.getResponseCode();
+            Log.e("BAD", String.valueOf(bad));
             InputStream in = new BufferedInputStream(conn.getInputStream());
+            Log.i("inputstream",in.toString());
             response = convertStreamToString(in);
         } catch (MalformedURLException e) {
             Log.e(TAG, "MalformedURLException: " + e.getMessage());

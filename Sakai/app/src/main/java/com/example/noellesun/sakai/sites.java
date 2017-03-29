@@ -46,7 +46,7 @@ public class sites extends AppCompatActivity {
         Log.e("sitetitlelist",Integer.toString(sitetitleist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        //Log.e("Sites:", "now in sites create");
+        Log.e(TAG,cookiestr);
 
         if(getIntent().getExtras().getString("ID").equals("Login")){
             Bundle b = getIntent().getExtras();
