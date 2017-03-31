@@ -61,6 +61,7 @@ public class eachSite extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent toGradebook = new Intent(eachSite.this, Gradebook.class);
+            toGradebook.putExtra("SiteID",siteid);
             startActivity(toGradebook);
         }
     };
