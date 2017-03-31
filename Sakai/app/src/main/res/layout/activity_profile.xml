@@ -96,7 +96,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/sitesbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/imageView"
@@ -116,7 +116,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/imageView"
-        android:layout_alignTop="@+id/button"
+        android:layout_alignTop="@+id/sitesbtn"
         android:layout_marginLeft="31dp"
         android:layout_marginStart="31dp"
         android:text="profile" />

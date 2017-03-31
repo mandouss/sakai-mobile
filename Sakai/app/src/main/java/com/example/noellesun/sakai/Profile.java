@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,18 @@ public class Profile extends AppCompatActivity {
         Log.e("PROFILE", userid);
         new GetProfile().execute();
 
+        findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
+
     }
+
+    final View.OnClickListener sitesclick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent toSites = new Intent(Profile.this, sites.class);
+            toSites.putExtra("ID","eachSite");
+            startActivity(toSites);
+        }
+    };
     void loadText(){
         TextView name = (TextView) findViewById(R.id.nameview);
         name.setText(jsonname);
