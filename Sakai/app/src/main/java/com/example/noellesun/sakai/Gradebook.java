@@ -27,7 +27,7 @@ import java.util.HashMap;
 
 public class Gradebook extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
-    ArrayList<HashMap<String, String>> gradeList = new ArrayList<>();
+    static ArrayList<HashMap<String, String>> gradeList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/gradebook/site/";
@@ -38,6 +38,7 @@ public class Gradebook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i("GRADEBOOKDEBUG","ewe");
         setContentView(R.layout.activity_gradebook);
+        lv = (ListView) findViewById(R.id.gradebooklist);
         Log.i("setcontview","here!");
         //findViewById(R.id.sites).setOnClickListener(sitesclick);
         siteid = getIntent().getExtras().getString("SiteID");
