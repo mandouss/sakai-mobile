@@ -18,8 +18,8 @@ public class Assignment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment);
 
-        findViewById(R.id.btn8).setOnClickListener(siteClickEvent);
-        findViewById(R.id.sites).setOnClickListener(sitesclick);
+        //findViewById(R.id.btn8).setOnClickListener(siteClickEvent);
+        //findViewById(R.id.sites).setOnClickListener(sitesclick);
     }
     final OnClickListener siteClickEvent = new OnClickListener() {
         @Override
