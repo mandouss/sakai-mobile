@@ -23,7 +23,7 @@ public class eachSite extends AppCompatActivity {
 
         userid = ids[0];
         siteid = ids[1];
-        Log.e("EachSite:",userid);
+        Log.e("EachSite:",siteid);
         setContentView(R.layout.activity_each_site);
         //assignments = (Button)findViewById(R.id.Assignments);
         findViewById(R.id.Assignments).setOnClickListener(assignclick);

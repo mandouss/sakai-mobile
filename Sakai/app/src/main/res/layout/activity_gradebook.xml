@@ -26,7 +26,7 @@
                 android:layout_width="1dip"
                 android:layout_height="30dp"
                 android:background="?attr/colorButtonNormal"
-                android:text="Item"
+                android:text="itemName"
                 android:textAlignment="center"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -44,19 +44,11 @@
                 android:layout_width="1dip"
                 android:layout_height="30dp"
                 android:background="?attr/colorButtonNormal"
-                android:text="Due"
+                android:text="Points"
                 android:textAlignment="center"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="1dip"
-                android:layout_height="30dp"
-                android:background="?attr/colorButtonNormal"
-                android:text="Cmments"
-                android:textAlignment="center"
-                android:textSize="15sp"
-                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
@@ -78,12 +70,6 @@
             <TextView
                 android:layout_height="30dp"
                 android:text="Jan 13,2017 11am"
-                android:textAlignment="center"
-                android:textSize="28px" />
-
-            <TextView
-                android:layout_height="30dp"
-                android:text="Jan 17,2017 11am"
                 android:textAlignment="center"
                 android:textSize="28px" />
 
@@ -111,12 +97,6 @@
                 android:textAlignment="center"
                 android:textSize="28px" />
 
-            <TextView
-                android:layout_height="30dp"
-                android:text="Jan 21,2017 11am"
-                android:textAlignment="center"
-                android:textSize="28px" />
-
         </TableRow>
 
         <TableRow
@@ -138,12 +118,6 @@
             <TextView
                 android:layout_height="30dp"
                 android:text="Jan 22,2017 11am"
-                android:textAlignment="center"
-                android:textSize="28px" />
-
-            <TextView
-                android:layout_height="30dp"
-                android:text="Jan 26,2017 11am"
                 android:textAlignment="center"
                 android:textSize="28px" />
 
@@ -171,11 +145,6 @@
                 android:textAlignment="center"
                 android:textSize="28px" />
 
-            <TextView
-                android:layout_height="30dp"
-                android:text="Jan 31,2017 11am"
-                android:textAlignment="center"
-                android:textSize="28px" />
 
         </TableRow>
 
@@ -200,12 +169,7 @@
                 android:text="Feb 1,2017 11am"
                 android:textAlignment="center"
                 android:textSize="28px" />
-
-            <TextView
-                android:layout_height="30dp"
-                android:text="Feb 5,2017 11am"
-                android:textAlignment="center"
-                android:textSize="28px" />
+            
 
         </TableRow>
     </TableLayout>
