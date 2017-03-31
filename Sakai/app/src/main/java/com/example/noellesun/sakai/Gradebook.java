@@ -38,7 +38,8 @@ public class Gradebook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i("GRADEBOOKDEBUG","ewe");
         setContentView(R.layout.activity_gradebook);
-        findViewById(R.id.sites).setOnClickListener(sitesclick);
+        Log.i("setcontview","here!");
+        //findViewById(R.id.sites).setOnClickListener(sitesclick);
         siteid = getIntent().getExtras().getString("SiteID");
         Log.i("GRADESiteid:",siteid);
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -122,7 +123,11 @@ public class Gradebook extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
             Log.e("postexe","prepare to list");
-
+            Log.i("gradelist",Integer.toString(gradeList.size()));
+            ListAdapter adapter = new SimpleAdapter( Gradebook.this, gradeList,
+                    R.layout.gradebook_listitem, new String[]{"itemName", "grade",
+                    "points"},new int[]{R.id.itemName, R.id.grade,R.id.points});
+            lv.setAdapter(adapter);
         }
 
     }
