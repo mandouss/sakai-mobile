@@ -3,20 +3,26 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="30dp"
+    android:padding="15dp"
     android:weightSum="1">
 
     <TextView
         android:id="@+id/itemName"
-        android:layout_width="103dp"
+        android:layout_width="84dp"
         android:layout_height="wrap_content"
         android:paddingBottom="2dip"
         android:paddingTop="6dip"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_weight="0.17" />
+        android:layout_weight="0.25" />
 
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dip"
+        android:textColor="@color/colorPrimaryDark" />
     <TextView
         android:id="@+id/openTimeString"
         android:layout_width="100dp"
@@ -30,4 +36,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="2dip"
         android:textColor="@color/colorAccent" />
+
+
 </LinearLayout>
