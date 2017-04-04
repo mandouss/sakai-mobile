@@ -85,12 +85,16 @@ public class Assignment extends AppCompatActivity {
                         String itemName = c.getString("gradebookItemName");
                         String dueTime = c.getString("dueTimeString");
                         String startTime = c.getString("openTimeString");
+                        String instructions = c.getString("instructions");
+                        String status = c.getString("status");
                         Log.e("ASSINITEMNAME", itemName);
 
                         HashMap<String, String> eachAssign = new HashMap<>();
                         eachAssign.put("itemName", itemName);
                         eachAssign.put("dueTime", dueTime);
                         eachAssign.put("startTime", startTime);
+                        eachAssign.put("instructions", instructions);
+                        eachAssign.put("status", status);
                         asnList.add(eachAssign);
                         Log.i("ASNLIST",asnList.toString());
                     }
