@@ -21,7 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
+import java.lang.reflect.
+        Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,10 +37,8 @@ public class Gradebook extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("GRADEBOOKDEBUG","ewe");
         setContentView(R.layout.activity_gradebook);
         lv = (ListView) findViewById(R.id.gradebooklist);
-        Log.i("setcontview","here!");
         //findViewById(R.id.sites).setOnClickListener(sitesclick);
         siteid = getIntent().getExtras().getString("SiteID");
         Log.i("GRADESiteid:",siteid);

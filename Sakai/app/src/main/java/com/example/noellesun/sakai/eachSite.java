@@ -46,6 +46,7 @@ public class eachSite extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent toAssignments = new Intent(eachSite.this, Assignment.class);
+            toAssignments.putExtra("SiteID",siteid);
             startActivity(toAssignments);
         }
     };
