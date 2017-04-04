@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -124,6 +125,22 @@ public class Gradebook extends AppCompatActivity {
                 pDialog.dismiss();
             Log.e("postexe","prepare to list");
             Log.i("gradelist",Integer.toString(gradeList.size()));
+
+            /*TextView description1 = (TextView) findViewById(R.id.header_line1);
+            TextView description2 = (TextView) findViewById(R.id.header_line2);
+            description1.setText("This is the first line describing the list");
+            description2.setText("Another description in the header");
+
+
+            TextView columnHeader1 = (TextView) findViewById(R.id.column_header1);
+            TextView columnHeader2 = (TextView) findViewById(R.id.column_header2);
+
+            columnHeader1.setText("Sequence");
+            columnHeader2.setText("Precipitation (inches)");
+            lv.addHeaderView(columnHeader1);
+            lv.addHeaderView(columnHeader2);*/
+
+
             ListAdapter adapter = new SimpleAdapter( Gradebook.this, gradeList,
                     R.layout.gradebook_listitem, new String[]{"itemName", "grade",
                     "points"},new int[]{R.id.itemName, R.id.grade,R.id.points});

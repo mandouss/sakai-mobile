@@ -12,6 +12,7 @@ import android.webkit.CookieManager;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class Assignment extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
     static ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
+    private ListView lv;
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
@@ -34,6 +36,7 @@ public class Assignment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment);
+        lv = (ListView) findViewById(R.id.assignlist);
         siteid = getIntent().getExtras().getString("SiteID");
         Log.i("ASSIGNiteid:",siteid);
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -125,6 +128,11 @@ public class Assignment extends AppCompatActivity {
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
+
+            ListAdapter adapter = new SimpleAdapter( Assignment.this, asnList,
+                    R.layout.assign_listitem, new String[]{"itemName", "startTime",
+                    "dueTime"},new int[]{R.id.itemName, R.id.openTimeString,R.id.dueTimeString});
+            lv.setAdapter(adapter);
         }
 
     }
