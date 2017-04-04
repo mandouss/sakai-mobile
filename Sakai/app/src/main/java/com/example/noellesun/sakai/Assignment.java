@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.ListAdapter;
@@ -42,6 +43,7 @@ public class Assignment extends AppCompatActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
+
         //findViewById(R.id.btn8).setOnClickListener(siteClickEvent);
         //findViewById(R.id.sites).setOnClickListener(sitesclick);
     }
@@ -137,6 +139,17 @@ public class Assignment extends AppCompatActivity {
                     R.layout.assign_listitem, new String[]{"itemName", "startTime",
                     "dueTime"},new int[]{R.id.itemName, R.id.openTimeString,R.id.dueTimeString});
             lv.setAdapter(adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+                    Intent intent = new Intent(Assignment.this, eachAssign.class);
+                    Log.i("wefwef","ede3e");
+                    intent.putExtra("assign info",asnList.get(position));
+                    startActivity(intent);
+                }
+            });
+
         }
 
     }
