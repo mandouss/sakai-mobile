@@ -41,11 +41,11 @@
         android:layout_alignStart="@+id/Assignments" />
 
     <Button
-        android:text="Assigments"
+        android:id="@+id/Assignments"
         android:layout_width="237dp"
         android:layout_height="95dp"
-        android:id="@+id/Assignments"
-        android:layout_marginTop="60dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="Assignments" />
 </RelativeLayout>

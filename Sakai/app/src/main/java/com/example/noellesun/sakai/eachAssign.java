@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
 public class eachAssign extends AppCompatActivity {
-
+    String instructions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("eachAssigninstr","in eachassign");
@@ -20,8 +21,9 @@ public class eachAssign extends AppCompatActivity {
         String itemName = info.get("itemName");
         String dueTime = info.get("dueTime");
         String startTime = info.get("startTime");
-        String instructions = Html.fromHtml(info.get("instructions")).toString();
+        instructions = Html.fromHtml(info.get("instructions")).toString();
         String status = info.get("status");
+        loadText();
     }
     @SuppressWarnings("deprecation")
     public static Spanned fromHtml(String html){
@@ -32,5 +34,15 @@ public class eachAssign extends AppCompatActivity {
             result = Html.fromHtml(html);
         }
         return result;
+    }
+    void loadText(){
+        /*TextView name = (TextView) findViewById(R.id.name);
+        name.setText(jsonname);*/
+        /*TextView email = (TextView) findViewById(R.id.emailview);
+        email.setText(jsonemail);
+        TextView nickname = (TextView) findViewById(R.id.nicknameview);
+        nickname.setText(jsonnickname);*/
+        TextView instruct = (TextView) findViewById(R.id.instruction);
+        instruct.setText(instructions);
     }
 }
