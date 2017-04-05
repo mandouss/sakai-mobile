@@ -15,9 +15,9 @@ public class eachAssign extends AppCompatActivity {
         setContentView(R.layout.activity_each_assign);
 
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("assign info");
-        String itemName = info.get("gradebookItemName");
-        String dueTime = info.get("dueTimeString");
-        String startTime = info.get("openTimeString");
+        String itemName = info.get("itemName");
+        String dueTime = info.get("dueTime");
+        String startTime = info.get("startTime");
         String instructions = info.get("instructions");
         String status = info.get("status");
         Log.i("eachAssigninstr",instructions);
