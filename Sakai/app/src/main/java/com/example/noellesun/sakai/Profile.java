@@ -115,6 +115,7 @@ public class Profile extends AppCompatActivity {
 
                 URL imageURL = new URL(imageurl);
                 HttpURLConnection connection = (HttpURLConnection) imageURL.openConnection();
+                connection.setRequestProperty("Cookie", cookiestr);
                 connection.setDoInput(true);
                 connection.connect();
                 Log.i("profileimage",imageurl);
@@ -125,7 +126,7 @@ public class Profile extends AppCompatActivity {
                     @Override
                     public void run() {
                         Log.i("profileimage to show","");
-                        ImageView myImage = (ImageView) findViewById(R.id.profilepic);
+                        ImageView myImage = (ImageView) findViewById(R.id.imageView);
                         myImage.setImageBitmap(myBitmap);
                     }
                 });
