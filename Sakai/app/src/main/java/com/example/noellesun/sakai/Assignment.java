@@ -136,8 +136,8 @@ public class Assignment extends AppCompatActivity {
                 pDialog.dismiss();
 
             ListAdapter adapter = new SimpleAdapter( Assignment.this, asnList,
-                    R.layout.assign_listitem, new String[]{"itemName", "startTime",
-                    "dueTime"},new int[]{R.id.itemName, R.id.openTimeString,R.id.dueTimeString});
+                    R.layout.assign_listitem, new String[]{"itemName", "status","startTime",
+                    "dueTime"},new int[]{R.id.itemName, R.id.status, R.id.openTimeString,R.id.dueTimeString});
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

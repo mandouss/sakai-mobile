@@ -6,4 +6,103 @@
     android:layout_height="match_parent"
     tools:context="com.example.noellesun.sakai.eachAssign">
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instructions:"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="246dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History:"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="203dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grade:"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="158dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submitted Date:"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="114dp" />
+
+    <TextView
+        android:id="@+id/assigntitle"
+        android:layout_width="175dp"
+        android:layout_height="31dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Students:"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="72dp" />
+
+    <TextView
+        android:id="@+id/submitdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="114dp" />
+
+    <TextView
+        android:id="@+id/instruction"
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="188dp"
+        tools:layout_editor_absoluteY="246dp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="203dp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="158dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="72dp" />
 </android.support.constraint.ConstraintLayout>
