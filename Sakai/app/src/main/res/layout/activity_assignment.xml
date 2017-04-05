@@ -17,7 +17,7 @@
 
 
         <TextView
-            android:layout_width="103dp"
+            android:layout_width="113dp"
             android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="Assignment"
@@ -35,7 +35,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="Open"
@@ -44,7 +44,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:padding="3dip"
             android:text="Due"
