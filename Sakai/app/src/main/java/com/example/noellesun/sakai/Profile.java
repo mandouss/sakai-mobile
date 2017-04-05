@@ -2,18 +2,26 @@ package com.example.noellesun.sakai;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Profile extends AppCompatActivity {
     String userid;
@@ -76,11 +84,8 @@ public class Profile extends AppCompatActivity {
 
             // Making a request to url and getting response
             String url = fixurl + userid.toString() + ".json";
-            Log.e("jsonurl!",url);
-            Log.e("profileCookiestr",cookiestr);
+            String imageurl = fixurl + userid.toString() + "/image.jpeg";
             String jsonStr = sh.makeServiceCall(url, cookiestr);
-
-            Log.e("profilejson", "Response from url: " + jsonStr);
 
             if (jsonStr != null) {
                 try {
@@ -104,6 +109,30 @@ public class Profile extends AppCompatActivity {
                 }
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
+            }
+            Log.i("profileimage","prepare to go intry");
+            try {
+
+                URL imageURL = new URL(imageurl);
+                HttpURLConnection connection = (HttpURLConnection) imageURL.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                Log.i("profileimage",imageurl);
+                InputStream input = connection.getInputStream();
+                Log.i("profileimage","after get");
+                final Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("profileimage to show","");
+                        ImageView myImage = (ImageView) findViewById(R.id.profilepic);
+                        myImage.setImageBitmap(myBitmap);
+                    }
+                });
+
+            } catch (IOException e) {
+                Log.i("profileimage","ioexception");
+                return null;
             }
             return null;
         }
