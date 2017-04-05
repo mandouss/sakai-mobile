@@ -84,7 +84,7 @@ public class Profile extends AppCompatActivity {
 
             // Making a request to url and getting response
             String url = fixurl + userid.toString() + ".json";
-            String imageurl = fixurl + userid.toString() + "/image.jpeg";
+            String imageurl = fixurl + userid.toString() + "/image";
             String jsonStr = sh.makeServiceCall(url, cookiestr);
 
             if (jsonStr != null) {
