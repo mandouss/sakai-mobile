@@ -7,8 +7,6 @@ Duke Sakai App will be able to work for an authenticated user a subset of Sakai 
 
 
 
-_**Task distribution**_:
+_**Overall Code structure**_:
 
-Yuhan Liu: Sites view and sites subview
 
-Wuyi Sun: Assignments view and Gradebook view.
