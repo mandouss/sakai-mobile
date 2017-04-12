@@ -1,4 +1,4 @@
-*Features*:
+_**Features**_:
 
 We have set up sites view (for programs), sites subview (for functions in each program), assignment view and gradebook view.
 
