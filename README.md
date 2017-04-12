@@ -1,15 +1,13 @@
-_**Features**_:
+_**Introduction**_:
 
-We have set up sites view (for programs), sites subview (for functions in each program), assignment view and gradebook view.
-
-Click on each program, the view will be redirected to sites subview, which has an assignment view block and a gradebook view block.
-
-When clicking assignment view block or gradebook view block, a table of assignments or gradebook will be displayed.
-
-At the bottom of each view, there are three buttons: Sites, Calender and Settings. Currently, only the Sites button can be clicked and redirected to the Sites View.
+Studying and working at Duke, we are engaging with Sakai any time at any place. Many of Sakai accesses are made with mobile device. Now we can visit the website directly
+through browser, which is relatively slow. An alternative is an accessory version of Sakai as part of DukeMobile application. Both have same problem: bad UI design disable us from
+using it effectively. After contacting official Sakai develop staff, we are guaranteed to have REST APIs offered by OIT that support all the features. Leveraging some of these APIs, the
+Duke Sakai App will be able to work for an authenticated user a subset of Sakai functions and display them in a better Android user interface.
 
 
-Task distribution:
+
+_**Task distribution**_:
 
 Yuhan Liu: Sites view and sites subview
 
