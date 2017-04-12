@@ -5,7 +5,9 @@ through browser, which is relatively slow. An alternative is an accessory versio
 using it effectively. After contacting official Sakai develop staff, we are guaranteed to have REST APIs offered by OIT that support all the features. Leveraging some of these APIs, the Duke Sakai App will be able to work for an authenticated user a subset of Sakai functions and display them in a better Android user interface.
 
 _**Installation/Configuration**_:
-
+1. Device: Android phone
+2. Installation: Install the Sakai APK to an Android phone
+3. Requirement: Connected to the Internet via WI-FI or Cellular
 
 
 _**Overall Code structure**_:
