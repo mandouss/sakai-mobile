@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorControlHighlight"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/navigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="bottom|center_horizontal"
         android:orientation="horizontal"
-        tools:ignore="UselessParent"
-        android:layout_alignParentBottom="true">
+        tools:ignore="UselessParent">
 
 
         <Button
             android:id="@+id/sitesbtn"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.20"
+            android:background="@drawable/circle"
             android:text="Sites" />
+
 
         <Button
             android:id="@+id/profilebtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.37"
+            android:background="@drawable/circle"
             android:text="Profile" />
     </LinearLayout>
 
 
     <Button
-        android:text="Gradebook"
+        android:id="@+id/Gradebook"
         android:layout_width="234dp"
         android:layout_height="96dp"
-        android:id="@+id/Gradebook"
-        android:layout_marginTop="79dp"
-        android:layout_below="@+id/Assignments"
         android:layout_alignLeft="@+id/Assignments"
-        android:layout_alignStart="@+id/Assignments" />
+        android:layout_alignStart="@+id/Assignments"
+        android:layout_below="@+id/Assignments"
+        android:layout_marginTop="79dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Gradebook" />
 
     <Button
         android:id="@+id/Assignments"
@@ -47,5 +57,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:text="Assignments" />
 </RelativeLayout>
