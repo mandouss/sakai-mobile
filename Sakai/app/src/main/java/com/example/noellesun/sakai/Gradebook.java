@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 public class Gradebook extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
-    static ArrayList<HashMap<String, String>> gradeList = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> gradeList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/gradebook/site/";

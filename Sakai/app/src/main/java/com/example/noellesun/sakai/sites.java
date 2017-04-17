@@ -72,6 +72,7 @@ public class sites extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
+                    Log.e("position is", sitesids.get(position));
                     String [] ids = {userid, sitesids.get(position)};
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);

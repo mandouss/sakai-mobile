@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class Assignment extends AppCompatActivity {
 
     private String TAG = sites.class.getSimpleName();
-    static ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
@@ -76,6 +76,7 @@ public class Assignment extends AppCompatActivity {
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
             String url = fixurl + siteid + ".json";
+            Log.i("assign_url",url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             Log.e(TAG, "ASSIGNJSON: " + jsonStr);
             if (jsonStr != null) {
