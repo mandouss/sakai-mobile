@@ -60,12 +60,16 @@ public class Profile extends AppCompatActivity {
     void loadText(){
         TextView name = (TextView) findViewById(R.id.nameview);
         name.setText(jsonname);
+        Log.i("Name",name.getText().toString());
         TextView email = (TextView) findViewById(R.id.emailview);
         email.setText(jsonemail);
+        Log.i("Email",email.getText().toString());
         TextView nickname = (TextView) findViewById(R.id.nicknameview);
         nickname.setText(jsonnickname);
+        Log.i("Nickname",nickname.getText().toString());
         TextView degree = (TextView) findViewById(R.id.degreeview);
         degree.setText(jsondegree);
+        Log.i("Degree",degree.getText().toString());
     }
     private class GetProfile extends AsyncTask<Void, Void, Void> {
         @Override
