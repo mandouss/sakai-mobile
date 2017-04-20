@@ -31,5 +31,8 @@ _**Overall Code structure**_:
     * Paring the json data of user’s information into the corresponding field.
 
 
+_**Additional File**_:
+[Project Document](https://sakai.duke.edu/access/content/attachment/41ac7d60-b777-485a-9d6c-4969e3aa7231/Assignments/9326240e-0629-4e0b-a3bf-309e3eff21c1/SakaiDocument_Sakayakers.pdf)
+
 
 
