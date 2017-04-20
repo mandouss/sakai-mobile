@@ -25,12 +25,12 @@ public class eachSite extends AppCompatActivity {
         siteid = ids[1];
         Log.e("EachSite:",siteid);
         setContentView(R.layout.activity_each_site);
-        //assignments = (Button)findViewById(R.id.Assignments);
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
         findViewById(R.id.Gradebook).setOnClickListener(gradebookclick);
         findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
         findViewById(R.id.profilebtn).setOnClickListener(profilelclick);
     }
+    //redirect to profile view, send userid
     final OnClickListener profilelclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -41,7 +41,7 @@ public class eachSite extends AppCompatActivity {
             startActivity(toProfile);
         }
     };
-
+    //redirect to assignment view, send the selected siteid
     public final OnClickListener assignclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -50,6 +50,7 @@ public class eachSite extends AppCompatActivity {
             startActivity(toAssignments);
         }
     };
+    //redirect to sites view
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -58,6 +59,7 @@ public class eachSite extends AppCompatActivity {
             startActivity(toSites);
         }
     };
+    //redirect to gradebook view, send the selected siteid
     final OnClickListener gradebookclick = new OnClickListener() {
         @Override
         public void onClick(View v) {

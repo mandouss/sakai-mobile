@@ -27,6 +27,7 @@ import java.util.HashMap;
 
 public class sites extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
+    //use static userid and sitesids to keep the original userid and sitesids
     static  String userid;
     static ArrayList<String> sitesids;
     private ProgressDialog pDialog;
@@ -41,7 +42,6 @@ public class sites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
-        //sitetitleist = new ArrayList<>();
 
         Log.e("sitetitlelist",Integer.toString(sitetitleist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -73,6 +73,7 @@ public class sites extends AppCompatActivity {
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
                     Log.e("position is", sitesids.get(position));
+                    //send the selected site's id to eachSite view
                     String [] ids = {userid, sitesids.get(position)};
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
@@ -81,8 +82,6 @@ public class sites extends AppCompatActivity {
                 }
             });
         }
-
-        //Log.e("Sites:", idarray.toString());
 
     }
 
@@ -107,7 +106,6 @@ public class sites extends AppCompatActivity {
                 String siteurl = fixurl + sitesids.get(i) + ".json";
                 // Making a request to url and getting response
                 String jsonStr = sh.makeServiceCall(siteurl, cookiestr);
-                //Log.e(TAG, "Response from url: " + jsonStr);
                 if (jsonStr != null) {
                     try {
                         JSONObject jsonObj = new JSONObject(jsonStr);
@@ -156,6 +154,7 @@ public class sites extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
             Log.e("postexe","prepare to list");
+            //parse json data into the sites list
             ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
                     R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
 
@@ -173,7 +172,6 @@ public class sites extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            //findViewById(R.id.sites).setOnClickListener(sitesclick);
         }
 
     }

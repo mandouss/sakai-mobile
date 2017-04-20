@@ -47,18 +47,15 @@ public class Login extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         final CookieManager cookieManager = CookieManager.getInstance();
 
-
+        //Use webview to redirect to sakai login page
         browser.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 Log.i("MyApp", view.getUrl());
 
                 if (url.equals("https://sakai.duke.edu/portal")) {
-                    //redirect to sites
                     cookiestr = cookieManager.getCookie(url);
                     new GetMember().execute();
-
-
                 }
             }
         });
@@ -144,6 +141,7 @@ public class Login extends AppCompatActivity {
                 });
 
             }
+            //send userid and sitesid to sites view
             Intent intent = new Intent(Login.this, sites.class);
             Bundle b=new Bundle();
             b.putStringArrayList("ID_ARRAY",idarray);

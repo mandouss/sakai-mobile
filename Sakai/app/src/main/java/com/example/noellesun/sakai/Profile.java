@@ -57,6 +57,7 @@ public class Profile extends AppCompatActivity {
             startActivity(toSites);
         }
     };
+    //parse data into corresponding field
     void loadText(){
         TextView name = (TextView) findViewById(R.id.nameview);
         name.setText(jsonname);

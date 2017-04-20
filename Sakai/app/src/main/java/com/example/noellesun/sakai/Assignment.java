@@ -44,8 +44,6 @@ public class Assignment extends AppCompatActivity {
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
 
-        //findViewById(R.id.btn8).setOnClickListener(siteClickEvent);
-        //findViewById(R.id.sites).setOnClickListener(sitesclick);
     }
     final OnClickListener siteClickEvent = new OnClickListener() {
         @Override
@@ -53,6 +51,7 @@ public class Assignment extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"sites clicked",Toast.LENGTH_SHORT).show();
         }
     };
+    //redirect to sites
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -65,7 +64,6 @@ public class Assignment extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Showing progress dialog
             pDialog = new ProgressDialog(Assignment.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
@@ -132,10 +130,9 @@ public class Assignment extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
-
+            //parse data into the assignment lists
             ListAdapter adapter = new SimpleAdapter( Assignment.this, asnList,
                     R.layout.assign_listitem, new String[]{"itemName", "status","startTime",
                     "dueTime"},new int[]{R.id.itemName, R.id.status, R.id.openTimeString,R.id.dueTimeString});
@@ -145,7 +142,6 @@ public class Assignment extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(Assignment.this, eachAssign.class);
-                    Log.i("wefwef","ede3e");
                     intent.putExtra("assign info",asnList.get(position));
                     startActivity(intent);
                 }
