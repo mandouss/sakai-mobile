@@ -59,7 +59,7 @@ public class Assignment extends AppCompatActivity {
             startActivity(toSites);
         }
     };
-
+    // AsuncTask that is used to get json from url
     private class GetAssign extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {

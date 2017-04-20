@@ -16,11 +16,12 @@ public class eachAssign extends AppCompatActivity {
         Log.i("eachAssigninstr","in eachassign");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_each_assign);
-
+        //Get selected assignment's info from Assignment view
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("assign info");
         String itemName = info.get("itemName");
         String dueTime = info.get("dueTime");
         String startTime = info.get("startTime");
+        //parse html formatted text into plain text
         instructions = Html.fromHtml(info.get("instructions")).toString();
         String status = info.get("status");
         loadText();
@@ -36,12 +37,6 @@ public class eachAssign extends AppCompatActivity {
         return result;
     }
     void loadText(){
-        /*TextView name = (TextView) findViewById(R.id.name);
-        name.setText(jsonname);*/
-        /*TextView email = (TextView) findViewById(R.id.emailview);
-        email.setText(jsonemail);
-        TextView nickname = (TextView) findViewById(R.id.nicknameview);
-        nickname.setText(jsonnickname);*/
         TextView instruct = (TextView) findViewById(R.id.instruction);
         instruct.setText(instructions);
     }

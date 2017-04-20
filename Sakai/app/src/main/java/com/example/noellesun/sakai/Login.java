@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        //Use shib.duke to do the authentication
         WebView browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -63,7 +63,7 @@ public class Login extends AppCompatActivity {
         browser.loadUrl("https://sakai.duke.edu");
 
     }
-
+    //Use AsyncTask to retrieve json from sakai server on the background
     class GetMember extends AsyncTask<Void, Void, Void> {
 
         @Override

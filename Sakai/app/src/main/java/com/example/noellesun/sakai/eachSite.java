@@ -17,6 +17,7 @@ public class eachSite extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Get the selected site's userid and siteid from sites view
         Bundle b = getIntent().getExtras();
         Log.e("EachSite:", "got intent");
         String[] ids = b.getStringArray("IDS");

@@ -18,10 +18,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-/**
- * Created by Ravi Tamada on 01/09/16.
- * www.androidhive.info
- */
 public class HttpHandler {
     int bad = 10;
     private static final String TAG = HttpHandler.class.getSimpleName();
@@ -34,7 +30,7 @@ public class HttpHandler {
         try {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
+            //Use cookie to maintain the login status
             conn.setRequestProperty("Cookie", myCookie);
             Log.e("aftersetcookie","aftersetcookie");
             conn.setRequestMethod("GET");
@@ -56,7 +52,7 @@ public class HttpHandler {
         }
         return response;
     }
-
+    //convert stream read from http connection into String
     private String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();

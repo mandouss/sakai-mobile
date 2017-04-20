@@ -40,9 +40,9 @@ public class Gradebook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gradebook);
         lv = (ListView) findViewById(R.id.gradebooklist);
-        //findViewById(R.id.sites).setOnClickListener(sitesclick);
+        //Get the selected site's siteid from eachSite view
         siteid = getIntent().getExtras().getString("SiteID");
-        Log.i("GRADESiteid:",siteid);
+        //Get the cookie to keep login status
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new GetGrade().execute();
@@ -55,6 +55,7 @@ public class Gradebook extends AppCompatActivity {
         }
     };
 
+    //Use AsyncTask to get json from sakai server
     private class GetGrade extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -123,24 +124,7 @@ public class Gradebook extends AppCompatActivity {
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            Log.e("postexe","prepare to list");
-            Log.i("gradelist",Integer.toString(gradeList.size()));
-
-            /*TextView description1 = (TextView) findViewById(R.id.header_line1);
-            TextView description2 = (TextView) findViewById(R.id.header_line2);
-            description1.setText("This is the first line describing the list");
-            description2.setText("Another description in the header");
-
-
-            TextView columnHeader1 = (TextView) findViewById(R.id.column_header1);
-            TextView columnHeader2 = (TextView) findViewById(R.id.column_header2);
-
-            columnHeader1.setText("Sequence");
-            columnHeader2.setText("Precipitation (inches)");
-            lv.addHeaderView(columnHeader1);
-            lv.addHeaderView(columnHeader2);*/
-
-
+            //After gradeList is filled with parsed json data, set ListAdapter
             ListAdapter adapter = new SimpleAdapter( Gradebook.this, gradeList,
                     R.layout.gradebook_listitem, new String[]{"itemName", "grade",
                     "points"},new int[]{R.id.itemName, R.id.grade,R.id.points});
