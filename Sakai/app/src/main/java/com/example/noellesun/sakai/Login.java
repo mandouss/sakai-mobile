@@ -45,6 +45,7 @@ public class Login extends AppCompatActivity {
         WebView browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        //set cookie to maintain the session
         final CookieManager cookieManager = CookieManager.getInstance();
 
         //Use webview to redirect to sakai login page

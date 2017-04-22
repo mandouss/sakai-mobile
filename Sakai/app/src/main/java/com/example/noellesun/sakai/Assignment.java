@@ -40,6 +40,7 @@ public class Assignment extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.assignlist);
         siteid = getIntent().getExtras().getString("SiteID");
         Log.i("ASSIGNiteid:",siteid);
+        //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
@@ -83,6 +84,7 @@ public class Assignment extends AppCompatActivity {
                     JSONArray assignments = jsonObj.getJSONArray("assignment_collection");
                     for (int i = 0; i < assignments.length(); i++) {
                         JSONObject c = assignments.getJSONObject(i);
+                        //get variable needed from JSON object
                         String itemName = c.getString("gradebookItemName");
                         String dueTime = c.getString("dueTimeString");
                         String startTime = c.getString("openTimeString");
@@ -90,6 +92,7 @@ public class Assignment extends AppCompatActivity {
                         String status = c.getString("status");
                         Log.e("ASSINITEMNAME", itemName);
 
+                        //store the variable needed in a hashmap
                         HashMap<String, String> eachAssign = new HashMap<>();
                         eachAssign.put("itemName", itemName);
                         eachAssign.put("dueTime", dueTime);
@@ -142,6 +145,7 @@ public class Assignment extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(Assignment.this, eachAssign.class);
+                    //send the assignment info to each Assign view
                     intent.putExtra("assign info",asnList.get(position));
                     startActivity(intent);
                 }
