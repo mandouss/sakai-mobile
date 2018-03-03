@@ -24,7 +24,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class sites extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
     //use static userid and sitesids to keep the original userid and sitesids
@@ -99,8 +98,6 @@ public class sites extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             //receive userId and siteIs from Login view
-
-
             HttpHandler sh = new HttpHandler();
             for (int i = 0; i < sitesids.size(); i++) {
                 String siteurl = fixurl + sitesids.get(i) + ".json";
@@ -145,7 +142,6 @@ public class sites extends AppCompatActivity {
             Log.e("background","done!");
             return null;
         }
-
         @Override
         protected void onPostExecute(Void result) {
             Log.e("postexe","prepare to list");//not execute this!!???
@@ -173,6 +169,5 @@ public class sites extends AppCompatActivity {
                 }
             });
         }
-
     }
 }

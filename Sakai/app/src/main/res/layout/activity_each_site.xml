@@ -1,63 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical">
+<GridLayout
+    android:id="@+id/navigationBar"
+    android:columnCount="2"
+    android:rowCount="6"
+    android:alignmentMode="alignMargins"
+    android:columnOrderPreserved="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorControlHighlight"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:id="@+id/navigationBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="bottom|center_horizontal"
-        android:orientation="horizontal"
-        tools:ignore="UselessParent">
-
-
-        <Button
-            android:id="@+id/sitesbtn"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.20"
-            android:background="@drawable/circle"
-            android:text="Sites" />
-
-
-        <Button
-            android:id="@+id/profilebtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.37"
-            android:background="@drawable/circle"
-            android:text="Profile" />
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/Gradebook"
-        android:layout_width="234dp"
-        android:layout_height="96dp"
-        android:layout_alignLeft="@+id/Assignments"
-        android:layout_alignStart="@+id/Assignments"
-        android:layout_below="@+id/Assignments"
-        android:layout_marginTop="79dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="Gradebook" />
-
-    <Button
+    android:padding="14dp"
+    >
+    <android.support.v7.widget.CardView
         android:id="@+id/Assignments"
-        android:layout_width="237dp"
-        android:layout_height="95dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="Assignments" />
-</RelativeLayout>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:cardCornerRadius="8dp"
+        >
+        <LinearLayout
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Assignments"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/Gradebook"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        >
+        <LinearLayout
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Gradebook"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/profilebtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        >
+        <LinearLayout
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Profilebtn"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/sitesbtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        >
+        <LinearLayout
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Site"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</GridLayout>
+
+</LinearLayout>
