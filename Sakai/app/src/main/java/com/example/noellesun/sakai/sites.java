@@ -173,6 +173,5 @@ public class sites extends AppCompatActivity {
                 }
             });
         }
-
     }
 }

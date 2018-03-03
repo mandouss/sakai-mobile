@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menuId">
+    <item android:id="@+id/nav_assignment"
+        android:title="Assignment"/>
+    <item android:id="@+id/nav_gradebook"
+        android:title="Gradebook"/>
+    <item android:id="@+id/nav_announcement"
+        android:title="Announcement"/>
+    <item android:id="@+id/nav_resource"
+        android:title="Resource"/>
+</menu>
