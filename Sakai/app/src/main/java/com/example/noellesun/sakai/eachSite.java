@@ -27,6 +27,7 @@ public class eachSite extends AppCompatActivity {
         Log.e("EachSite:",siteid);
         setContentView(R.layout.activity_each_site);
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
+        findViewById(R.id.Resources).setOnClickListener(resouclick);
         findViewById(R.id.Gradebook).setOnClickListener(gradebookclick);
         findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
         findViewById(R.id.profilebtn).setOnClickListener(profilelclick);
@@ -42,7 +43,15 @@ public class eachSite extends AppCompatActivity {
             startActivity(toProfile);
         }
     };
-    //redirect to assignment view, send the selected siteid
+    //redirect to resource view, send the selected siteid
+    public final OnClickListener resouclick = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent toResources = new Intent(eachSite.this, Resources.class);
+            toResources.putExtra("SiteID",siteid);
+            startActivity(toResources);
+        }
+    };
     public final OnClickListener assignclick = new OnClickListener() {
         @Override
         public void onClick(View v) {

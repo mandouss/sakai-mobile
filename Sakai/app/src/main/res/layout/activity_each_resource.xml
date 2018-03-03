@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.noellesun.sakai.eachResource">
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="Instructions"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp" />
+
+    <ScrollView
+        android:id="@+id/textAreaScroller"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/itemName"
+        android:layout_marginTop="36dp"
+        android:layout_x="0px"
+        android:layout_y="25px"
+        android:scrollbars="vertical">
+
+        <TextView
+            android:id="@+id/instruction"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_alignLeft="@+id/itemName"
+            android:layout_alignStart="@+id/itemName"
+            android:layout_below="@+id/itemName"
+            android:layout_marginTop="32dp"
+            android:text="TextView" />
+    </ScrollView>
+</RelativeLayout>

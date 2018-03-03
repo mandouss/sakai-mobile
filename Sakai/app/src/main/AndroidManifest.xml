@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Assignment" />
+        <activity android:name=".Resources" />
         <activity android:name=".Gradebook" />
+        <activity android:name=".eachResource" />
         <activity android:name=".eachSite" />
         <activity android:name=".sites" />
         <activity android:name=".eachAssign" />
