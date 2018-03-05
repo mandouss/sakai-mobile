@@ -171,6 +171,28 @@ public class Assignment extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(Void result) {
+            NavigationView n = (NavigationView)findViewById(R.id.navi_id);
+            n.setNavigationItemSelectedListener(
+                    new NavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            item.setChecked(true);
+                            mDrawerLayout.closeDrawers();
+//                            Toast.makeText(getApplicationContext(), "!", Toast.LENGTH_SHORT).show();
+                            if(item.getTitle().equals("Assignment")){
+                                Intent toAssignment = new Intent(Assignment.this, Assignment.class);
+                                toAssignment.putExtra("SiteID",siteid);
+                                startActivity(toAssignment);
+                            }else if(item.getTitle().equals("Gradebook")) {
+                                Intent toSites = new Intent(Assignment.this, Gradebook.class);
+                                toSites.putExtra("SiteID",siteid);
+                                startActivity(toSites);
+                            }
+                            return true;
+                        }
+                    }
+            );
+
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();
