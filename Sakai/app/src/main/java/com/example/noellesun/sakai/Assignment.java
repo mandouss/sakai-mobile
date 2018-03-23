@@ -146,6 +146,7 @@ public class Assignment extends AppBaseActivity {
         @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
         @Override
         protected void onPostExecute(Void result) {
+
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();
@@ -164,7 +165,6 @@ public class Assignment extends AppBaseActivity {
                     startActivity(intent);
                 }
             });
-
         }
     }
 }

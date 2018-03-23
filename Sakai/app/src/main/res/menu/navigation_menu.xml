@@ -3,10 +3,15 @@
     android:id="@+id/menuId">
     <item android:id="@+id/nav_assignment"
         android:title="Assignment"/>
-    <item android:id="@+id/nav_gradebook"
-        android:title="Gradebook"/>
-    <item android:id="@+id/nav_announcement"
-        android:title="Announcement"/>
     <item android:id="@+id/nav_resource"
         android:title="Resource"/>
+    <item android:id="@+id/nav_gradebook"
+        android:title="Gradebook"/>
+    <item android:id="@+id/nav_profile"
+        android:title="Profile"/>
+    <item android:id="@+id/nav_site"
+        android:title="Site"/>
+    <item android:id="@+id/nav_announcement"
+        android:title="Announcement"/>
+
 </menu>
