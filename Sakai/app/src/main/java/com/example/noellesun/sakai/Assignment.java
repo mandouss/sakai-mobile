@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Assignment extends AppCompatActivity {
-    private String TAG = sites.class.getSimpleName();
+    private String TAG = Assignment.class.getSimpleName();
     private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;

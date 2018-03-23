@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
 
         //Use webview to redirect to sakai login page
+        // Ethan: what is this for?
         browser.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -65,6 +66,7 @@ public class Login extends AppCompatActivity {
 
     }
     //Use AsyncTask to retrieve json from sakai server on the background
+    // using different thread automatically
     class GetMember extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -72,7 +74,7 @@ public class Login extends AppCompatActivity {
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(Login.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Please wait..."); // show this on screen
             pDialog.setCancelable(false);
             pDialog.show();
 
@@ -146,6 +148,7 @@ public class Login extends AppCompatActivity {
             Intent intent = new Intent(Login.this, sites.class);
             Bundle b=new Bundle();
             b.putStringArrayList("ID_ARRAY",idarray);
+            Log.i("idarray", "Here is the idarry value :" + idarray.toString()); // to see idarry's information
             intent.putExtras(b);
             intent.putExtra("ID","Login");
             startActivity(intent);
