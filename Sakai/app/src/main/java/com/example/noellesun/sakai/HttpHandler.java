@@ -18,23 +18,24 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class HttpHandler {
-    int bad = 10;
+ public class HttpHandler { // Ethan: why can we us package protected
+    private int bad;
     private static final String TAG = HttpHandler.class.getSimpleName();
 
-    public HttpHandler() {
+    HttpHandler() {
+        bad = 10;
     }
 
-    public String makeServiceCall(String reqUrl, String myCookie) {
+    String makeServiceCall(String reqUrl, String myCookie) {
         String response = null;
         try {
             URL url = new URL(reqUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             //Use cookie to maintain the login status
             conn.setRequestProperty("Cookie", myCookie);
-            Log.e("aftersetcookie","aftersetcookie");
+            Log.i("aftersetcookie","aftersetcookie");
             conn.setRequestMethod("GET");
-            Log.e("aftersetget","aftersetget");
+            Log.i("aftersetget","aftersetget");
             // read the response
             bad = conn.getResponseCode();
             Log.e("BAD", String.valueOf(bad));

@@ -164,6 +164,7 @@ public class sites extends AppCompatActivity {
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
                     String [] ids = {userid, sitesids.get(position)};
+                    Log.i("position", sitesids.get(position));
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
                     intent.putExtras(b);
