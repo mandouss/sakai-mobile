@@ -1,0 +1,9 @@
+Sakai/*.iml
+Sakai/.gradle
+Sakai//local.properties
+Sakai//.idea/workspace.xml
+Sakai//.idea/libraries
+Sakai/.DS_Store
+Sakai//build
+Sakai//captures
+Sakai/.externalNativeBuild
