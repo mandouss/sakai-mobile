@@ -25,7 +25,7 @@
         <activity android:name=".eachSite" />
         <activity android:name=".sites" />
         <activity android:name=".eachAssign" />
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile"/>
     </application>
 
 </manifest>
