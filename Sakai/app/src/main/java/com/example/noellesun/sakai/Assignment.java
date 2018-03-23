@@ -57,24 +57,7 @@ public class Assignment extends AppCompatActivity {
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        NavigationView n = (NavigationView)findViewById(R.id.navi_id);
-        n.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        item.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        Toast.makeText(getApplicationContext(), "!", Toast.LENGTH_SHORT).show();
-                        Intent toSites = new Intent(Assignment.this, sites.class);
-                        //
-                        startActivity(toSites);
-                        return true;
-                    }
-                }
-        );
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Ethan: reason?
     }
 
     @Override
@@ -176,19 +159,32 @@ public class Assignment extends AppCompatActivity {
                     new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            item.setChecked(true);
+                            item.setChecked(false); // not showing blue
                             mDrawerLayout.closeDrawers();
-//                            Toast.makeText(getApplicationContext(), "!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "!", Toast.LENGTH_SHORT).show();
                             if(item.getTitle().equals("Assignment")){
                                 Intent toAssignment = new Intent(Assignment.this, Assignment.class);
                                 toAssignment.putExtra("SiteID",siteid);
                                 startActivity(toAssignment);
-                            }else if(item.getTitle().equals("Gradebook")) {
-                                Intent toSites = new Intent(Assignment.this, Gradebook.class);
-                                toSites.putExtra("SiteID",siteid);
+                            } else if(item.getTitle().equals("Resource")) {
+                                Intent toResource = new Intent(Assignment.this, Resources.class);
+                                toResource.putExtra("SiteID",siteid);
+                                startActivity(toResource);
+                            } else if(item.getTitle().equals("Gradebook")) {
+                                Intent toGradebook = new Intent(Assignment.this, Gradebook.class);
+                                toGradebook.putExtra("SiteID",siteid);
+                                startActivity(toGradebook);
+                            } else if(item.getTitle().equals("Announcement")) {
+//                                Intent toAnnouncement = new Intent(Assignment.this, Announcement.class);
+//                                toAnnouncement.putExtra("SiteID",siteid);
+//                                startActivity(toAnnouncement);
+                            } else if(item.getTitle().equals("Site")) {
+                                Intent toSites = new Intent(Assignment.this, sites.class);
+                                toSites.putExtra("ID","sitesclick");
                                 startActivity(toSites);
                             }
                             return true;
+
                         }
                     }
             );
@@ -211,7 +207,6 @@ public class Assignment extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
         }
     }
 }
