@@ -3,8 +3,10 @@ package com.example.noellesun.sakai;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,14 +32,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Assignment extends AppBaseActivity {
-    private String TAG = sites.class.getSimpleName();
+
+
+    private String TAG = Assignment.class.getSimpleName();
+    //reviewed Login, sites, added comments and restructured some code
     private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +74,7 @@ public class Assignment extends AppBaseActivity {
         }
     };
     // AsuncTask that is used to get json from url
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private class GetAssign extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -135,6 +143,7 @@ public class Assignment extends AppBaseActivity {
             Log.e("background","done!");
             return null;
         }
+        @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);

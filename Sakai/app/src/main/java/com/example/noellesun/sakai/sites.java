@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class sites extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
     //use static userid and sitesids to keep the original userid and sitesids
-    static  String userid;
+    static  String userid; // Ethan: why do we need static
     static ArrayList<String> sitesids;
     private ProgressDialog pDialog;
     private ListView lv;
@@ -42,27 +42,28 @@ public class sites extends AppCompatActivity {
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
 
-        Log.e("sitetitlelist",Integer.toString(sitetitleist.size()));
+        Log.i("siteTitleList",Integer.toString(sitetitleist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        Log.e(TAG,cookiestr);
-
+        Log.i(TAG,cookiestr);
+        // from login activity
         if(getIntent().getExtras().getString("ID").equals("Login")){
             Bundle b = getIntent().getExtras();
-            Log.e("Sites:", "got intent");
+            Log.i("Sites:", "got intent");
             idarray = b.getStringArrayList("ID_ARRAY");
             userid = idarray.get(0);
             idarray.remove(0);
             sitesids = idarray;
             Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
-            Log.e("aftergetid:", "I am here!");
+            Log.i("Here:", "I am here!");
             new GetSites().execute();
         }
-        else{
-            Log.e("redirect","From other activities!");
-            Log.e("Sites:", "now in sites create");
+        else{  // Ethan: do not need? If we need it we can write abstraction to reuse code
+            Log.i("redirect","From other activities!");
+            Log.i("Sites:", "now in sites create");
             ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
                     R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
+
 
             lv.setAdapter(adapter);
             //set click event
@@ -71,7 +72,7 @@ public class sites extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
-                    Log.e("position is", sitesids.get(position));
+                    Log.i("position is", sitesids.get(position));
                     //send the selected site's id to eachSite view
                     String [] ids = {userid, sitesids.get(position)};
                     Bundle b = new Bundle();
@@ -93,6 +94,7 @@ public class sites extends AppCompatActivity {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
+            Log.i("show", "message");
         }
 
         @Override
