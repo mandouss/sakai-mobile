@@ -40,7 +40,7 @@ public abstract class AppBaseActivity extends AppCompatActivity{
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        item.setChecked(true);
+                        item.setChecked(false);
                         Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                         mDrawerLayout.closeDrawers();
                         if(item.getTitle().equals("Assignment")){
@@ -54,6 +54,10 @@ public abstract class AppBaseActivity extends AppCompatActivity{
                         }else if(item.getTitle().equals("Resource")) {
                             Intent toSites = new Intent(getBaseContext(), Resources.class);
                             toSites.putExtra("SiteID",siteid);
+                            startActivity(toSites);
+                        }else if(item.getTitle().equals("sites")) {
+                            Intent toSites = new Intent(getBaseContext(), sites.class);
+                            toSites.putExtra("ID","eachSite");
                             startActivity(toSites);
                         }
                         return true;
