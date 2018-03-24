@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Resources extends AppCompatActivity {
+public class Resources extends AppBaseActivity {
 
     private String TAG = sites.class.getSimpleName();
     private ArrayList<HashMap<String, String>> resList = new ArrayList<>();
@@ -51,6 +51,10 @@ public class Resources extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        establish_nav(siteid);
+        
+
 
     }
     final OnClickListener siteClickEvent = new OnClickListener() {

@@ -3,8 +3,10 @@ package com.example.noellesun.sakai;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,43 +32,32 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Assignment extends AppCompatActivity {
+
+public class Assignment extends AppBaseActivity {
+
+
     private String TAG = Assignment.class.getSimpleName();
+    //reviewed Login, sites, added comments and restructured some code
+
     private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
-    private Menu m;
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment);
         lv = (ListView) findViewById(R.id.assignlist);
-        m = (Menu) findViewById(R.id.menuId);
         siteid = getIntent().getExtras().getString("SiteID");
         Log.i("ASSIGNiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Ethan: reason?
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mToggle.onOptionsItemSelected(item)){
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+       establish_nav(siteid);
     }
 
     final OnClickListener siteClickEvent = new OnClickListener() {
@@ -84,6 +75,7 @@ public class Assignment extends AppCompatActivity {
         }
     };
     // AsuncTask that is used to get json from url
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private class GetAssign extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -108,7 +100,7 @@ public class Assignment extends AppCompatActivity {
                     for (int i = 0; i < assignments.length(); i++) {
                         JSONObject c = assignments.getJSONObject(i);
                         //get variable needed from JSON object
-                        String itemName = c.getString("gradebookItemName");
+                        String itemName = c.getString("entityTitle");
                         String dueTime = c.getString("dueTimeString");
                         String startTime = c.getString("openTimeString");
                         String instructions = c.getString("instructions");
@@ -152,42 +144,9 @@ public class Assignment extends AppCompatActivity {
             Log.e("background","done!");
             return null;
         }
+        @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
         @Override
         protected void onPostExecute(Void result) {
-            NavigationView n = (NavigationView)findViewById(R.id.navi_id);
-            n.setNavigationItemSelectedListener(
-                    new NavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            item.setChecked(false); // not showing blue
-                            mDrawerLayout.closeDrawers();
-                            //Toast.makeText(getApplicationContext(), "!", Toast.LENGTH_SHORT).show();
-                            if(item.getTitle().equals("Assignment")){
-                                Intent toAssignment = new Intent(Assignment.this, Assignment.class);
-                                toAssignment.putExtra("SiteID",siteid);
-                                startActivity(toAssignment);
-                            } else if(item.getTitle().equals("Resource")) {
-                                Intent toResource = new Intent(Assignment.this, Resources.class);
-                                toResource.putExtra("SiteID",siteid);
-                                startActivity(toResource);
-                            } else if(item.getTitle().equals("Gradebook")) {
-                                Intent toGradebook = new Intent(Assignment.this, Gradebook.class);
-                                toGradebook.putExtra("SiteID",siteid);
-                                startActivity(toGradebook);
-                            } else if(item.getTitle().equals("Announcement")) {
-//                                Intent toAnnouncement = new Intent(Assignment.this, Announcement.class);
-//                                toAnnouncement.putExtra("SiteID",siteid);
-//                                startActivity(toAnnouncement);
-                            } else if(item.getTitle().equals("Site")) {
-                                Intent toSites = new Intent(Assignment.this, sites.class);
-                                toSites.putExtra("ID","sitesclick");
-                                startActivity(toSites);
-                            }
-                            return true;
-
-                        }
-                    }
-            );
 
             super.onPostExecute(result);
             if (pDialog.isShowing())
