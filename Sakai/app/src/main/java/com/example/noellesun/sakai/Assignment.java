@@ -38,6 +38,7 @@ public class Assignment extends AppBaseActivity {
 
     private String TAG = Assignment.class.getSimpleName();
     //reviewed Login, sites, added comments and restructured some code
+
     private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
@@ -56,7 +57,7 @@ public class Assignment extends AppBaseActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
-        establish_nav(siteid);
+       establish_nav(siteid);
     }
 
     final OnClickListener siteClickEvent = new OnClickListener() {

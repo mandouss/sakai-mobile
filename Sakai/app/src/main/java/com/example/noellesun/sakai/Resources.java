@@ -43,9 +43,6 @@ public class Resources extends AppBaseActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Resources.GetResour().execute();
-
-        establish_nav(siteid);
-
         Button button = (Button)findViewById(R.id.openPdf);
         button.setOnClickListener(new OnClickListener() {
             @Override
@@ -54,6 +51,9 @@ public class Resources extends AppBaseActivity {
                 startActivity(intent);
             }
         });
+
+        establish_nav(siteid);
+        
 
 
     }
