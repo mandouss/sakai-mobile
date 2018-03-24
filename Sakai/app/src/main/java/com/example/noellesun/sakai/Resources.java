@@ -29,7 +29,8 @@ public class Resources extends AppBaseActivity {
     private ArrayList<HashMap<String, String>> resList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
-    String fixurl = "https://sakai.duke.edu/access/content/group/";
+//    String fixurl = "https://sakai.duke.edu/access/content/group/";
+    String fixurl = "https://sakai.duke.edu/direct/content/site/";
     String cookiestr;
     String siteid;
     @Override
@@ -85,22 +86,22 @@ public class Resources extends AppBaseActivity {
         @Override
         protected Void doInBackground(Void... arg0) {  // String... urls
             HttpHandler sh = new HttpHandler();
-            String url = fixurl + siteid;
+            String url = fixurl + siteid + ".json";
             Log.i("resource_url", url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             Log.e(TAG, "RESOURCEJSON: " + jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    JSONArray resources = jsonObj.getJSONArray("resources_collection");
+                    JSONArray resources = jsonObj.getJSONArray("content_collection");
                     for (int i = 0; i < resources.length(); i++) {
                         JSONObject c = resources.getJSONObject(i);
                         //get variable needed from JSON object
-                        String itemName = c.getString("resourcesItemName");
-                        String modifiedTime = c.getString("modifiedTimeString");
-                        String createdBy = c.getString("createdByString");
-                        String instructions = c.getString("instructions");
-                        String access = c.getString("access");
+                        String itemName = c.getString("entityTitle");
+                        String modifiedTime = c.getString("modifiedDate");
+                        String createdBy = c.getString("author");
+                        String resourceurl = c.getString("url");
+                        String access = c.getString("usage");
                         Log.e("RESOURCEMNAME", itemName);
 
                         //store the variable needed in a hashmap
@@ -108,7 +109,7 @@ public class Resources extends AppBaseActivity {
                         eachResource.put("itemName", itemName);
                         eachResource.put("modifiedTime", modifiedTime);
                         eachResource.put("createdBy", createdBy);
-                        eachResource.put("instructions", instructions);
+                        eachResource.put("resourceurl", resourceurl);
                         eachResource.put("access", access);
                         resList.add(eachResource);
                         Log.i("RESLIST", resList.toString());

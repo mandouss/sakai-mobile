@@ -26,7 +26,8 @@ public class eachResource extends AppCompatActivity {
         String modifiedTime = info.get("modifiedTime");
         String createdBy = info.get("createdBy");
         //parse html formatted text into plain text
-        instructions = Html.fromHtml(info.get("instructions")).toString();
+        //String url = Html.fromHtml(info.get("url")).toString();
+        String resourceurl = info.get("resourceurl");
         String access = info.get("access");
         String size = info.get("size");
         loadText();
@@ -46,4 +47,6 @@ public class eachResource extends AppCompatActivity {
         TextView instruct = (TextView) findViewById(R.id.instruction);
         instruct.setText(instructions);
     }
+
+
 }
