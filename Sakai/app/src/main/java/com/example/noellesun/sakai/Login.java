@@ -35,9 +35,8 @@ public class Login extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         //set cookie to maintain the session
         final CookieManager cookieManager = CookieManager.getInstance();
-
-        //Use webview to redirect to sakai login page
-        // Ethan: what is this for?
+//        Use webview to redirect to sakai login page
+//         Ethan: what is this for?
         browser.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -49,7 +48,6 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-
         browser.loadUrl("https://sakai.duke.edu/portal/login");
 
     }

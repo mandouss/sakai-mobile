@@ -41,7 +41,7 @@ public class sites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
-
+        findViewById(R.id.lo).setOnClickListener(logout);
         Log.i("siteTitleList",Integer.toString(sitetitleist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
@@ -84,6 +84,15 @@ public class sites extends AppCompatActivity {
         }
 
     }
+    final OnClickListener logout = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.removeAllCookie();
+            cookieManager.removeSessionCookie();
+            startActivity(new Intent(getBaseContext(), Login.class));
+        }
+    };
 
     private class GetSites extends AsyncTask<Void, Void, Void> {
         @Override
