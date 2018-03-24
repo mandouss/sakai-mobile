@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.noellesun.sakai.Login">
 
+    <!-- Ethan: strange numbers-->
     <WebView
         android:id="@+id/webview"
         android:layout_width="413dp"
         android:layout_height="614dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-9dp" />
+
 </android.support.constraint.ConstraintLayout>

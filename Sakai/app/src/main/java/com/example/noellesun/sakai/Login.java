@@ -3,33 +3,21 @@ package com.example.noellesun.sakai;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.lang.reflect.Array;
-
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class Login extends AppCompatActivity {
     ArrayList<String> idarray = new ArrayList<>();
@@ -40,7 +28,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.web_layout);
         //Use shib.duke to do the authentication
         WebView browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
@@ -49,6 +37,7 @@ public class Login extends AppCompatActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
 
         //Use webview to redirect to sakai login page
+        // Ethan: what is this for?
         browser.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -65,6 +54,7 @@ public class Login extends AppCompatActivity {
 
     }
     //Use AsyncTask to retrieve json from sakai server on the background
+    // using different thread automatically
     class GetMember extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -72,7 +62,7 @@ public class Login extends AppCompatActivity {
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(Login.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Please wait..."); // show this on screen
             pDialog.setCancelable(false);
             pDialog.show();
 
@@ -146,6 +136,7 @@ public class Login extends AppCompatActivity {
             Intent intent = new Intent(Login.this, sites.class);
             Bundle b=new Bundle();
             b.putStringArrayList("ID_ARRAY",idarray);
+            Log.i("idarray", "Here is the idarry value :" + idarray.toString()); // to see idarry's information
             intent.putExtras(b);
             intent.putExtra("ID","Login");
             startActivity(intent);
