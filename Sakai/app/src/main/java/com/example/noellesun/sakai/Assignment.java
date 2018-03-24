@@ -30,60 +30,26 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Assignment extends AppCompatActivity {
+public class Assignment extends AppBaseActivity {
     private String TAG = sites.class.getSimpleName();
     private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
-    private Menu m;
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment);
         lv = (ListView) findViewById(R.id.assignlist);
-        m = (Menu) findViewById(R.id.menuId);
         siteid = getIntent().getExtras().getString("SiteID");
         Log.i("ASSIGNiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        NavigationView n = (NavigationView)findViewById(R.id.navi_id);
-        n.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        item.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        Toast.makeText(getApplicationContext(), "!", Toast.LENGTH_SHORT).show();
-                        Intent toSites = new Intent(Assignment.this, sites.class);
-                        //
-                        startActivity(toSites);
-                        return true;
-                    }
-                }
-        );
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mToggle.onOptionsItemSelected(item)){
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        establish_nav(siteid);
     }
 
     final OnClickListener siteClickEvent = new OnClickListener() {
@@ -171,28 +137,6 @@ public class Assignment extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(Void result) {
-            NavigationView n = (NavigationView)findViewById(R.id.navi_id);
-            n.setNavigationItemSelectedListener(
-                    new NavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            item.setChecked(true);
-                            mDrawerLayout.closeDrawers();
-//                            Toast.makeText(getApplicationContext(), "!", Toast.LENGTH_SHORT).show();
-                            if(item.getTitle().equals("Assignment")){
-                                Intent toAssignment = new Intent(Assignment.this, Assignment.class);
-                                toAssignment.putExtra("SiteID",siteid);
-                                startActivity(toAssignment);
-                            }else if(item.getTitle().equals("Gradebook")) {
-                                Intent toSites = new Intent(Assignment.this, Gradebook.class);
-                                toSites.putExtra("SiteID",siteid);
-                                startActivity(toSites);
-                            }
-                            return true;
-                        }
-                    }
-            );
-
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();

@@ -27,7 +27,7 @@ import java.lang.reflect.
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Gradebook extends AppCompatActivity {
+public class Gradebook extends AppBaseActivity {
     private String TAG = sites.class.getSimpleName();
     private ArrayList<HashMap<String, String>> gradeList = new ArrayList<>();
     private ProgressDialog pDialog;
@@ -45,7 +45,8 @@ public class Gradebook extends AppCompatActivity {
         //Get the cookie to keep login status
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        new GetGrade().execute();
+        new Gradebook.GetGrade().execute();
+        establish_nav(siteid);
     }
     final OnClickListener sitesclick = new OnClickListener() {
         @Override

@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Resources extends AppCompatActivity {
+public class Resources extends AppBaseActivity {
 
     private String TAG = sites.class.getSimpleName();
     private ArrayList<HashMap<String, String>> resList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class Resources extends AppCompatActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Resources.GetResour().execute();
-
+        establish_nav(siteid);
     }
     final OnClickListener siteClickEvent = new OnClickListener() {
         @Override
