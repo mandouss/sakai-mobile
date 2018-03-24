@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        browser.loadUrl("https://sakai.duke.edu");
+        browser.loadUrl("https://sakai.duke.edu/portal/login");
 
     }
     //Use AsyncTask to retrieve json from sakai server on the background
