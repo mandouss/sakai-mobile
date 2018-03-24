@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.CookieManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -42,6 +43,14 @@ public class Resources extends AppCompatActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Resources.GetResour().execute();
+        Button button = (Button)findViewById(R.id.openPdf);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Resources.this, PdfViewer.class);
+                startActivity(intent);
+            }
+        });
 
     }
     final OnClickListener siteClickEvent = new OnClickListener() {

@@ -13,6 +13,18 @@
     android:layout_height="459sp"
     tools:context="sites">
 
+    <Button
+        android:id="@+id/openPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Pdf in Webview"
+        android:textAllCaps="false"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is only a demo button to show hardcoded url pdf"
+        android:paddingLeft="5dp"
+        android:paddingTop="42dp"/>
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +33,7 @@
         android:layout_alignParentTop="true"
         android:paddingLeft="15dp"
         android:paddingRight="30dp"
-        android:paddingTop="30dp">
+        android:paddingTop="60dp">
 
 
         <TextView
