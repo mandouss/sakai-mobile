@@ -125,7 +125,7 @@ public class Assignment extends AppCompatActivity {
                     for (int i = 0; i < assignments.length(); i++) {
                         JSONObject c = assignments.getJSONObject(i);
                         //get variable needed from JSON object
-                        String itemName = c.getString("gradebookItemName");
+                        String itemName = c.getString("entityTitle");
                         String dueTime = c.getString("dueTimeString");
                         String startTime = c.getString("openTimeString");
                         String instructions = c.getString("instructions");
