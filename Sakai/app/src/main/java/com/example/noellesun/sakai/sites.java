@@ -18,11 +18,13 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class sites extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
@@ -35,6 +37,10 @@ public class sites extends AppCompatActivity {
     String cookiestr;
     static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>(); ;
     static ArrayList<String> idarray = new ArrayList<>();
+    // termlist includes both terms and courses
+    static HashMap<String, ArrayList<String>> termlist = new HashMap<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +116,7 @@ public class sites extends AppCompatActivity {
         protected Void doInBackground(Void... arg0) {
             //receive userId and siteIs from Login view
             HttpHandler sh = new HttpHandler();
+
             for (int i = 0; i < sitesids.size(); i++) {
                 String siteurl = fixurl + sitesids.get(i) + ".json";
                 // Making a request to url and getting response
@@ -117,7 +124,16 @@ public class sites extends AppCompatActivity {
                 if (jsonStr != null) {
                     try {
                         JSONObject jsonObj = new JSONObject(jsonStr);
-                        // Getting JSON Array node
+                        String type = jsonObj.getString("type");
+                        String term;
+                        if(!type.equals("course")){
+                            term = type;
+                        }
+                        else{
+                            JSONObject props = jsonObj.getJSONObject("props");
+                            term =props.getString("term");
+                        }
+                        Log.e("term",term);
                         String titlename = jsonObj.getString("title");
                         Log.e("titlename",titlename);
                         // tmp hash map for single sitetitle
@@ -125,6 +141,26 @@ public class sites extends AppCompatActivity {
                         sitetitle.put("title", titlename);
                         sitetitleist.add(sitetitle);
                         Log.e("after_sitessize",Integer.toString(sitetitleist.size()));
+                        if (termlist == null){
+                            ArrayList<String> temp_course = new ArrayList<>();
+                            temp_course.add(titlename);
+                            termlist.put(term,temp_course);
+                        }
+                        else{
+                            ArrayList<String> temp_course;
+                            if(termlist.containsKey(term)){
+                                temp_course = termlist.get(term);
+                                temp_course.add(titlename);
+                            }
+                            else {
+                                temp_course = new ArrayList<>();
+                                temp_course.add(titlename);
+
+                            }
+                            termlist.put(term,temp_course);
+                        }
+
+
                     } catch (final JSONException e) {
                         Log.e(TAG, "Json parsing error: " + e.getMessage());
                         runOnUiThread(new Runnable() {
@@ -150,6 +186,16 @@ public class sites extends AppCompatActivity {
                     });
                 }
             }
+
+//            print hashmap
+            for (HashMap.Entry<String, ArrayList<String> > entry : termlist.entrySet())
+            {
+//                String result;
+//                for(String item : e)
+                Log.e("print hashmap", entry.getKey() + "/" + entry.getValue().toString());
+            }
+
+
             Log.e("background","done!");
             return null;
         }
