@@ -42,6 +42,8 @@ public class sites extends AppCompatActivity {
     static ArrayList<ListCell> sitelist = new ArrayList<ListCell>();
     static ArrayList<String> idarray = new ArrayList<>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +102,10 @@ public class sites extends AppCompatActivity {
             final CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.removeAllCookie();
             cookieManager.removeSessionCookie();
-            startActivity(new Intent(getBaseContext(), Login.class));
+            System.exit(0);
+//            Intent intent = new Intent(getBaseContext(), Login.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//close all activities
+//            startActivity(intent);
         }
     };
     private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
@@ -120,6 +125,8 @@ public class sites extends AppCompatActivity {
         }
         return tempList;
     }
+
+
 
     private class GetSites extends AsyncTask<Void, Void, Void> {
         @Override

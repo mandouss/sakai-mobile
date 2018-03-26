@@ -53,6 +53,7 @@ public class Login extends AppCompatActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
 
         //Use webview to redirect to sakai login page
+        browser.loadUrl("https://sakai.duke.edu/portal/logout");
         browser.loadUrl("https://sakai.duke.edu/portal/login");
         Log.i("url", browser.getUrl());
 
