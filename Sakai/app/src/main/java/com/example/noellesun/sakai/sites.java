@@ -1,5 +1,6 @@
 package com.example.noellesun.sakai;
 
+import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.nfc.Tag;
@@ -13,6 +14,8 @@ import android.webkit.CookieManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -32,21 +35,26 @@ public class sites extends AppCompatActivity {
     static  String userid;
     static ArrayList<String> sitesids;
     private ProgressDialog pDialog;
-    private ListView lv;
+    //private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/site/";
     String cookiestr;
-    static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>(); ;
+    //static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>(); ;
     static ArrayList<String> idarray = new ArrayList<>();
     // termlist includes both terms and courses
-    static HashMap<String, ArrayList<String>> termlist = new HashMap<>();
+    static HashMap<String, ArrayList<String>> courses = new HashMap<>();
+    // term only includes the terms and used for first degree categories
+    static ArrayList<String> term = new ArrayList<>();
 
+    private ExpandableListView explv;
+    private ExpSiteAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
-        lv = (ListView) findViewById(R.id.list);
+        //lv = (ListView) findViewById(R.id.list);
+        explv = (ExpandableListView) findViewById(R.id.list);
 
         Log.e("sitetitlelist",Integer.toString(sitetitleist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -67,8 +75,9 @@ public class sites extends AppCompatActivity {
         else{
             Log.e("redirect","From other activities!");
             Log.e("Sites:", "now in sites create");
-            ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
-                    R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
+            //ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
+                  // R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
+            adapter = new ExpSiteAdapter(this, termlist )
 
             lv.setAdapter(adapter);
             //set click event
@@ -113,40 +122,48 @@ public class sites extends AppCompatActivity {
                 if (jsonStr != null) {
                     try {
                         JSONObject jsonObj = new JSONObject(jsonStr);
+                        //first add terms to the Arraylist term
                         String type = jsonObj.getString("type");
-                        String term;
+                        String strterm;
                         if(!type.equals("course")){
-                            term = type;
+                            // if the site is a project instead of a course
+                            // use type as the first categories
+                            strterm = type;
+                            term.add(type);
                         }
                         else{
                             JSONObject props = jsonObj.getJSONObject("props");
-                            term =props.getString("term");
+                            strterm =props.getString("term");
+                            term.add(strterm);
                         }
-                        Log.e("term",term);
-                        String titlename = jsonObj.getString("title");
-                        Log.e("titlename",titlename);
+                        Log.e("term",strterm);
+                        // get secondary categories
+                        //String titlename = jsonObj.getString("title");
+                        //Log.e("titlename",titlename);
+                        String coursename = jsonObj.getString("title");
+                        Log.e("coursename",coursename );
                         // tmp hash map for single sitetitle
-                        HashMap<String, String> sitetitle = new HashMap<>();
-                        sitetitle.put("title", titlename);
-                        sitetitleist.add(sitetitle);
-                        Log.e("after_sitessize",Integer.toString(sitetitleist.size()));
-                        if (termlist == null){
+                        //HashMap<String, String> sitetitle = new HashMap<>();
+                        //sitetitle.put("title", titlename);
+                        //sitetitleist.add(sitetitle);
+                        //Log.e("after_sitessize",Integer.toString(sitetitleist.size()));
+                        if (courses == null){
                             ArrayList<String> temp_course = new ArrayList<>();
-                            temp_course.add(titlename);
-                            termlist.put(term,temp_course);
+                            temp_course.add(coursename);
+                            courses.put(strterm,temp_course);
                         }
                         else{
                             ArrayList<String> temp_course;
-                            if(termlist.containsKey(term)){
-                                temp_course = termlist.get(term);
-                                temp_course.add(titlename);
+                            if(courses.containsKey(strterm)){
+                                temp_course = courses.get(strterm);
+                                temp_course.add(coursename);
                             }
                             else {
                                 temp_course = new ArrayList<>();
-                                temp_course.add(titlename);
+                                temp_course.add(coursename);
 
                             }
-                            termlist.put(term,temp_course);
+                            courses.put(strterm,temp_course);
                         }
 
 
