@@ -9,9 +9,9 @@
     <!-- Ethan: strange numbers-->
     <WebView
         android:id="@+id/webview"
-        android:layout_width="413dp"
-        android:layout_height="614dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-9dp" />
+        tools:layout_editor_absoluteY="0dp" />
 
 </android.support.constraint.ConstraintLayout>
