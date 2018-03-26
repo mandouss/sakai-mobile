@@ -1,6 +1,5 @@
 package com.example.noellesun.sakai;
 
-import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.nfc.Tag;
@@ -14,8 +13,6 @@ import android.webkit.CookieManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.view.View.OnClickListener;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -32,52 +29,47 @@ import java.util.Iterator;
 public class sites extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
     //use static userid and sitesids to keep the original userid and sitesids
-    static  String userid;
+    static  String userid; // Ethan: why do we need static
     static ArrayList<String> sitesids;
     private ProgressDialog pDialog;
-    //private ListView lv;
+    private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/site/";
     String cookiestr;
-    //static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>(); ;
+    static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>(); ;
     static ArrayList<String> idarray = new ArrayList<>();
     // termlist includes both terms and courses
-    static HashMap<String, ArrayList<String>> courses = new HashMap<>();
-    // term only includes the terms and used for first degree categories
-    static ArrayList<String> term = new ArrayList<>();
+    static HashMap<String, ArrayList<String>> termlist = new HashMap<>();
 
-    private ExpandableListView explv;
-    private ExpSiteAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
-        //lv = (ListView) findViewById(R.id.list);
-        explv = (ExpandableListView) findViewById(R.id.list);
-
-        Log.e("sitetitlelist",Integer.toString(sitetitleist.size()));
+        lv = (ListView) findViewById(R.id.list);
+        findViewById(R.id.lo).setOnClickListener(logout);
+        Log.i("siteTitleList",Integer.toString(sitetitleist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        Log.e(TAG,cookiestr);
-
+        Log.i(TAG,cookiestr);
+        // from login activity
         if(getIntent().getExtras().getString("ID").equals("Login")){
             Bundle b = getIntent().getExtras();
-            Log.e("Sites:", "got intent");
+            Log.i("Sites:", "got intent");
             idarray = b.getStringArrayList("ID_ARRAY");
             userid = idarray.get(0);
             idarray.remove(0);
             sitesids = idarray;
             Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
-            Log.e("aftergetid:", "I am here!");
+            Log.i("Here:", "I am here!");
             new GetSites().execute();
         }
-        else{
-            Log.e("redirect","From other activities!");
-            Log.e("Sites:", "now in sites create");
-            //ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
-                  // R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
-            adapter = new ExpSiteAdapter(this, termlist )
+        else{  // Ethan: do not need? If we need it we can write abstraction to reuse code
+            Log.i("redirect","From other activities!");
+            Log.i("Sites:", "now in sites create");
+            ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
+                    R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
+
 
             lv.setAdapter(adapter);
             //set click event
@@ -86,7 +78,7 @@ public class sites extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
-                    Log.e("position is", sitesids.get(position));
+                    Log.i("position is", sitesids.get(position));
                     //send the selected site's id to eachSite view
                     String [] ids = {userid, sitesids.get(position)};
                     Bundle b = new Bundle();
@@ -98,6 +90,15 @@ public class sites extends AppCompatActivity {
         }
 
     }
+    final OnClickListener logout = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.removeAllCookie();
+            cookieManager.removeSessionCookie();
+            startActivity(new Intent(getBaseContext(), Login.class));
+        }
+    };
 
     private class GetSites extends AsyncTask<Void, Void, Void> {
         @Override
@@ -108,6 +109,7 @@ public class sites extends AppCompatActivity {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
+            Log.i("show", "message");
         }
 
         @Override
@@ -122,48 +124,40 @@ public class sites extends AppCompatActivity {
                 if (jsonStr != null) {
                     try {
                         JSONObject jsonObj = new JSONObject(jsonStr);
-                        //first add terms to the Arraylist term
                         String type = jsonObj.getString("type");
-                        String strterm;
+                        String term;
                         if(!type.equals("course")){
-                            // if the site is a project instead of a course
-                            // use type as the first categories
-                            strterm = type;
-                            term.add(type);
+                            term = type;
                         }
                         else{
                             JSONObject props = jsonObj.getJSONObject("props");
-                            strterm =props.getString("term");
-                            term.add(strterm);
+                            term =props.getString("term");
                         }
-                        Log.e("term",strterm);
-                        // get secondary categories
-                        //String titlename = jsonObj.getString("title");
-                        //Log.e("titlename",titlename);
-                        String coursename = jsonObj.getString("title");
-                        Log.e("coursename",coursename );
+                        Log.e("term",term);
+                        String titlename = jsonObj.getString("title");
+                        Log.e("titlename",titlename);
                         // tmp hash map for single sitetitle
-                        //HashMap<String, String> sitetitle = new HashMap<>();
-                        //sitetitle.put("title", titlename);
-                        //sitetitleist.add(sitetitle);
-                        //Log.e("after_sitessize",Integer.toString(sitetitleist.size()));
-                        if (courses == null){
+                        HashMap<String, String> sitetitle = new HashMap<>();
+                        sitetitle.put("title", titlename);
+                        sitetitleist.add(sitetitle);
+                        Log.e("after_sitessize",Integer.toString(sitetitleist.size()));
+                        if (termlist == null){
                             ArrayList<String> temp_course = new ArrayList<>();
-                            temp_course.add(coursename);
-                            courses.put(strterm,temp_course);
+                            temp_course.add(titlename);
+                            termlist.put(term,temp_course);
                         }
                         else{
                             ArrayList<String> temp_course;
-                            if(courses.containsKey(strterm)){
-                                temp_course = courses.get(strterm);
-                                temp_course.add(coursename);
+                            if(termlist.containsKey(term)){
+                                temp_course = termlist.get(term);
+                                temp_course.add(titlename);
                             }
                             else {
                                 temp_course = new ArrayList<>();
-                                temp_course.add(coursename);
+                                temp_course.add(titlename);
 
                             }
-                            courses.put(strterm,temp_course);
+                            termlist.put(term,temp_course);
                         }
 
 
@@ -225,6 +219,7 @@ public class sites extends AppCompatActivity {
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
                     String [] ids = {userid, sitesids.get(position)};
+                    Log.i("position", sitesids.get(position));
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
                     intent.putExtras(b);
