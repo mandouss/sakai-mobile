@@ -3,25 +3,26 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:paddingLeft="18dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
+        android:paddingBottom="0dip"
         android:paddingTop="6dip"
         android:textColor="#283593"
         android:textSize="24sp"
         android:textStyle="bold" />
+
     <TextView
+        android:text="Instructor:"
         android:id="@+id/subtitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
-        android:paddingTop="6dip"
+        android:paddingBottom="6dip"
+        android:paddingTop="0dip"
         android:textColor="#7986CB"
         android:textSize="20sp"
         android:textStyle="normal" />
-
 </LinearLayout>
