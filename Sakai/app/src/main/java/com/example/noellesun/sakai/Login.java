@@ -2,21 +2,16 @@ package com.example.noellesun.sakai;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -28,10 +23,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 
@@ -47,6 +39,7 @@ public class Login extends AppCompatActivity {
     private String TAG = Login.class.getSimpleName();
     String target = "site:";
     String cookiestr;
+    String basic = "https://shib.oit.duke.edu/idp/authn/external?";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +49,6 @@ public class Login extends AppCompatActivity {
         WebView browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        browser.getSettings().setLoadWithOverviewMode(true);
-        browser.getSettings().setUseWideViewPort(true);
         //set cookie to maintain the session
         final CookieManager cookieManager = CookieManager.getInstance();
 
@@ -75,6 +66,16 @@ public class Login extends AppCompatActivity {
                     cookiestr = cookieManager.getCookie(url);
                     new GetMember().execute();
                 }
+            }
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                // do your handling codes here, which url is the requested url
+                // probably you need to open that url rather than redirect:
+                if(url.length() >= basic.length() && url.substring(0, basic.length()).equals(basic)) {
+                    Log.e("override url", url);
+                    String summary = generate_login_html(url);
+                    view.loadData(summary, "text/html; charset=utf-8", "utf-8");
+                }
+                return false; // then it is not handled by default action
             }
         });
 
