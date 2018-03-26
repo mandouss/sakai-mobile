@@ -1,5 +1,9 @@
 package com.example.noellesun.sakai;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import android.app.Activity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.nfc.Tag;
@@ -18,13 +22,11 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class sites extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
@@ -35,20 +37,17 @@ public class sites extends AppCompatActivity {
     private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/site/";
     String cookiestr;
-    static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>(); ;
+    //    static ArrayList<LinkedHashMap<String, site_info>> sitetitleist = new ArrayList<>();
+    //static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>();
+    static ArrayList<ListCell> sitelist = new ArrayList<ListCell>();
     static ArrayList<String> idarray = new ArrayList<>();
-    // termlist includes both terms and courses
-    static HashMap<String, ArrayList<String>> termlist = new HashMap<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
-        findViewById(R.id.lo).setOnClickListener(logout);
-        Log.i("siteTitleList",Integer.toString(sitetitleist.size()));
+        Log.i("siteList",Integer.toString(sitelist.size()));
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         Log.i(TAG,cookiestr);
@@ -63,14 +62,12 @@ public class sites extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
             Log.i("Here:", "I am here!");
             new GetSites().execute();
+            //sort site by term;
         }
         else{  // Ethan: do not need? If we need it we can write abstraction to reuse code
             Log.i("redirect","From other activities!");
             Log.i("Sites:", "now in sites create");
-            ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
-                    R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
-
-
+            ListAdapter adapter = new com.example.noellesun.sakai.ListAdapter(sites.this, sitelist);
             lv.setAdapter(adapter);
             //set click event
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,9 +75,14 @@ public class sites extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
-                    Log.i("position is", sitesids.get(position));
-                    //send the selected site's id to eachSite view
-                    String [] ids = {userid, sitesids.get(position)};
+                    //get the position of one click
+                    ListCell temp_lc = (ListCell)parent.getAdapter().getItem(position);
+                    //!!! check if it is header, dynamic action to be complete
+                    if(temp_lc.getTitlename() == null) {
+                        return;//lv.setClickable(false);
+                    }
+                    Log.i("position is", temp_lc.getId());
+                    String [] ids = {userid, temp_lc.getId()};
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
                     intent.putExtras(b);
@@ -90,15 +92,24 @@ public class sites extends AppCompatActivity {
         }
 
     }
-    final OnClickListener logout = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            final CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.removeAllCookie();
-            cookieManager.removeSessionCookie();
-            startActivity(new Intent(getBaseContext(), Login.class));
+
+    private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
+        ArrayList tempList = new ArrayList();
+        Collections.sort(itemList);
+        //Loops thorough the list and add a section header in tempList
+        String header = "";
+        for(int i = 0; i < itemList.size(); i++) {
+            //If it is the start of a new section we create a new listcell and add it to our array
+            if(!(header.equals(itemList.get(i).getCategory()))){
+                ListCell sectionCell = new ListCell(itemList.get(i).getCategory(), null,null, null);
+                sectionCell.setToSectionHeader();
+                tempList.add(sectionCell);
+                header = itemList.get(i).getCategory();
+            }
+            tempList.add(itemList.get(i));
         }
-    };
+        return tempList;
+    }
 
     private class GetSites extends AsyncTask<Void, Void, Void> {
         @Override
@@ -116,7 +127,6 @@ public class sites extends AppCompatActivity {
         protected Void doInBackground(Void... arg0) {
             //receive userId and siteIs from Login view
             HttpHandler sh = new HttpHandler();
-
             for (int i = 0; i < sitesids.size(); i++) {
                 String siteurl = fixurl + sitesids.get(i) + ".json";
                 // Making a request to url and getting response
@@ -124,43 +134,19 @@ public class sites extends AppCompatActivity {
                 if (jsonStr != null) {
                     try {
                         JSONObject jsonObj = new JSONObject(jsonStr);
-                        String type = jsonObj.getString("type");
-                        String term;
-                        if(!type.equals("course")){
-                            term = type;
+                        // Getting JSON Array node and //parse json data into the sitelist
+                        String category = jsonObj.getString("type");
+                        if(!category.equals("course")) {
+                            category = "Project";
                         }
                         else{
-                            JSONObject props = jsonObj.getJSONObject("props");
-                            term =props.getString("term");
+                            category = jsonObj.getJSONObject("props").getString("term");
                         }
-                        Log.e("term",term);
-                        String titlename = jsonObj.getString("title");
-                        Log.e("titlename",titlename);
-                        // tmp hash map for single sitetitle
-                        HashMap<String, String> sitetitle = new HashMap<>();
-                        sitetitle.put("title", titlename);
-                        sitetitleist.add(sitetitle);
-                        Log.e("after_sitessize",Integer.toString(sitetitleist.size()));
-                        if (termlist == null){
-                            ArrayList<String> temp_course = new ArrayList<>();
-                            temp_course.add(titlename);
-                            termlist.put(term,temp_course);
-                        }
-                        else{
-                            ArrayList<String> temp_course;
-                            if(termlist.containsKey(term)){
-                                temp_course = termlist.get(term);
-                                temp_course.add(titlename);
-                            }
-                            else {
-                                temp_course = new ArrayList<>();
-                                temp_course.add(titlename);
-
-                            }
-                            termlist.put(term,temp_course);
-                        }
-
-
+                        String instructor = jsonObj.getJSONObject("siteOwner").getString("userDisplayName");
+                        String titleName = jsonObj.getString("title");
+                        Log.e("titleName",titleName);
+                        sitelist.add(new ListCell(sitesids.get(i), titleName, category, instructor));
+                        Log.e("after_sitessize",Integer.toString(sitelist.size()));
                     } catch (final JSONException e) {
                         Log.e(TAG, "Json parsing error: " + e.getMessage());
                         runOnUiThread(new Runnable() {
@@ -186,16 +172,8 @@ public class sites extends AppCompatActivity {
                     });
                 }
             }
-
-//            print hashmap
-            for (HashMap.Entry<String, ArrayList<String> > entry : termlist.entrySet())
-            {
-//                String result;
-//                for(String item : e)
-                Log.e("print hashmap", entry.getKey() + "/" + entry.getValue().toString());
-            }
-
-
+            //sort site by term;
+            sitelist = sortAndAddSections(sitelist);
             Log.e("background","done!");
             return null;
         }
@@ -207,19 +185,24 @@ public class sites extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
             Log.e("postexe","prepare to list");
+            //sitelist = sortAndAddSections(sitelist);
+            ListAdapter adapter = new com.example.noellesun.sakai.ListAdapter(sites.this, sitelist);
             //parse json data into the sites list
-            ListAdapter adapter = new SimpleAdapter( sites.this, sitetitleist,
-                    R.layout.list_item, new String[]{"title"}, new int[]{R.id.title});
 
             lv.setAdapter(adapter);
+
             //set click event
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
-                    String [] ids = {userid, sitesids.get(position)};
-                    Log.i("position", sitesids.get(position));
+                    ListCell temp_lc = (ListCell)parent.getAdapter().getItem(position);
+                    String [] ids = {userid, temp_lc.getId()};
+                    Log.i("position", temp_lc.getId());
+                    if(temp_lc.getTitlename() == null) {
+                        return;//lv.setClickable(false);
+                    }
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
                     intent.putExtras(b);
