@@ -48,6 +48,8 @@ public class sites extends AppCompatActivity {
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
         Log.i("siteList",Integer.toString(sitelist.size()));
+
+        findViewById(R.id.lo).setOnClickListener(logout);
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         Log.i(TAG,cookiestr);
@@ -92,7 +94,15 @@ public class sites extends AppCompatActivity {
         }
 
     }
-
+    final OnClickListener logout = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.removeAllCookie();
+            cookieManager.removeSessionCookie();
+            startActivity(new Intent(getBaseContext(), Login.class));
+        }
+    };
     private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
         ArrayList tempList = new ArrayList();
         Collections.sort(itemList);
@@ -122,6 +132,7 @@ public class sites extends AppCompatActivity {
             pDialog.show();
             Log.i("show", "message");
         }
+
 
         @Override
         protected Void doInBackground(Void... arg0) {
