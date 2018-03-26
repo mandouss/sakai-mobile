@@ -35,6 +35,7 @@ public class Gradebook extends AppBaseActivity {
     private static String fixurl = "https://sakai.duke.edu/direct/gradebook/site/";
     String cookiestr;
     String siteid;
+    //private String [] subtitle = new String[]{null, "Grades:   "};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +85,12 @@ public class Gradebook extends AppBaseActivity {
                         String grade = c.getString("grade");
                         String points = c.getString("points");
                         Log.e("ITEMNAME", itemName);
-
                         HashMap<String, String> eachGrade = new HashMap<>();
+                        //eachGrade.put("subtitle", subtitle[i]);
                         eachGrade.put("itemName", itemName);
-                        eachGrade.put("grade", grade);
-                        eachGrade.put("points", points);
+                        String gradePoints = "Grades:    " + grade + " / " + points;
+                        eachGrade.put("Grades", gradePoints);
+                        //eachGrade.put("points", points);
                         gradeList.add(eachGrade);
                     }
                 } catch (final JSONException e) {
@@ -127,8 +129,11 @@ public class Gradebook extends AppBaseActivity {
                 pDialog.dismiss();
             //After gradeList is filled with parsed json data, set ListAdapter
             ListAdapter adapter = new SimpleAdapter( Gradebook.this, gradeList,
-                    R.layout.gradebook_listitem, new String[]{"itemName", "grade",
-                    "points"},new int[]{R.id.itemName, R.id.grade,R.id.points});
+                    R.layout.gradebook_listitem, new String[]{"itemName", "Grades"},
+                    new int[]{R.id.itemName, R.id.grade});
+//            ListAdapter adapter = new SimpleAdapter( Gradebook.this, gradeList,
+//                    R.layout.gradebook_listitem, new String[]{"itemName", "grade",
+//                    "points"},new int[]{R.id.itemName, R.id.grade,R.id.points});
             lv.setAdapter(adapter);
         }
 
