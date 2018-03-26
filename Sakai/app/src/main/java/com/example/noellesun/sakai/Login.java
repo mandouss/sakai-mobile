@@ -77,6 +77,7 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+
     }
     //Use AsyncTask to retrieve json from sakai server on the background
     class GetMember extends AsyncTask<Void, Void, Void> {
