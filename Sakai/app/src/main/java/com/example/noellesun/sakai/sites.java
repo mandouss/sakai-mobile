@@ -42,12 +42,16 @@ public class sites extends AppCompatActivity {
     static ArrayList<ListCell> sitelist = new ArrayList<ListCell>();
     static ArrayList<String> idarray = new ArrayList<>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sites);
         lv = (ListView) findViewById(R.id.list);
         Log.i("siteList",Integer.toString(sitelist.size()));
+
+        findViewById(R.id.lo).setOnClickListener(logout);
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         Log.i(TAG,cookiestr);
@@ -92,7 +96,18 @@ public class sites extends AppCompatActivity {
         }
 
     }
-
+    final OnClickListener logout = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.removeAllCookie();
+            cookieManager.removeSessionCookie();
+            System.exit(0);
+//            Intent intent = new Intent(getBaseContext(), Login.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//close all activities
+//            startActivity(intent);
+        }
+    };
     private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
         ArrayList tempList = new ArrayList();
         Collections.sort(itemList);
@@ -111,6 +126,8 @@ public class sites extends AppCompatActivity {
         return tempList;
     }
 
+
+
     private class GetSites extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -122,6 +139,7 @@ public class sites extends AppCompatActivity {
             pDialog.show();
             Log.i("show", "message");
         }
+
 
         @Override
         protected Void doInBackground(Void... arg0) {
