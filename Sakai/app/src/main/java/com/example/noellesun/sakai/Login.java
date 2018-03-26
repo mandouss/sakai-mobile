@@ -69,7 +69,6 @@ public class Login extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url){
                 // do your handling codes here, which url is the requested url
                 // probably you need to open that url rather than redirect:
-                view.loadUrl(url);
                 if(url.length() >= basic.length() && url.substring(0, basic.length()).equals(basic)) {
                     Log.e("override url", url);
                     String summary = generate_login_html(url);
@@ -178,20 +177,122 @@ public class Login extends AppCompatActivity {
         }
     }
     private String generate_login_html(String url){
-        String summary = "<form action=\"" + url + "\" method=\"post\">\n" +
-                "        \n" +
-                "          <div class=\"login-fields\">\n" +
+
+
+        String summary = "<head>\n" +
+                "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge;\">\n" +
+                "    <meta charset=\"utf-8\">\n" +
+                "    <title>Duke | Log In</title>\n" +
+                "    <meta name=\"description\" content=\"Duke - Log In\">\n" +
+                "    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\">\n" +
+                "    <link rel=\"icon\" href=\"/favicon.ico\" type=\"image/x-icon\">\n" +
+                "    <script type=\"text/javascript\" src=\"/idp/js/jquery-3.2.1.min.js\"></script>\n" +
+                "    <script type=\"text/javascript\">\n" +
+                "      jQuery.extend({\n" +
+                "        isValidSelector: function(selector) {\n" +
+                "          try {\n" +
+                "            var $element = $(selector);\n" +
+                "          } catch(error) {\n" +
+                "            return false;\n" +
+                "          }\n" +
                 "\n" +
-                "  \n" +
-                "        \n" +
-                "          <label for=\"j_username\" class=\"form-control\">NetID</label>\n" +
+                "          return true;\n" +
+                "        }\n" +
+                "      });\n" +
+                "\n" +
+                "      function passwordPopulated() {\n" +
+                "        if ($(\"#j_password\").val().length > 0 || ($.isValidSelector(\"input:-webkit-autofill\") && $(\"#j_password:-webkit-autofill\").length > 0)) {\n" +
+                "          return true;\n" +
+                "        }\n" +
+                "\n" +
+                "        return false;\n" +
+                "      }\n" +
+                "    </script>\n" +
+                "\n" +
+                "    <script src=\"/idp/js/boomerang-oit.js\" type=\"text/javascript\"></script>\n" +
+                "    <script type=\"application/javascript\">\n" +
+                "      var isAgent = {\n" +
+                "        OutlookApp: function() {\n" +
+                "          return navigator.userAgent.match(/iPhone/);\n" +
+                "        },\n" +
+                "        any: function() {\n" +
+                "          return (isAgent.OutlookApp());\n" +
+                "        }\n" +
+                "      };\n" +
+                "    (function() {\n" +
+                "      if( isAgent.any() ) { return; };\n" +
+                "      // random beacon sampling\n" +
+                "      var epoch = Math.floor(Date.now() / 1000);\n" +
+                "      var urls = [\"https://beacon.oit.duke.edu\"];\n" +
+                "      var num = Math.floor(Math.random() * urls.length);\n" +
+                "      host = urls[num].replace(new RegExp('http.*://',''),'');\n" +
+                "      var clientip = \"10.194.129.27\";\n" +
+                "      var server = \"shib.oit.duke.edu\";\n" +
+                "      BOOMR.init({\n" +
+                "           beacon_url: \"https://via.oit.duke.edu/boomerangs/boompost\",\n" +
+                "           site_domain: server,\n" +
+                "           user_ip: clientip,\n" +
+                "           beacon_type: 'POST',\n" +
+                "           BW: {\n" +
+                "             base_url: urls[num] + '/images/',\n" +
+                "             cookie: server + '-bw',\n" +
+                "             cookie_exp: 120,\n" +
+                "             test_https: true,\n" +
+                "             block_beacon: true\n" +
+                "           },\n" +
+                "           RT: {\n" +
+                "             cookie: server + '-rt',\n" +
+                "             cookie_exp: 120,\n" +
+                "             test_https: true,\n" +
+                "             block_beacon: true\n" +
+                "           }\n" +
+                "      }).\n" +
+                "      addVar({\n" +
+                "       \"clientip\": clientip,\n" +
+                "       \"useragent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36\",\n" +
+                "       \"http_ver\": \"HTTP/1.1\",\n" +
+                "       \"method\": \"GET\",\n" +
+                "       \"req_time\": epoch,\n" +
+                "       \"uri_path\": \"/idp/login.jsp\",\n" +
+                "       \"host\": host,\n" +
+                "       \"protocol\": \"https\"\n" +
+                "      });\n" +
+                "    })();\n" +
+                "    </script>\n" +
+                "\n" +
+                "  </head>\n" +
+                "<body>\n" +
+                "\n" +
+                "            <div class=\"panel panel-default\">\n" +
+                "<div class=\"container container-fluid\" style=\"text-align: center; /*让div内部文字居中*/\n" +
+                "    background-color: #fff;\n" +
+                "    border-radius: 20px;\n" +
+                "    width: 300px;\n" +
+                "    height: 350px;\n" +
+                "    margin: auto;\n" +
+                "    position: absolute;\n" +
+                "    top: 0;\n" +
+                "    left: 0;\n" +
+                "    right: 0;\n" +
+                "    bottom: 0;\">  \n" +
+                "            <div class=\"panel panel-default\">\n" +
+                "              \n" +
+                "     <div class=\"panel-heading\">\n" +
+                "                    <h3>Login</h3>\n" +
+                "                </div>\n" +
+                "                <div class=\"panel-body\">\n" +
+                "<form action=\"" + url + "\" method=\"post\">\n" +
+                "\n" +
+                "\n" +
+                "          <div class=\"login-fields\">   \n" +
+                "          <h4 for=\"j_username\" class=\" container-fluid\">NetID</h4>\n" +
                 "          <input class=\"text\" type=\"text\" id=\"j_username\" name=\"j_username\" maxlength=\"50\" autocorrect=\"off\" autocapitalize=\"off\">\n" +
                 "          <script type=\"text/javascript\">$(\"#j_username\").focus();</script>\n" +
-                "\n" +
-                "          <label for=\"j_password\" class=\"form-control\">Password</label>\n" +
+                "          <br></br>\n" +
+                "          <h4 for=\"j_password\" class=\"container-fluid\">Password</h4>\n" +
                 "          <input class=\"text\" type=\"password\" id=\"j_password\" name=\"j_password\" value=\"\">\n" +
                 "\n" +
-                "          <a href=\"https://idms.oit.duke.edu/pwreset/\" id=\"forgot-pw-link\" class=\"smaller\" target=\"_blank\">Forgot your password?&nbsp;<i class=\"fa fa-external-link-square\" aria-hidden=\"true\"></i></a>\n" +
+                "\n" +
                 "\n" +
                 "          <span id=\"login_options_loading\"></span>\n" +
                 "\n" +
@@ -221,7 +322,7 @@ public class Login extends AppCompatActivity {
                 "                    <label for=\"rememberme\">Remember device for 72 hours</label>\n" +
                 "                    <i class=\"fa fa-question-circle tooltip\" tabindex=\"0\" aria-label=\"what's this?\">\n" +
                 "                      <div class=\"tooltip-text\">\n" +
-                "                        <a href=\"#\" class=\"tooltip-close\" aria-label=\"close\"><i class=\"fa fa-window-close-o\" aria-hidden=\"true\"></i></a>\n" +
+                "                        < a href=\"#\" class=\"tooltip-close\" aria-label=\"close\"><i class=\"fa fa-window-close-o\" aria-hidden=\"true\"></i></ a>\n" +
                 "                        This option will allow you to skip multi-factor authentication for the next 72 hours if logging in from this same device and browser.  You will still be prompted to enter your NetID and password.\n" +
                 "                      </div>\n" +
                 "                    </i>\n" +
@@ -229,12 +330,12 @@ public class Login extends AppCompatActivity {
                 "                </ul>  \n" +
                 "              </span>\n" +
                 "              <ul id=\"advanced_verification_links\" class=\"mfa-options\">\n" +
-                "                <li class=\"mfa-indented\"><a href=\"https://idms-mfa.oit.duke.edu/mfa/help?open=authentication_forgotdevice_link#authentication_forgotdevice_anchor\" class=\"smaller\" target=\"_blank\">Forgot your device?\n" +
+                "                <li class=\"mfa-indented\">< a href=\"https://idms-mfa.oit.duke.edu/mfa/help?open=authentication_forgotdevice_link#authentication_forgotdevice_anchor\" class=\"smaller\" target=\"_blank\">Forgot your device?\n" +
                 "                <i class=\"fa fa-external-link-square\" aria-hidden=\"true\"></i>\n" +
-                "              </a></li>\n" +
-                "                <li class=\"mfa-indented\"><a href=\"https://idms-mfa.oit.duke.edu/mfa/help?open=authentication_newdevice_link#authentication_newdevice_anchor\" class=\"smaller\" target=\"_blank\">Have a new device?\n" +
+                "              </ a></li>\n" +
+                "                <li class=\"mfa-indented\">< a href=\"https://idms-mfa.oit.duke.edu/mfa/help?open=authentication_newdevice_link#authentication_newdevice_anchor\" class=\"smaller\" target=\"_blank\">Have a new device?\n" +
                 "                  <i class=\"fa fa-external-link-square\" aria-hidden=\"true\"></i>\n" +
-                "                </a></li>\n" +
+                "                </ a></li>\n" +
                 "              </ul>\n" +
                 "            </div>\n" +
                 "          </div>\n" +
@@ -242,10 +343,11 @@ public class Login extends AppCompatActivity {
                 "          <input id=\"disableAutoCheck\" type=\"hidden\" value=\"1\">\n" +
                 "          <input id=\"disableMFACheck\" type=\"hidden\" value=\"1\">\n" +
                 "\n" +
-                "          <input id=\"loginPageTime\" name=\"loginPageTime\" type=\"hidden\" value=\"1521913885510\">\n" +
-                "\n" +
-                "          <button type=\"submit\" class=\"action\" id=\"Submit\" name=\"Submit\">Log In</button>\n" +
-                "\n" +
+                "          <input id=\"loginPageTime\" name=\"loginPageTime\" type=\"hidden\" value=\"1521923015028\">\n" +
+                "<br></br>\n" +
+                "          <button type=\"submit\" class=\"btn btn-primary\" id=\"Submit\" name=\"Submit\">Log In</button>\n" +
+                "        <br></br>\n" +
+                "         <a href=\"https://idms.oit.duke.edu/pwreset/\" id=\"forgot-pw-link\" class=\"smaller\" target=\"_blank\">Forgot your password?&nbsp;<i class=\"fa fa-external-link-square\" aria-hidden=\"true\"></i></a>\n" +
                 "    <script type=\"text/javascript\">\n" +
                 "    $(document).ready(function() {\n" +
                 "\n" +
@@ -274,7 +376,7 @@ public class Login extends AppCompatActivity {
                 "\n" +
                 "        if ($(\"#j_username\").val().length > 0) {\n" +
                 "\n" +
-                "          $('#login_options_loading').replaceWith(\"<span id='login_options_loading'><br /><img src='/idp/img/loading_animation.gif' alt='Reloading' /></span>\");\n" +
+                "          $('#login_options_loading').replaceWith(\"<span id='login_options_loading'><br />< img src='/idp/img/loading_animation.gif' alt='Reloading' /></span>\");\n" +
                 "          $('#login_options').replaceWith(\"<div id='login_options'></div>\");\n" +
                 "          var username = $('#j_username').val();\n" +
                 "\n" +
@@ -329,9 +431,11 @@ public class Login extends AppCompatActivity {
                 "        }, 250);\n" +
                 "      }\n" +
                 "    </script>\n" +
-                "\n" +
-                "  \n" +
-                "          </div></form>";
+                "</div></form>\n" +
+                "     </div>\n" +
+                "   </div>\n" +
+                " </div>\n" +
+                "</body>";
         return summary;
     }
 }
