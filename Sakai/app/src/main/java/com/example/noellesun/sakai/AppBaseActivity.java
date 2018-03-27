@@ -58,7 +58,7 @@ public abstract class AppBaseActivity extends AppCompatActivity{
                         }else if(item.getTitle().equals("Other Courses")) {
                             Intent intent = new Intent();
                             intent.putExtra("Result", "1");
-                            setResult(0, intent);
+                            setResult(1, intent);
                         }
                         finish();
                         return true;
