@@ -7,61 +7,110 @@
     tools:context="sites"
     android:id="@+id/drawerLayout">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.noellesun.sakai.eachResource">
 
-    <TextView
-        android:id="@+id/itemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:text="ResourcesURL"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp" />
 
-    <ScrollView
-        android:id="@+id/textAreaScroller"
-        android:layout_width="fill_parent"
-        android:layout_height="400dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/itemName"
-        android:layout_marginTop="36dp"
-        android:layout_x="0px"
-        android:layout_y="25px"
-        android:scrollbars="vertical">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="459dp"
+        tools:context="com.example.noellesun.sakai.eachResource"
+        >
+        <Button
+            android:id="@+id/openPdf"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:text="Open Pdf in Webview(Tap to open)"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"/>
+
 
         <TextView
-            android:id="@+id/instruction"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignLeft="@+id/itemName"
-            android:layout_alignStart="@+id/itemName"
-            android:layout_below="@+id/itemName"
-            android:layout_marginTop="32dp"
-            android:text="TextView" />
-    </ScrollView>
-</RelativeLayout>
-<android.support.design.widget.NavigationView
-android:layout_width="wrap_content"
-android:layout_height="match_parent"
-app:menu="@menu/navigation_menu"
-android:layout_gravity="start"
-android:id="@+id/navi_id"
-    >
-</android.support.design.widget.NavigationView>
+            android:layout_height="wrap_content"
+            android:text="This is only a demo button to show hardcoded url pdf"
+            android:paddingLeft="5dp"
+            android:paddingTop="42dp"/>
+        <TextView
+            android:id="@+id/resource_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="80dp"
+            android:text="@string/res_fir_line"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="16dp"
+            android:layout_marginStart="23dp" />
 
-    </android.support.v4.widget.DrawerLayout>
+        <!--<TextView-->
+        <!--android:id="@+id/resource_url"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignLeft="@+id/itemName"-->
+        <!--android:layout_alignStart="@+id/itemName"-->
+        <!--android:layout_below="@+id/itemName"-->
+        <!--android:layout_marginTop="32dp"-->
+        <!--android:paddingLeft="30dp"-->
+        <!--android:paddingRight="30dp"-->
+        <!--android:text = "@string/app_name"-->
+        <!--/>-->
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="200dp"
+            android:text="@string/res_sec_line"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="40dp"
+            android:layout_marginStart="23dp" />
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="30dp"
+            android:paddingTop="60dp">
+
+
+            <ScrollView
+                android:id="@+id/textAreaScroller"
+                android:layout_width="fill_parent"
+                android:layout_height="400dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/itemName"
+                android:layout_marginTop="36dp"
+                android:layout_x="0px"
+                android:layout_y="25px"
+                android:scrollbars="vertical">
+
+
+            </ScrollView>
+        </TableRow>
+    </RelativeLayout>
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/navigation_menu"
+        android:layout_gravity="start"
+        android:id="@+id/navi_id"
+        >
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>
