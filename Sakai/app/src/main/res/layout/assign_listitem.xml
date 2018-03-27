@@ -31,7 +31,7 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.12"
-        android:paddingBottom="2dip"
+        android:paddingBottom="0dip"
         android:textAlignment="center"
         android:textColor="@color/colorAccent" />
 
@@ -39,7 +39,7 @@
         android:id="@+id/dueTimeString"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
+        android:paddingBottom="10dip"
         android:textAlignment="center"
         android:textColor="@color/colorAccent" />
 
