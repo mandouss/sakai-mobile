@@ -20,6 +20,7 @@ public class eachSite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //Get the selected site's userid and siteid from sites view
         Bundle b = getIntent().getExtras();
+
         Log.e("EachSite:", "got intent");
         if (b == null) {
             Log.e(TAG, "can't get bundle");
@@ -27,6 +28,8 @@ public class eachSite extends AppCompatActivity {
             String[] ids = b.getStringArray("IDS");
             if (ids == null) {
                 Log.e(TAG, "ids doesn't contains IDS");
+                finish();
+                return;
             } else {
                 userid = ids[0];
                 siteid = ids[1];
@@ -78,10 +81,13 @@ public class eachSite extends AppCompatActivity {
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent toSites = new Intent(eachSite.this, sites.class);
-            toSites.putExtra("ID","sitesclick");
-            Log.i(TAG, "sitesclick");
-            startActivity(toSites);
+            finish();
+            //Intent toSites = new Intent(getBaseContext(), sites.class);
+
+            //toSites.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//close all activities
+            //toSites.putExtra("ID","sitesclick");
+            //Log.i(TAG, "sitesclick");
+            //startActivity(toSites);
         }
     };
     //redirect to gradebook view, send the selected siteid

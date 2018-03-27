@@ -56,10 +56,12 @@ public abstract class AppBaseActivity extends AppCompatActivity{
                             toSites.putExtra("SiteID",siteid);
                             startActivity(toSites);
                         }else if(item.getTitle().equals("Other Courses")) {
-                            Intent toSites = new Intent(getBaseContext(), sites.class);
+                            Intent toSites = new Intent(getBaseContext(), eachSite.class);
+
                             toSites.putExtra("ID","eachSite");
                             startActivity(toSites);
                         }
+                        finish();
                         return true;
                     }
                 }
