@@ -43,6 +43,7 @@ public class eachSite extends AppCompatActivity {
         // Ethan: add notification clicker
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
         findViewById(R.id.Resources).setOnClickListener(resouclick);
+        findViewById(R.id.Announcements).setOnClickListener(announceclick);
         findViewById(R.id.Gradebook).setOnClickListener(gradebookclick);
         findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
         findViewById(R.id.profilebtn).setOnClickListener(profilelclick);
@@ -69,6 +70,16 @@ public class eachSite extends AppCompatActivity {
             startActivity(toResources);
         }
     };
+
+    public final OnClickListener announceclick = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent toAnnouncement = new Intent(eachSite.this, Announcement.class);
+            toAnnouncement.putExtra("SiteID",siteid);
+            startActivity(toAnnouncement);
+        }
+    };
+
     public final OnClickListener assignclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
