@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/menuId">
     <item android:id="@+id/nav_assignment"
+        android:icon="@mipmap/ic_assignment_black_24dp"
+        android:orderInCategory="50"
         android:title="Assignment"/>
     <item android:id="@+id/nav_resource"
+        android:icon="@mipmap/ic_attach_file_black_24dp"
+        android:orderInCategory="50"
         android:title="Resource"/>
     <item android:id="@+id/nav_gradebook"
+        android:icon="@mipmap/ic_grade_black_24dp"
+        android:orderInCategory="50"
         android:title="Gradebook"/>
-    <item android:id="@+id/nav_site"
-        android:title="sites"/>
     <item android:id="@+id/nav_announcement"
+        android:icon="@mipmap/ic_announcement_black_24dp"
+        android:orderInCategory="50"
         android:title="Announcement"/>
+    <item
+        android:id="@+id/nav_site"
+        android:icon="@mipmap/ic_action_name"
+        android:orderInCategory="50"
+        android:title="Other Courses" />
 
 </menu>
