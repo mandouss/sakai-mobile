@@ -57,7 +57,7 @@ public class eachSite extends AppCompatActivity {
             b.putString("USERID", userid);
             toProfile.putExtras(b);
             Log.i(TAG, "profilelclick");
-            startActivity(toProfile);
+            startActivityForResult(toProfile,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
     //redirect to resource view, send the selected siteid
@@ -67,7 +67,7 @@ public class eachSite extends AppCompatActivity {
             Intent toResources = new Intent(eachSite.this, Resources.class);
             toResources.putExtra("SiteID",siteid);
             Log.i(TAG, "resouclick");
-            startActivity(toResources);
+            startActivityForResult(toResources,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
 
@@ -90,27 +90,10 @@ public class eachSite extends AppCompatActivity {
         }
     };
     //redirect to sites view
-    @Override
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data ) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // check that it is the SecondActivity with an OK result
-        if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
-            if (resultCode == 0) {
-                Log.e(TAG, "你进入了Return");
-                finish();
-            }
-        }
-    }
-        final OnClickListener sitesclick = new OnClickListener() {
+    final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();
-            //Intent toSites = new Intent(getBaseContext(), sites.class);
-
-            //toSites.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//close all activities
-            //toSites.putExtra("ID","sitesclick");
-            //Log.i(TAG, "sitesclick");
-            //startActivity(toSites);
         }
     };
     //redirect to gradebook view, send the selected siteid
@@ -120,8 +103,19 @@ public class eachSite extends AppCompatActivity {
             Intent toGradebook = new Intent(eachSite.this, Gradebook.class);
             toGradebook.putExtra("SiteID",siteid);
             Log.i(TAG, "gradebookclick");
-            startActivity(toGradebook);
+            startActivityForResult(toGradebook,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
 
+    @Override
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data ) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
+            if (resultCode == 1) {
+                Log.e(TAG, "你进入了Return");
+                finish();
+            }
+        }
+    }
 }
