@@ -1,10 +1,20 @@
-_**Todo**_:
-1. Review all original code
-2. Add comments
-3. Restructure the code
-4. Try to add pdf view function
+# Sakai android app
+## Sprint 2
 
 _**Finish Status**_:
-Login, sites (2018-03-23)
-All other classes (2018-03-24)
-Put a demo button on the resource page, which will open a hard-coded url PDF using Google Doc service + Android WebView, if this is not allowed then we can try to use other way to load PDF files (2018-03-24)
+1. Review all original code, restructure code, add some comments (Yichuan Shi)
+2. pdf view function in a demo button (Yichuan Shi)
+3. add some links to hamburger button (Yichuan Shi)
+4. Implement hamburger using inherent in every sub-view (Yunzhen Zou)
+5. Intergrate Login into app (Yunzhen Zou, Zhengyi Jiang)
+6. Add logout (Yunzhen Zou, Zhengyi Jiang)
+7. Activities control flow optimize (Zhengyi Jiang)
+8. Create Resource page (Sifan Wang, Lei Chen)
+9. Design the interface of each research item. Pull data to be shown on resource page (Sifan Wang, Lei Chen)
+10. Create Announcement page. Attempted pulling data for display(in progess) (Sifan Wang, Lei Chen, Chenfan Li)
+......
+......
+......
+
+
+
