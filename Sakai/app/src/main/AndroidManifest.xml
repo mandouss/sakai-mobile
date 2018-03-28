@@ -17,28 +17,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Assignment"
             android:label="Assignment" />
-
         <activity
             android:name=".Resources"
-            android:label ="Resources"/>
-
+            android:label="Resources" />
         <activity
             android:name=".Gradebook"
-            android:label="Gradebook"/>
-        <activity android:name=".eachResource"/>
-        <activity
-            android:name=".eachSite" />
+            android:label="Gradebook" />
+        <activity android:name=".eachResource" />
+        <activity android:name=".eachSite" />
         <activity
             android:name=".sites"
             android:label="Sites" />
         <activity android:name=".eachAssign" />
         <activity
             android:name=".Profile"
-            android:label="Profile"/>
-        <activity android:name=".PdfViewer"></activity>
+            android:label="Profile" />
+        <activity android:name=".PdfViewer" />
+
+        <service
+            android:name=".Notification"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
+
 </manifest>
