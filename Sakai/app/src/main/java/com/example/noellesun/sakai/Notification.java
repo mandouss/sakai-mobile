@@ -7,36 +7,50 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.webkit.CookieManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
+import static android.content.Intent.getIntent;
 
 public class Notification extends Service {
     private String TAG = Notification.class.getSimpleName();
     //get assignment
     private ArrayList<String> asnList = new ArrayList<>();
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
-    String cookiestr;
     String siteid;
+    String cookiestr;
     public Notification() {
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+//        Log.i("ASSIGNsiteid:",siteid);
+         //TODO  get the site id  need to check all the site(all courses) need to get all the siteids and iterate them
+        //use bind send all the sites id
+        //siteid = getIntent().getExtras().getString("SiteID");
+        //set cookies in order to maintain the same session
+        final CookieManager cookieManager = CookieManager.getInstance();
+        cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         Log.d("Notification", "onCreate");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("Notification", "onStart");
+        Log.d("cookie", cookiestr);
+        final ArrayList<String> siteids = intent.getExtras().getStringArrayList("ID_ARRAY");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -49,19 +63,22 @@ public class Notification extends Service {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    if(!asnList.isEmpty()){
-                        //since don't know the method to deep copy the arraylist, just compare the size of the list to find the difference
-                        int previousSize = asnList.size();
-                        asnList.clear();
-                        new Notification.GetAssign().execute();
-                        int newSize = asnList.size();
-                        if(newSize!=previousSize){
-                            sendNotification();
+                    Iterator<String> it1 = siteids.iterator();
+                    for(int i = 1;i<siteids.size();i++) {
+                        siteid = siteids.get(i);
+                        if (!asnList.isEmpty()) {
+                            //since don't know the method to deep copy the arraylist, just compare the size of the list to find the difference
+                            int previousSize = asnList.size();
+                            asnList.clear();
+                            new Notification.GetAssign().execute();
+                            int newSize = asnList.size();
+                            if (newSize != previousSize) {
+                                sendNotification();
+                            }
+                        } else {
+                            new Notification.GetAssign().execute();
                         }
-                    }else{
-                        new Notification.GetAssign().execute();
                     }
-
                 }
             }
         }).start();return super.onStartCommand(intent, flags, startId);
@@ -94,6 +111,7 @@ public class Notification extends Service {
             HttpHandler sh = new HttpHandler();
             String url = fixurl + siteid + ".json";
             Log.i("assign_url",url);
+            Log.i("assign_cookiestr",cookiestr);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             Log.e(TAG, "ASSIGNJSON: " + jsonStr);
             if (jsonStr != null) {
