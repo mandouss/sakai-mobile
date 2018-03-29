@@ -29,6 +29,10 @@
         <activity
             android:name=".Gradebook"
             android:label="Gradebook"/>
+        <activity
+            android:name=".Announcement"
+            android:label="Announcement" />
+
         <activity android:name=".eachResource"/>
         <activity
             android:name=".eachSite" />
@@ -36,6 +40,8 @@
             android:name=".sites"
             android:label="Sites" />
         <activity android:name=".eachAssign" />
+        <activity android:name=".eachAnnounce" />
+
         <activity
             android:name=".Profile"
             android:label="Profile"/>
