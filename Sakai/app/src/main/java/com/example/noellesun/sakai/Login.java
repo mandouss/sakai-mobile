@@ -437,6 +437,8 @@ public class Login extends AppCompatActivity {
                 "   </div>\n" +
                 " </div>\n" +
                 "</body>";
+
+        Log.i("LogIn_html", summary);
         return summary;
     }
 }

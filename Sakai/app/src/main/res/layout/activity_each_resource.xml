@@ -20,7 +20,7 @@
             android:id="@+id/openPdf"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
-            android:text="Open Pdf in Webview(Tap to open)"
+            android:text="Tap to open the file in browser"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textAllCaps="false"/>
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is only a demo button to show hardcoded url pdf"
+            android:text="Log in required in browser"
             android:paddingLeft="5dp"
             android:paddingTop="42dp"/>
         <TextView
