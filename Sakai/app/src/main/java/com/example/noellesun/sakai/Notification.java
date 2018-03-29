@@ -36,10 +36,7 @@ public class Notification extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-//        Log.i("ASSIGNsiteid:",siteid);
-         //TODO  get the site id  need to check all the site(all courses) need to get all the siteids and iterate them
-        //use bind send all the sites id
-        //siteid = getIntent().getExtras().getString("SiteID");
+
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
@@ -58,7 +55,7 @@ public class Notification extends Service {
                 //if post time is within 4 hours , send notification
                 while(true){
                     try {
-                        Thread.sleep(5000);//14400000
+                        Thread.sleep(3600000); // every one hour
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -88,7 +85,7 @@ public class Notification extends Service {
     private void sendNotification(){
         Log.d("Notification","send noti");
         Intent notificationIntent = new Intent(this, Login.class);
-        PendingIntent pi = PendingIntent.getActivities(this, 0, new Intent[]{notificationIntent}, 0);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         android.app.Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle("Sakai: Homework has been updated")
