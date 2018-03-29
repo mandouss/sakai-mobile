@@ -80,6 +80,7 @@ public class eachResource extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(eachResource.this, PdfViewer.class);
+                    intent.putExtra("url_str", resource_url);
                     startActivity(intent);
                 }
             });
