@@ -34,17 +34,15 @@ import java.util.HashMap;
 
 
 public class Assignment extends AppBaseActivity {
-
-
     private String TAG = Assignment.class.getSimpleName();
     //reviewed Login, sites, added comments and restructured some code
-
     private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
+    static String title = "Assignment";
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +55,10 @@ public class Assignment extends AppBaseActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
-       establish_nav(siteid);
+        establish_nav(siteid);
+        setTitle(title);
     }
+
 
     final OnClickListener siteClickEvent = new OnClickListener() {
         @Override
@@ -90,13 +90,17 @@ public class Assignment extends AppBaseActivity {
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
             String url = fixurl + siteid + ".json";
+            String url_site = "https://sakai.duke.edu/direct/site/"+ siteid + ".json";
             Log.i("assign_url",url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
+            String jsonStr1 = sh.makeServiceCall(url_site, cookiestr); // use for class name
             Log.e(TAG, "ASSIGNJSON: " + jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj1 = new JSONObject(jsonStr1);
                     JSONArray assignments = jsonObj.getJSONArray("assignment_collection");
+                    title = jsonObj1.getString("title") + " / "+ "Assignments";
                     for (int i = 0; i < assignments.length(); i++) {
                         JSONObject c = assignments.getJSONObject(i);
                         //get variable needed from JSON object
@@ -106,7 +110,6 @@ public class Assignment extends AppBaseActivity {
                         String instructions = c.getString("instructions");
                         String status = c.getString("status");
                         Log.e("ASSINITEMNAME", itemName);
-
                         //store the variable needed in a hashmap
                         HashMap<String, String> eachAssign = new HashMap<>();
                         eachAssign.put("itemName", itemName);
@@ -114,6 +117,7 @@ public class Assignment extends AppBaseActivity {
                         eachAssign.put("startTime", startTime);
                         eachAssign.put("instructions", instructions);
                         eachAssign.put("status", status);
+                        eachAssign.put("title", title);
                         asnList.add(eachAssign);
                         Log.i("ASNLIST",asnList.toString());
                     }
@@ -149,6 +153,7 @@ public class Assignment extends AppBaseActivity {
         protected void onPostExecute(Void result) {
 
             super.onPostExecute(result);
+            setTitle(title);
             if (pDialog.isShowing())
                 pDialog.dismiss();
             //parse data into the assignment lists

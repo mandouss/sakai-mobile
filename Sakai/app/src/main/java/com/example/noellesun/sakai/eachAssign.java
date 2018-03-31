@@ -24,6 +24,8 @@ public class eachAssign extends AppCompatActivity {
         //parse html formatted text into plain text
         instructions = Html.fromHtml(info.get("instructions")).toString();
         String status = info.get("status");
+        String title = info.get("title"); //site_title/Assignment
+        setTitle(title);
         loadText();
     }
 //    @SuppressWarnings("deprecation")

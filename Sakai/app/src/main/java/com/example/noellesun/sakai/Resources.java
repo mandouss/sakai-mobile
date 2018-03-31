@@ -33,6 +33,7 @@ public class Resources extends AppBaseActivity {
     String fixurl = "https://sakai.duke.edu/direct/content/site/";
     String cookiestr;
     String siteid;
+    static String title = "Resources";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +55,9 @@ public class Resources extends AppBaseActivity {
         });
 
         establish_nav(siteid);
-        
-
-
+        setTitle(title);
     }
+
     final OnClickListener siteClickEvent = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -94,6 +94,7 @@ public class Resources extends AppBaseActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray resources = jsonObj.getJSONArray("content_collection");
+                    title = resources.getJSONObject(0).getString("entityTitle") + " / " + "Resources";
                     for (int i = 0; i < resources.length(); i++) {
                         JSONObject c = resources.getJSONObject(i);
                         //get variable needed from JSON object
@@ -111,6 +112,7 @@ public class Resources extends AppBaseActivity {
                         eachResource.put("createdBy", createdBy);
                         eachResource.put("resourceurl", resourceurl);
                         eachResource.put("access", access);
+                        eachResource.put("title", title);
                         resList.add(eachResource);
                         Log.i("RESLIST", resList.toString());
                     }
@@ -145,6 +147,7 @@ public class Resources extends AppBaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            setTitle(title);
             if (pDialog.isShowing())
                 pDialog.dismiss();
             //parse data into the resources lists

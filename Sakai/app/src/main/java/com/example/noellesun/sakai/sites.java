@@ -33,6 +33,7 @@ public class sites extends AppCompatActivity {
     //use static userid and sitesids to keep the original userid and sitesids
     static  String userid; // Ethan: why do we need static
     static ArrayList<String> sitesids;
+    //private ArrayList<HashMap<String, String>> siteList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/site/";
@@ -223,6 +224,7 @@ public class sites extends AppCompatActivity {
                     }
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
+                    b.putString("site info", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }

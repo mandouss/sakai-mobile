@@ -1,5 +1,7 @@
 package com.example.noellesun.sakai;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +12,14 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class eachSite extends AppCompatActivity {
     private String TAG = eachSite.class.getSimpleName();
     public Button assignments;
     String userid;
     String siteid;
+    static String title = "Navigator";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,8 @@ public class eachSite extends AppCompatActivity {
 
 
         Log.i("EachSite:",siteid);
+        title =  (String) getIntent().getStringExtra("site info");
+        setTitle(title);
         setContentView(R.layout.activity_each_site); // Ethan: need modification
         // Ethan: add notification clicker
         findViewById(R.id.Assignments).setOnClickListener(assignclick);

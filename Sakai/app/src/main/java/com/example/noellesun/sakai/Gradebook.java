@@ -35,6 +35,7 @@ public class Gradebook extends AppBaseActivity {
     private static String fixurl = "https://sakai.duke.edu/direct/gradebook/site/";
     String cookiestr;
     String siteid;
+    static String title = "Gradebook";
     //private String [] subtitle = new String[]{null, "Grades:   "};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class Gradebook extends AppBaseActivity {
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Gradebook.GetGrade().execute();
         establish_nav(siteid);
+        Log.e("title", title);
+        setTitle(title);
     }
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
@@ -68,7 +71,6 @@ public class Gradebook extends AppBaseActivity {
             pDialog.setCancelable(false);
             pDialog.show();
         }
-
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
@@ -79,6 +81,7 @@ public class Gradebook extends AppBaseActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray assignments = jsonObj.getJSONArray("assignments");
+                    title = jsonObj.getString("siteName")  + " / " + "Gradebook";
                     for (int i = 0; i < assignments.length(); i++) {
                         JSONObject c = assignments.getJSONObject(i);
                         String itemName = c.getString("itemName");
@@ -124,6 +127,7 @@ public class Gradebook extends AppBaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            setTitle(title);
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
@@ -131,9 +135,6 @@ public class Gradebook extends AppBaseActivity {
             ListAdapter adapter = new SimpleAdapter( Gradebook.this, gradeList,
                     R.layout.gradebook_listitem, new String[]{"itemName", "Grades"},
                     new int[]{R.id.itemName, R.id.grade});
-//            ListAdapter adapter = new SimpleAdapter( Gradebook.this, gradeList,
-//                    R.layout.gradebook_listitem, new String[]{"itemName", "grade",
-//                    "points"},new int[]{R.id.itemName, R.id.grade,R.id.points});
             lv.setAdapter(adapter);
         }
 

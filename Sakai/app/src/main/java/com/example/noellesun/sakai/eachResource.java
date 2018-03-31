@@ -30,6 +30,8 @@ public class eachResource extends AppCompatActivity {
         String resourceurl = info.get("resourceurl");
         String access = info.get("access");
         String size = info.get("size");
+        String title = info.get("title");
+        setTitle(title);
         loadText();
     }
 
