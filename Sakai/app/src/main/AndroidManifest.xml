@@ -26,7 +26,7 @@
 
         <activity
             android:name=".Resources"
-            android:label ="Resources"/>
+            android:label="Resources"/>
 
         <activity
             android:name=".Gradebook"
@@ -35,7 +35,8 @@
             android:name=".Announcement"
             android:label="Announcements" />
 
-        <activity android:name=".eachResource" />
+        <activity android:name=".eachResource"
+                  android:label="Resources"/>
         <activity
             android:name=".eachSite"
             />
