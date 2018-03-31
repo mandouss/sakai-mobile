@@ -57,6 +57,7 @@ public class eachResource extends AppCompatActivity {
         String activityLabel = getIntent().getExtras().getString("activityLabelclick") + "/" + "Resources";
         setTitle(activityLabel);
         //Get selected assignment's info from Assignment view
+        //HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("resource info");
         HashMap<String, String> info = (HashMap<String, String>)getIntent().getSerializableExtra("resource info");
         if(info != null) {
             String itemName = info.get("itemName");
