@@ -20,26 +20,28 @@
 
         <activity
             android:name=".Assignment"
-            android:label="Assignments"/>
+            android:label="Assignment" />
 
         <activity
             android:name=".Resources"
-            android:label="Resources"/>
+            android:label ="Resources"/>
 
         <activity
             android:name=".Gradebook"
             android:label="Gradebook"/>
         <activity
-            android:name=".eachResource"
-            android:label="Resources"/>
+            android:name=".Announcement"
+            android:label="Announcement" />
+
+        <activity android:name=".eachResource"/>
         <activity
             android:name=".eachSite" />
         <activity
             android:name=".sites"
             android:label="Sites" />
-        <activity
-            android:name=".eachAssign"
-            android:label="Assignments"/>
+        <activity android:name=".eachAssign" />
+        <activity android:name=".eachAnnounce" />
+
         <activity
             android:name=".Profile"
             android:label="Profile"/>

@@ -2,4 +2,6 @@
     <string name="app_name">Sakai</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="res_fir_line">Resource link: </string>
+    <string name="res_sec_line">Resource size: </string>
 </resources>

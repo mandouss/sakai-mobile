@@ -23,6 +23,38 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.webkit.CookieManager;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.view.View.OnClickListener;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Resources extends AppBaseActivity {
 
     private String TAG = sites.class.getSimpleName();
@@ -46,17 +78,12 @@ public class Resources extends AppBaseActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Resources.GetResour().execute();
-        Button button = (Button)findViewById(R.id.openPdf);
-        button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Resources.this, PdfViewer.class);
-                startActivity(intent);
-            }
-        });
+
+        //});
 
         establish_nav(siteid);
         setTitle(title);
+
     }
 
     final OnClickListener siteClickEvent = new OnClickListener() {
@@ -100,20 +127,39 @@ public class Resources extends AppBaseActivity {
                         JSONObject c = resources.getJSONObject(i);
                         //get variable needed from JSON object
                         String itemName = c.getString("entityTitle");
-                        String modifiedTime = c.getString("modifiedDate");
+                        String numChildren = c.getString("numChildren");
                         String createdBy = c.getString("author");
-                        String resourceurl = c.getString("url");
-                        String access = c.getString("usage");
+                        String resource_url = c.getString("url");
+                        String type = c.getString("type");
+                        String size = "";
+                        if(!numChildren.equals("0")){
+                            //size = "Dir";
+                        }
+                        else {
+                            size = c.getString("size");
+                            int sz = Integer.parseInt(size);
+                            if (sz > 1024 * 1024) {
+                                double num = sz/(1024 * 1024);
+                                size = Double.toString(num) + " MB";
+                            }
+                            else if (sz > 1024) {
+                                double num = sz/(1024);
+                                size = Double.toString(num) + " KB";
+                            }
+                            else{
+                                size = Double.toString(sz) + " B";
+                            }
+                        }
                         Log.e("RESOURCEMNAME", itemName);
 
                         //store the variable needed in a hashmap
                         HashMap<String, String> eachResource = new HashMap<>();
                         eachResource.put("itemName", itemName);
-                        eachResource.put("modifiedTime", modifiedTime);
+                        eachResource.put("numChildren", numChildren);
                         eachResource.put("createdBy", createdBy);
-                        eachResource.put("resourceurl", resourceurl);
-                        eachResource.put("access", access);
-                        eachResource.put("title", title);
+                        eachResource.put("resource_url", resource_url);
+                        eachResource.put("type", type);
+                        eachResource.put("size", size);
                         resList.add(eachResource);
                         Log.i("RESLIST", resList.toString());
                     }
@@ -153,8 +199,8 @@ public class Resources extends AppBaseActivity {
                 pDialog.dismiss();
             //parse data into the resources lists
             ListAdapter adapter = new SimpleAdapter(Resources.this, resList,
-                    R.layout.resource_listitem, new String[]{"itemName", "modifiedTime",
-                    "createdBy"}, new int[]{R.id.itemName, R.id.modifiedTime, R.id.createdBy});
+                    R.layout.resource_listitem, new String[]{"itemName", "size",
+                    "createdBy"}, new int[]{R.id.itemName, R.id.size, R.id.createdBy});
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -163,6 +209,7 @@ public class Resources extends AppBaseActivity {
                     Intent intent = new Intent(Resources.this, eachResource.class);
                     //send the resource info to each Resource view
                     intent.putExtra("resource info", resList.get(position));
+                    //intent.putExtra("resource info", resList);
                     startActivity(intent);
                 }
             });

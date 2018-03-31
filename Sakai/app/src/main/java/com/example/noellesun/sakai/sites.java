@@ -102,7 +102,7 @@ public class sites extends AppCompatActivity {
         public void onClick(View v) {
             final CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.removeAllCookie();
-            cookieManager.removeSessionCookie();
+            cookieManager.removeSessionCookie();//close all activities
             System.exit(0);
 //            Intent intent = new Intent(getBaseContext(), Login.class);
 //            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//close all activities
@@ -217,7 +217,7 @@ public class sites extends AppCompatActivity {
                                         long id) {
                     Intent intent = new Intent(sites.this, eachSite.class);
                     ListCell temp_lc = (ListCell)parent.getAdapter().getItem(position);
-                    String [] ids = {userid, temp_lc.getId()};
+                    String [] ids = {userid, temp_lc.getId(),"0"};
                     Log.i("position", temp_lc.getId());
                     if(temp_lc.getTitlename() == null) {
                         return;//lv.setClickable(false);
