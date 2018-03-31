@@ -65,14 +65,14 @@ public class Resources extends AppBaseActivity {
     String fixurl = "https://sakai.duke.edu/direct/content/site/";
     String cookiestr;
     String siteid;
-    static String title = "Resources";
+    static String activityLabel = "Resources";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getIntent().getExtras().getString("");
         setContentView(R.layout.activity_resources);
         lv = (ListView) findViewById(R.id.resourcelist);
         siteid = getIntent().getExtras().getString("SiteID");
+        activityLabel = (String)getIntent().getExtras().getString("activityLabel") + "/" + "Resources";
         Log.i("RESOURiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -82,7 +82,7 @@ public class Resources extends AppBaseActivity {
         //});
 
         establish_nav(siteid);
-        setTitle(title);
+        setTitle(activityLabel);
 
     }
 
@@ -122,7 +122,7 @@ public class Resources extends AppBaseActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray resources = jsonObj.getJSONArray("content_collection");
-                    title = resources.getJSONObject(0).getString("entityTitle") + " / " + "Resources";
+                    //title = resources.getJSONObject(0).getString("entityTitle") + " / " + "Resources";
                     for (int i = 0; i < resources.length(); i++) {
                         JSONObject c = resources.getJSONObject(i);
                         //get variable needed from JSON object
@@ -160,6 +160,7 @@ public class Resources extends AppBaseActivity {
                         eachResource.put("resource_url", resource_url);
                         eachResource.put("type", type);
                         eachResource.put("size", size);
+                        //eachResource.put("title", title);
                         resList.add(eachResource);
                         Log.i("RESLIST", resList.toString());
                     }
@@ -194,11 +195,11 @@ public class Resources extends AppBaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            setTitle(title);
+            setTitle(activityLabel);
             if (pDialog.isShowing())
                 pDialog.dismiss();
             //parse data into the resources lists
-            ListAdapter adapter = new SimpleAdapter(Resources.this, resList,
+            final ListAdapter adapter = new SimpleAdapter(Resources.this, resList,
                     R.layout.resource_listitem, new String[]{"itemName", "size",
                     "createdBy"}, new int[]{R.id.itemName, R.id.size, R.id.createdBy});
             lv.setAdapter(adapter);
@@ -209,6 +210,7 @@ public class Resources extends AppBaseActivity {
                     Intent intent = new Intent(Resources.this, eachResource.class);
                     //send the resource info to each Resource view
                     intent.putExtra("resource info", resList.get(position));
+                    intent.putExtra("activityLabel", activityLabel);
                     //intent.putExtra("resource info", resList);
                     startActivity(intent);
                 }

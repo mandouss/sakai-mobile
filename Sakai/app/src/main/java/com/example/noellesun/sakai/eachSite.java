@@ -20,7 +20,7 @@ public class eachSite extends AppCompatActivity {
     public Button assignments;
     String userid;
     String siteid;
-    static String title = "Navigator";
+    static String activityLabel = "Navigator";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +39,14 @@ public class eachSite extends AppCompatActivity {
             } else {
                 userid = ids[0];
                 siteid = ids[1];
+                activityLabel = b.getString("activityLabel");
             }
         }
 
 
         Log.i("EachSite:",siteid);
-        title =  (String) getIntent().getStringExtra("site info");
-        setTitle(title);
+        activityLabel =  (String) getIntent().getStringExtra("activityLabel");
+        setTitle(activityLabel);
         setContentView(R.layout.activity_each_site); // Ethan: need modification
         // Ethan: add notification clicker
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
@@ -62,6 +63,7 @@ public class eachSite extends AppCompatActivity {
             Intent toProfile = new Intent(eachSite.this, Profile.class);
             Bundle b = new Bundle();
             b.putString("USERID", userid);
+            b.putString("activityLabel", activityLabel);
             toProfile.putExtras(b);
             Log.i(TAG, "profilelclick");
             startActivityForResult(toProfile,ORDINARY_ACTIVITY_RESULT_CODE);
@@ -73,6 +75,7 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toResources = new Intent(eachSite.this, Resources.class);
             toResources.putExtra("SiteID",siteid);
+            toResources.putExtra("activityLabel", activityLabel);
             Log.i(TAG, "resouclick");
             startActivityForResult(toResources,ORDINARY_ACTIVITY_RESULT_CODE);
         }
@@ -83,6 +86,7 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toAnnouncement = new Intent(eachSite.this, Announcement.class);
             toAnnouncement.putExtra("SiteID",siteid);
+            toAnnouncement.putExtra("activityLabel", activityLabel);
             startActivity(toAnnouncement);
         }
     };
@@ -92,6 +96,7 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toAssignments = new Intent(eachSite.this, Assignment.class);
             toAssignments.putExtra("SiteID",siteid);
+            toAssignments.putExtra("activityLabel", activityLabel);
             Log.i(TAG, "assignclick");
             startActivityForResult(toAssignments,ORDINARY_ACTIVITY_RESULT_CODE);
         }
@@ -109,6 +114,7 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toGradebook = new Intent(eachSite.this, Gradebook.class);
             toGradebook.putExtra("SiteID",siteid);
+            toGradebook.putExtra("activityLabel", activityLabel);
             Log.i(TAG, "gradebookclick");
             startActivityForResult(toGradebook,ORDINARY_ACTIVITY_RESULT_CODE);
         }

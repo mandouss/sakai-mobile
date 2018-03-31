@@ -42,7 +42,7 @@ public class Assignment extends AppBaseActivity {
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
-    static String title = "Assignment";
+    static String activityLabel = "Assignment";
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +50,14 @@ public class Assignment extends AppBaseActivity {
         setContentView(R.layout.activity_assignment);
         lv = (ListView) findViewById(R.id.assignlist);
         siteid = getIntent().getExtras().getString("SiteID");
+        activityLabel = (String)getIntent().getExtras().getString("activityLabel") + "/"+ "Assignments";
         Log.i("ASSIGNiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
         establish_nav(siteid);
-        setTitle(title);
+        setTitle(activityLabel);
     }
 
 
@@ -93,14 +94,14 @@ public class Assignment extends AppBaseActivity {
             String url_site = "https://sakai.duke.edu/direct/site/"+ siteid + ".json";
             Log.i("assign_url",url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
-            String jsonStr1 = sh.makeServiceCall(url_site, cookiestr); // use for class name
+            //String jsonStr1 = sh.makeServiceCall(url_site, cookiestr); // use for class name
             Log.e(TAG, "ASSIGNJSON: " + jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-                    JSONObject jsonObj1 = new JSONObject(jsonStr1);
+                    //JSONObject jsonObj1 = new JSONObject(jsonStr1);
                     JSONArray assignments = jsonObj.getJSONArray("assignment_collection");
-                    title = jsonObj1.getString("title") + " / "+ "Assignments";
+                    //title = jsonObj1.getString("title") + " / "+ "Assignments";
                     for (int i = 0; i < assignments.length(); i++) {
                         JSONObject c = assignments.getJSONObject(i);
                         //get variable needed from JSON object
@@ -117,7 +118,6 @@ public class Assignment extends AppBaseActivity {
                         eachAssign.put("startTime", startTime);
                         eachAssign.put("instructions", instructions);
                         eachAssign.put("status", status);
-                        eachAssign.put("title", title);
                         asnList.add(eachAssign);
                         Log.i("ASNLIST",asnList.toString());
                     }
@@ -153,7 +153,7 @@ public class Assignment extends AppBaseActivity {
         protected void onPostExecute(Void result) {
 
             super.onPostExecute(result);
-            setTitle(title);
+            setTitle(activityLabel);
             if (pDialog.isShowing())
                 pDialog.dismiss();
             //parse data into the assignment lists
@@ -168,6 +168,7 @@ public class Assignment extends AppBaseActivity {
                     Intent intent = new Intent(Assignment.this, eachAssign.class);
                     //send the assignment info to each Assign view
                     intent.putExtra("assign info",asnList.get(position));
+                    intent.putExtra("activityLabel", activityLabel);
                     startActivity(intent);
                 }
             });

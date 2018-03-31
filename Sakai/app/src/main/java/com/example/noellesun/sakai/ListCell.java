@@ -17,7 +17,7 @@ public class ListCell implements Comparable<ListCell>{
         this.id = id;
         this.titleName = titlename;
         this.category = category;
-        this.subtitle = "Instructor: " + subtitle;
+        this.subtitle =  subtitle;
         isSectionHeader = false;
     }
 

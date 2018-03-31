@@ -35,11 +35,13 @@ public class Gradebook extends AppBaseActivity {
     private static String fixurl = "https://sakai.duke.edu/direct/gradebook/site/";
     String cookiestr;
     String siteid;
-    static String title = "Gradebook";
+    static String activityLabel = "Gradebook";
     //private String [] subtitle = new String[]{null, "Grades:   "};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activityLabel = (String) getIntent().getExtras().getString("activityLabel") + "/" + "Gradebook";
+        setTitle(activityLabel);
         setContentView(R.layout.activity_gradebook);
         lv = (ListView) findViewById(R.id.gradebooklist);
         //Get the selected site's siteid from eachSite view
@@ -49,8 +51,6 @@ public class Gradebook extends AppBaseActivity {
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Gradebook.GetGrade().execute();
         establish_nav(siteid);
-        Log.e("title", title);
-        setTitle(title);
     }
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
@@ -81,7 +81,6 @@ public class Gradebook extends AppBaseActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray assignments = jsonObj.getJSONArray("assignments");
-                    title = jsonObj.getString("siteName")  + " / " + "Gradebook";
                     for (int i = 0; i < assignments.length(); i++) {
                         JSONObject c = assignments.getJSONObject(i);
                         String itemName = c.getString("itemName");
@@ -127,7 +126,7 @@ public class Gradebook extends AppBaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            setTitle(title);
+            setTitle(activityLabel);
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();

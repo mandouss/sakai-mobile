@@ -111,7 +111,7 @@ public class sites extends AppCompatActivity {
     };
     private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
         ArrayList tempList = new ArrayList();
-        Collections.sort(itemList);
+        Collections.sort(itemList, Collections.reverseOrder());
         //Loops thorough the list and add a section header in tempList
         String header = "";
         for(int i = 0; i < itemList.size(); i++) {
@@ -161,7 +161,7 @@ public class sites extends AppCompatActivity {
                         else{
                             category = jsonObj.getJSONObject("props").getString("term");
                         }
-                        String instructor = jsonObj.getJSONObject("siteOwner").getString("userDisplayName");
+                        String instructor = "Instructor: " + jsonObj.getJSONObject("siteOwner").getString("userDisplayName");
                         String titleName = jsonObj.getString("title");
                         Log.e("titleName",titleName);
                         sitelist.add(new ListCell(sitesids.get(i), titleName, category, instructor));
@@ -224,7 +224,7 @@ public class sites extends AppCompatActivity {
                     }
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
-                    b.putString("site info", temp_lc.getTitlename());
+                    b.putString("activityLabel", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }

@@ -15,6 +15,8 @@ public class eachAssign extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("eachAssigninstr","in eachassign");
         super.onCreate(savedInstanceState);
+        String activityLabel = getIntent().getExtras().getString("activityLabel");
+        setTitle(activityLabel);
         setContentView(R.layout.activity_each_assign);
         //Get selected assignment's info from Assignment view
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("assign info");
@@ -24,8 +26,6 @@ public class eachAssign extends AppCompatActivity {
         //parse html formatted text into plain text
         instructions = Html.fromHtml(info.get("instructions")).toString();
         String status = info.get("status");
-        String title = info.get("title"); //site_title/Assignment
-        setTitle(title);
         loadText();
     }
 //    @SuppressWarnings("deprecation")
