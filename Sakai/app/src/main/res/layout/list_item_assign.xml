@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="18dp">
+
+    <TextView
+        android:id="@+id/assigntitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="0dip"
+        android:paddingTop="6dip"
+        android:textColor="#283593"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/assignsubtitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dip"
+        android:paddingTop="0dip"
+        android:textColor="#7986CB"
+        android:textSize="20sp"
+        android:textStyle="normal" />
+    <TextView
+        android:id="@+id/dueTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dip"
+        android:paddingTop="0dip"
+        android:textColor="#7986CB"
+        android:textSize="20sp"
+        android:textStyle="normal" />
+</LinearLayout>
