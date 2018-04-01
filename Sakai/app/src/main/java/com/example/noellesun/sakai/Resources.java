@@ -70,7 +70,6 @@ public class Resources extends AppBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getIntent().getExtras().getString("");
         setContentView(R.layout.activity_resources);
         lv = (ListView) findViewById(R.id.resourcelist);
         siteid = getIntent().getExtras().getString("SiteID");
