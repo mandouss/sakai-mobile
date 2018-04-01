@@ -30,19 +30,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 
 public class Assignment extends AppBaseActivity {
     private String TAG = Assignment.class.getSimpleName();
     //reviewed Login, sites, added comments and restructured some code
-    private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
+    //private ArrayList<HashMap<String, String>> asnList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
     static String activityLabel = "Assignment";
+    static String activityLabelclick;
+    static ArrayList<ListCellAssign> assignlist = new ArrayList<ListCellAssign>();
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +53,16 @@ public class Assignment extends AppBaseActivity {
         setContentView(R.layout.activity_assignment);
         lv = (ListView) findViewById(R.id.assignlist);
         siteid = getIntent().getExtras().getString("SiteID");
-        activityLabel = (String)getIntent().getExtras().getString("activityLabel") + "/"+ "Assignments";
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/"+ "Assignments";
         Log.i("ASSIGNiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
-        establish_nav(siteid);
+        establish_nav(siteid, activityLabelclick);
         setTitle(activityLabel);
+
     }
 
 
@@ -75,8 +80,27 @@ public class Assignment extends AppBaseActivity {
             startActivity(toSites);
         }
     };
+
+    private ArrayList sortAndAddSections(ArrayList<ListCellAssign> itemList) {
+        ArrayList tempList = new ArrayList();
+        Collections.sort(itemList, Collections.reverseOrder());
+        //Loops thorough the list and add a section header in tempList
+        String header = "";
+        for(int i = 0; i < itemList.size(); i++) {
+            //If it is the start of a new section we create a new listcell and add it to our array
+            if(!(header.equals(itemList.get(i).getAssignCategory()))){
+                ListCellAssign sectionCell = new ListCellAssign(itemList.get(i).getAssignCategory(), null,null, null, null, null);
+                sectionCell.setToAssignHeader();
+                tempList.add(sectionCell);
+                header = itemList.get(i).getAssignCategory();
+            }
+            tempList.add(itemList.get(i));
+        }
+        return tempList;
+    }
+
     // AsuncTask that is used to get json from url
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+    //@RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private class GetAssign extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -96,6 +120,7 @@ public class Assignment extends AppBaseActivity {
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             //String jsonStr1 = sh.makeServiceCall(url_site, cookiestr); // use for class name
             Log.e(TAG, "ASSIGNJSON: " + jsonStr);
+            assignlist.clear();
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -110,6 +135,7 @@ public class Assignment extends AppBaseActivity {
                         String startTime = c.getString("openTimeString");
                         String instructions = c.getString("instructions");
                         String status = c.getString("status");
+                        String gradeScale = c.getString("gradeScaleMaxPoints");
                         Log.e("ASSINITEMNAME", itemName);
                         //store the variable needed in a hashmap
                         HashMap<String, String> eachAssign = new HashMap<>();
@@ -118,8 +144,10 @@ public class Assignment extends AppBaseActivity {
                         eachAssign.put("startTime", startTime);
                         eachAssign.put("instructions", instructions);
                         eachAssign.put("status", status);
-                        asnList.add(eachAssign);
-                        Log.i("ASNLIST",asnList.toString());
+                        assignlist.add(new ListCellAssign(Integer.toString(i), itemName, status, gradeScale, dueTime, eachAssign));
+                        //asnList.add(eachAssign);
+                        //Log.i("ASNLIST",asnList.toString());
+                        //Log.e("list_status", assignlist.get(i).getAssignCategory());
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -145,30 +173,39 @@ public class Assignment extends AppBaseActivity {
                     }
                 });
             }
+            assignlist = sortAndAddSections(assignlist);
             Log.e("background","done!");
             return null;
         }
-        @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+        //@RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
         @Override
         protected void onPostExecute(Void result) {
-
+            Log.e("postexe","prepare to list");
             super.onPostExecute(result);
             setTitle(activityLabel);
             if (pDialog.isShowing())
                 pDialog.dismiss();
             //parse data into the assignment lists
-            ListAdapter adapter = new SimpleAdapter( Assignment.this, asnList,
-                    R.layout.assign_listitem, new String[]{"itemName", "status","startTime",
-                    "dueTime"},new int[]{R.id.itemName, R.id.status, R.id.openTimeString,R.id.dueTimeString});
+            //ListAdapter adapter = new SimpleAdapter( Assignment.this, asnList,
+            //        R.layout.assign_listitem, new String[]{"itemName", "status","startTime",
+            //        "dueTime"},new int[]{R.id.itemName, R.id.status, R.id.openTimeString,R.id.dueTimeString});
+            //lv.setAdapter(adapter);
+            ListAdapterAssign adapter = new com.example.noellesun.sakai.ListAdapterAssign(Assignment.this, assignlist);
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(Assignment.this, eachAssign.class);
+                    ListCellAssign temp_lc = (ListCellAssign) parent.getAdapter().getItem(position);
+                    Log.i("position", temp_lc.getAssignId());
+                    if(temp_lc.getAssignTitlename() == null) {
+                        return;//lv.setClickable(false);
+                    }
                     //send the assignment info to each Assign view
-                    intent.putExtra("assign info",asnList.get(position));
-                    intent.putExtra("activityLabel", activityLabel);
+                    intent.putExtra("assign info", assignlist.get(position).getEachAssign());
+                    //intent.putExtra("assign info",asnList.get(position));
+                    intent.putExtra("activityLabelclick", activityLabelclick);
                     startActivity(intent);
                 }
             });

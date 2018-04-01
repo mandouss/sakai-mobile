@@ -1,5 +1,7 @@
 package com.example.noellesun.sakai;
 
+
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,9 +24,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.
-        Array;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Gradebook extends AppBaseActivity {
@@ -36,11 +40,13 @@ public class Gradebook extends AppBaseActivity {
     String cookiestr;
     String siteid;
     static String activityLabel = "Gradebook";
+    static String activityLabelclick;
     //private String [] subtitle = new String[]{null, "Grades:   "};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityLabel = (String) getIntent().getExtras().getString("activityLabel") + "/" + "Gradebook";
+        activityLabelclick = (String) getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/" + "Gradebook";
         setTitle(activityLabel);
         setContentView(R.layout.activity_gradebook);
         lv = (ListView) findViewById(R.id.gradebooklist);
@@ -50,7 +56,7 @@ public class Gradebook extends AppBaseActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Gradebook.GetGrade().execute();
-        establish_nav(siteid);
+        establish_nav(siteid, activityLabelclick);
     }
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
@@ -59,7 +65,13 @@ public class Gradebook extends AppBaseActivity {
             startActivity(toSites);
         }
     };
-
+    private class SortByName implements Comparator {
+        public int compare(Object o1, Object o2) {
+            HashMap<String, String> h1 = (HashMap<String, String>) o1;
+            HashMap<String, String> h2 = (HashMap<String, String>) o2;
+            return h1.get("itemName").compareTo(h2.get("itemName"));
+        }
+    }
     //Use AsyncTask to get json from sakai server
     private class GetGrade extends AsyncTask<Void, Void, Void> {
         @Override
@@ -119,6 +131,7 @@ public class Gradebook extends AppBaseActivity {
                     }
                 });
             }
+            Collections.sort(gradeList, new SortByName());
             Log.e("background","done!");
             return null;
         }

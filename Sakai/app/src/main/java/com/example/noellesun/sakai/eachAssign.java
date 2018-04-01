@@ -10,19 +10,20 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 public class eachAssign extends AppCompatActivity {
+    static String itemName, dueTime, startTime;
     String instructions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("eachAssigninstr","in eachassign");
         super.onCreate(savedInstanceState);
-        String activityLabel = getIntent().getExtras().getString("activityLabel");
+        String activityLabel = getIntent().getExtras().getString("activityLabelclick") + "/" + "Assignments";
         setTitle(activityLabel);
         setContentView(R.layout.activity_each_assign);
         //Get selected assignment's info from Assignment view
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("assign info");
-        String itemName = info.get("itemName");
-        String dueTime = info.get("dueTime");
-        String startTime = info.get("startTime");
+        itemName = info.get("itemName").toString();
+        dueTime = info.get("dueTime").toString();
+        startTime = info.get("startTime").toString();
         //parse html formatted text into plain text
         instructions = Html.fromHtml(info.get("instructions")).toString();
         String status = info.get("status");
@@ -39,7 +40,9 @@ public class eachAssign extends AppCompatActivity {
 //        return result;
 //    }
     void loadText(){
+        TextView titleName = (TextView) findViewById(R.id.assign_itemName);
         TextView instruct = (TextView) findViewById(R.id.instruction);
+        titleName.setText(itemName);
         instruct.setText(instructions);
     }
 }

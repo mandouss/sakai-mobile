@@ -66,13 +66,15 @@ public class Resources extends AppBaseActivity {
     String cookiestr;
     String siteid;
     static String activityLabel = "Resources";
+    static String activityLabelclick;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resources);
         lv = (ListView) findViewById(R.id.resourcelist);
         siteid = getIntent().getExtras().getString("SiteID");
-        activityLabel = (String)getIntent().getExtras().getString("activityLabel") + "/" + "Resources";
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/" + "Resources";
         Log.i("RESOURiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -81,7 +83,7 @@ public class Resources extends AppBaseActivity {
 
         //});
 
-        establish_nav(siteid);
+        establish_nav(siteid, activityLabelclick);
         setTitle(activityLabel);
 
     }
@@ -210,7 +212,7 @@ public class Resources extends AppBaseActivity {
                     Intent intent = new Intent(Resources.this, eachResource.class);
                     //send the resource info to each Resource view
                     intent.putExtra("resource info", resList.get(position));
-                    intent.putExtra("activityLabel", activityLabel);
+                    intent.putExtra("activityLabelclick", activityLabelclick);
                     //intent.putExtra("resource info", resList);
                     startActivity(intent);
                 }

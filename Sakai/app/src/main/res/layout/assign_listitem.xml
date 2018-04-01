@@ -35,13 +35,13 @@
         android:textAlignment="center"
         android:textColor="@color/colorAccent" />
 
+
     <TextView
-        android:id="@+id/dueTimeString"
+        android:id="@+id/dueDate"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:paddingBottom="10dip"
         android:textAlignment="center"
         android:textColor="@color/colorAccent" />
-
 
 </LinearLayout>

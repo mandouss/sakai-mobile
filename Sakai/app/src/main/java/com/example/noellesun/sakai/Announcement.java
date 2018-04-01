@@ -38,6 +38,7 @@ public class Announcement extends AppCompatActivity {
     String cookiestr;
     String siteid;
     static String activityLabel = "Announcements";
+    static String activityLabelclick ;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     @Override
@@ -47,7 +48,8 @@ public class Announcement extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.announcelist);
         m = (Menu) findViewById(R.id.menuId);
         siteid = getIntent().getExtras().getString("SiteID");
-        activityLabel = (String)getIntent().getExtras().getString("activityLabel") + "/" + "Announcements";
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/" + "Announcements";
         Log.i("ASSIGNiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -209,7 +211,7 @@ public class Announcement extends AppCompatActivity {
                     Intent intent = new Intent(Announcement.this, eachAnnounce.class);
                     //send the assignment info to each Assign view
                     intent.putExtra("assign info",annoList.get(position));
-                    intent.putExtra("activityLabel", activityLabel);
+                    intent.putExtra("activityLabelclick", activityLabelclick);
                     startActivity(intent);
                 }
             });

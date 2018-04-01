@@ -90,6 +90,7 @@ public class sites extends AppCompatActivity {
                     String [] ids = {userid, temp_lc.getId()};
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
+                    b.putString("activityLabelclick", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }
@@ -224,7 +225,7 @@ public class sites extends AppCompatActivity {
                     }
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
-                    b.putString("activityLabel", temp_lc.getTitlename());
+                    b.putString("activityLabelclick", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }
