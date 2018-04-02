@@ -15,6 +15,7 @@ public class eachAnnounce extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("eachAnnounceinstr","in eachannounce");
         super.onCreate(savedInstanceState);
+        String activityLabel = getIntent().getExtras().getString("activityLabel");
         setContentView(R.layout.activity_each_announce);
         //Get selected assignment's info from Assignment view
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
@@ -24,6 +25,7 @@ public class eachAnnounce extends AppCompatActivity {
         //parse html formatted text into plain text
         instructions = Html.fromHtml(info.get("instructions")).toString();
         loadText();
+        setTitle(activityLabel);
     }
     @SuppressWarnings("deprecation")
     public static Spanned fromHtml(String html){
