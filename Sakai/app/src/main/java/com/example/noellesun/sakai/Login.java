@@ -43,8 +43,14 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.web_layout);
+//        if (getIntent().getBooleanExtra("EXIT", false)) {
+//            super.onBackPressed();
+//            return;
+//        }
         //Use shib.duke to do the authentication
         WebView browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
