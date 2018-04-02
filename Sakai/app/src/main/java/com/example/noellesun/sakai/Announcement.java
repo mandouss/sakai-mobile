@@ -112,7 +112,7 @@ public class Announcement extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-            String url = fixurl + siteid + ".json";
+            String url = fixurl + siteid + ".json?n=100&d=3000";
             Log.i("announce_url",url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             Log.e(TAG, "ANNOUNCEJSON: " + jsonStr);
@@ -123,10 +123,10 @@ public class Announcement extends AppCompatActivity {
                     for (int i = 0; i < announcements.length(); i++) {
                         JSONObject c = announcements.getJSONObject(i);
                         //get variable needed from JSON object
-                        String itemName = c.getString("SubjectName");
-                        String modifiedTime = c.getString("modifiedTimeString");
-                        String createdBy = c.getString("createdByString");
-                        String instructions = c.getString("instructions");
+                        String itemName = c.getString("title");
+                        String modifiedTime = c.getString("createdOn");  //timestring not displayed
+                        String createdBy = c.getString("createdByDisplayName");
+                        String instructions = c.getString("body");
                         Log.e("ANNONITEMNAME", itemName);
 
                         //store the variable needed in a hashmap
