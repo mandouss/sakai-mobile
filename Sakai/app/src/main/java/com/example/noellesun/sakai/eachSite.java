@@ -1,5 +1,7 @@
 package com.example.noellesun.sakai;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +12,15 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class eachSite extends AppCompatActivity {
     private final static int ORDINARY_ACTIVITY_RESULT_CODE = 0;
     private String TAG = eachSite.class.getSimpleName();
     public Button assignments;
     String userid;
     String siteid;
+    static String activityLabelclick = "Navigator";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +39,14 @@ public class eachSite extends AppCompatActivity {
             } else {
                 userid = ids[0];
                 siteid = ids[1];
+                activityLabelclick = b.getString("activityLabelclick");
             }
         }
 
 
         Log.i("EachSite:",siteid);
+        //activityLabelclick =  (String) getIntent().getStringExtra("activityLabelclick");
+        setTitle(activityLabelclick);
         setContentView(R.layout.activity_each_site); // Ethan: need modification
         // Ethan: add notification clicker
         findViewById(R.id.Assignments).setOnClickListener(assignclick);
@@ -55,9 +63,10 @@ public class eachSite extends AppCompatActivity {
             Intent toProfile = new Intent(eachSite.this, Profile.class);
             Bundle b = new Bundle();
             b.putString("USERID", userid);
+            b.putString("activityLabelclick", activityLabelclick);
             toProfile.putExtras(b);
             Log.i(TAG, "profilelclick");
-            startActivity(toProfile);
+            startActivityForResult(toProfile,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
     //redirect to resource view, send the selected siteid
@@ -66,8 +75,9 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toResources = new Intent(eachSite.this, Resources.class);
             toResources.putExtra("SiteID",siteid);
+            toResources.putExtra("activityLabelclick", activityLabelclick);
             Log.i(TAG, "resouclick");
-            startActivity(toResources);
+            startActivityForResult(toResources,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
 
@@ -76,6 +86,7 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toAnnouncement = new Intent(eachSite.this, Announcement.class);
             toAnnouncement.putExtra("SiteID",siteid);
+            toAnnouncement.putExtra("activityLabelclick", activityLabelclick);
             startActivity(toAnnouncement);
         }
     };
@@ -85,32 +96,16 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toAssignments = new Intent(eachSite.this, Assignment.class);
             toAssignments.putExtra("SiteID",siteid);
+            toAssignments.putExtra("activityLabelclick", activityLabelclick);
             Log.i(TAG, "assignclick");
             startActivityForResult(toAssignments,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
     //redirect to sites view
-    @Override
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data ) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // check that it is the SecondActivity with an OK result
-        if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
-            if (resultCode == 0) {
-                Log.e(TAG, "你进入了Return");
-                finish();
-            }
-        }
-    }
-        final OnClickListener sitesclick = new OnClickListener() {
+    final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();
-            //Intent toSites = new Intent(getBaseContext(), sites.class);
-
-            //toSites.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//close all activities
-            //toSites.putExtra("ID","sitesclick");
-            //Log.i(TAG, "sitesclick");
-            //startActivity(toSites);
         }
     };
     //redirect to gradebook view, send the selected siteid
@@ -119,9 +114,21 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toGradebook = new Intent(eachSite.this, Gradebook.class);
             toGradebook.putExtra("SiteID",siteid);
+            toGradebook.putExtra("activityLabelclick", activityLabelclick);
             Log.i(TAG, "gradebookclick");
-            startActivity(toGradebook);
+            startActivityForResult(toGradebook,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data ) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
+            if (resultCode == 1) {
+                Log.e(TAG, "你进入了Return");
+                finish();
+            }
+        }
+    }
 }

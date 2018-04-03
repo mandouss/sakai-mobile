@@ -42,6 +42,8 @@ public class Announcement extends AppCompatActivity {
     String fixurl = "https://sakai.duke.edu/direct/announcement/site/";
     String cookiestr;
     String siteid;
+    static String activityLabel = "Announcements";
+    static String activityLabelclick ;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     @Override
@@ -51,6 +53,8 @@ public class Announcement extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.announcelist);
         m = (Menu) findViewById(R.id.menuId);
         siteid = getIntent().getExtras().getString("SiteID");
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/" + "Announcements";
         Log.i("ASSIGNiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -77,7 +81,7 @@ public class Announcement extends AppCompatActivity {
                     }
                 }
         );
-
+        setTitle(activityLabel);
     }
 
     @Override
@@ -152,6 +156,7 @@ public class Announcement extends AppCompatActivity {
                         eachAnnounce.put("modifiedTimeString", modifiedTimeString);
                         eachAnnounce.put("millisecTimeString", millisecTimeString);
                         eachAnnounce.put("instructions", instructions);
+                        eachAnnounce.put("title", activityLabel);
                         annoList.add(eachAnnounce);
                         Log.i("ANNOLIST",annoList.toString());
                     }
@@ -185,6 +190,7 @@ public class Announcement extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             NavigationView n = (NavigationView)findViewById(R.id.navi_id);
+            setTitle(activityLabel);
             n.setNavigationItemSelectedListener(
                     new NavigationView.OnNavigationItemSelectedListener() {
                         @Override

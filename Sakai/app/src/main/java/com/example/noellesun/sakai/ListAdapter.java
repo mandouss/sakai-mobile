@@ -45,7 +45,6 @@ public class ListAdapter extends ArrayAdapter {
 
             titleName.setText(cell.getTitlename());
             subtitle.setText(cell.getSubtitle());
-
         }
         return v;
     }
