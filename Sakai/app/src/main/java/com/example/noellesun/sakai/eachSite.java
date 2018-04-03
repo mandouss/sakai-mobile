@@ -102,18 +102,7 @@ public class eachSite extends AppCompatActivity {
         }
     };
     //redirect to sites view
-    @Override
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data ) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // check that it is the SecondActivity with an OK result
-        if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
-            if (resultCode == 0) {
-                Log.e(TAG, "你进入了Return");
-                finish();
-            }
-        }
-    }
-        final OnClickListener sitesclick = new OnClickListener() {
+    final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();
@@ -132,7 +121,7 @@ public class eachSite extends AppCompatActivity {
     };
 
     @Override
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data ) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data ) {
         super.onActivityResult(requestCode, resultCode, data);
         // check that it is the SecondActivity with an OK result
         if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
