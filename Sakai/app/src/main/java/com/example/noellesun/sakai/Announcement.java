@@ -27,6 +27,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
+
 
 public class Announcement extends AppCompatActivity {
     private String TAG = sites.class.getSimpleName();
@@ -116,7 +121,7 @@ public class Announcement extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-            String url = fixurl + siteid + ".json";
+            String url = fixurl + siteid + ".json?n=100&d=3000";
             Log.i("announce_url",url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             Log.e(TAG, "ANNOUNCEJSON: " + jsonStr);
@@ -127,17 +132,29 @@ public class Announcement extends AppCompatActivity {
                     for (int i = 0; i < announcements.length(); i++) {
                         JSONObject c = announcements.getJSONObject(i);
                         //get variable needed from JSON object
-                        String itemName = c.getString("SubjectName");
-                        String modifiedTime = c.getString("modifiedTimeString");
-                        String createdBy = c.getString("createdByString");
-                        String instructions = c.getString("instructions");
+                        String itemName = c.getString("title");
+                        //String modifiedTime = //timestring not displayed, i.e 1521740259718 ->3/22/2018, 1:37:39 PM
+                        long timestamp = c.getInt("createdOn");
+                        Date modifiedTime = new Date(timestamp);
+                        SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy HH:mm aaa", Locale.US);
+                        //Date today = Calendar.getInstance().getTime();
+                        //String reportDate = df.format(today);
+                        // format: "display": "Jan 12, 2018 7:00 pm",
+                        // current: 01/21/1970 00:54:21
+                        String modifiedTimeString = df.format(modifiedTime);
+                        String millisecTimeString = new Long(timestamp).toString();
+
+                        String createdBy = c.getString("createdByDisplayName");
+                        String instructions = c.getString("body");
                         Log.e("ANNONITEMNAME", itemName);
 
                         //store the variable needed in a hashmap
                         HashMap<String, String> eachAnnounce = new HashMap<>();
                         eachAnnounce.put("itemName", itemName);
                         eachAnnounce.put("createdBy", createdBy);
-                        eachAnnounce.put("modifiedTimeString", modifiedTime);
+                        //eachAnnounce.put("modifiedTimeString", reportDate);   // modifiedTimeString=04/02/2018 17:10:33
+                        eachAnnounce.put("modifiedTimeString", modifiedTimeString);
+                        eachAnnounce.put("millisecTimeString", millisecTimeString);
                         eachAnnounce.put("instructions", instructions);
                         eachAnnounce.put("title", activityLabel);
                         annoList.add(eachAnnounce);
@@ -186,11 +203,6 @@ public class Announcement extends AppCompatActivity {
                                 toAnnouncement.putExtra("SiteID",siteid);
                                 startActivity(toAnnouncement);
                             }
-                            else if(item.getTitle().equals("Gradebook")) {
-                                Intent toSites = new Intent(Announcement.this, Gradebook.class);
-                                toSites.putExtra("SiteID",siteid);
-                                startActivity(toSites);
-                            } // not related to Gradebook
                             return true;
                         }
                     }
@@ -199,9 +211,9 @@ public class Announcement extends AppCompatActivity {
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            //parse data into the assignment lists
+            //parse data into the announcement lists
             ListAdapter adapter = new SimpleAdapter( Announcement.this, annoList,
-                    R.layout.announce_listitem, new String[]{"itemName","modifiedTime",
+                    R.layout.announce_listitem, new String[]{"itemName","modifiedTimeString",
                     "createdBy"},new int[]{R.id.itemName, R.id.modifiedTime, R.id.createdBy});
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -209,9 +221,8 @@ public class Announcement extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     Intent intent = new Intent(Announcement.this, eachAnnounce.class);
-                    //send the assignment info to each Assign view
-                    intent.putExtra("assign info",annoList.get(position));
-                    intent.putExtra("activityLabelclick", activityLabelclick);
+                    //send the announcement info to each Announ view
+                    intent.putExtra("Announce info",annoList.get(position));
                     startActivity(intent);
                 }
             });
