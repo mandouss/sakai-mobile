@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ public abstract class AppBaseActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("AppBaseActivity", "onCreate");
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.app_base_layout);// The base layout that contains your navigation drawer.
         view_stub = (FrameLayout) findViewById(R.id.view_stub);
@@ -33,6 +35,8 @@ public abstract class AppBaseActivity extends AppCompatActivity{
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
     protected void establish_nav(final String siteid, final String activityLabelclick){
         NavigationView n = (NavigationView)findViewById(R.id.navi_id);
