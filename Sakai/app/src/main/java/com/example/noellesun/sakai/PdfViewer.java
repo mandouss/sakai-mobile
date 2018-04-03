@@ -23,7 +23,8 @@ public class PdfViewer extends AppCompatActivity {
 
         setContentView(R.layout.web_layout);
         DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        String url = "https://sakai.duke.edu/access/content/group/40068560-0072-4822-b62f-89f3f3d3e900/ECE%20651%20Software%20Engineering.pdf";
+        //String url = "https://sakai.duke.edu/access/content/group/40068560-0072-4822-b62f-89f3f3d3e900/ECE%20651%20Software%20Engineering.pdf";
+        String url = (String)getIntent().getStringExtra("url_str");
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
         final CookieManager cookieManager = CookieManager.getInstance();
