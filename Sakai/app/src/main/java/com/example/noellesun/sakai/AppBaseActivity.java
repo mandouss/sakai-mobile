@@ -38,7 +38,7 @@ public abstract class AppBaseActivity extends AppCompatActivity{
 
 
     }
-    protected void establish_nav(final String siteid){
+    protected void establish_nav(final String siteid, final String activityLabelclick){
         NavigationView n = (NavigationView)findViewById(R.id.navi_id);
         n.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -47,22 +47,26 @@ public abstract class AppBaseActivity extends AppCompatActivity{
                         item.setChecked(false);
                         Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                         mDrawerLayout.closeDrawers();
-                        if(item.getTitle().equals("Assignment")){
+                        if(item.getTitle().equals("Assignments")){
                             Intent toAssignment = new Intent(getBaseContext(), Assignment.class);
                             toAssignment.putExtra("SiteID",siteid);
+                            toAssignment.putExtra("activityLabelclick",activityLabelclick);
                             startActivity(toAssignment);
                         }else if(item.getTitle().equals("Gradebook")) {
                             Intent toSites = new Intent(getBaseContext(), Gradebook.class);
                             toSites.putExtra("SiteID",siteid);
+                            toSites.putExtra("activityLabelclick",activityLabelclick);
                             startActivity(toSites);
-                        }else if(item.getTitle().equals("Resource")) {
+                        }else if(item.getTitle().equals("Resources")) {
                             Intent toSites = new Intent(getBaseContext(), Resources.class);
                             toSites.putExtra("SiteID",siteid);
+                            toSites.putExtra("activityLabelclick",activityLabelclick);
                             startActivity(toSites);
                         }else if(item.getTitle().equals("Other Courses")) {
                             Intent intent = new Intent();
                             intent.putExtra("Result", "1");
-                            setResult(0, intent);
+                            intent.putExtra("activityLabelclick", activityLabelclick);
+                            setResult(1, intent);
                         }
                         finish();
                         return true;

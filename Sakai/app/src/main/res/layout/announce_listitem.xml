@@ -18,7 +18,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/createdBy"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.30"
@@ -27,20 +27,11 @@
         android:textColor="@color/colorPrimaryDark" />
 
     <TextView
-        android:id="@+id/openTimeString"
+        android:id="@+id/modifiedTime"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.12"
-        android:paddingBottom="0dip"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent" />
-
-
-    <TextView
-        android:id="@+id/dueDate"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dip"
+        android:paddingBottom="2dip"
         android:textAlignment="center"
         android:textColor="@color/colorAccent" />
 

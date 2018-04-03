@@ -33,6 +33,7 @@ public class sites extends AppCompatActivity {
     //use static userid and sitesids to keep the original userid and sitesids
     static  String userid; // Ethan: why do we need static
     static ArrayList<String> sitesids;
+    //private ArrayList<HashMap<String, String>> siteList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/site/";
@@ -89,6 +90,7 @@ public class sites extends AppCompatActivity {
                     String [] ids = {userid, temp_lc.getId()};
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
+                    b.putString("activityLabelclick", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }
@@ -110,7 +112,7 @@ public class sites extends AppCompatActivity {
     };
     private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
         ArrayList tempList = new ArrayList();
-        Collections.sort(itemList);
+        Collections.sort(itemList, Collections.reverseOrder());
         //Loops thorough the list and add a section header in tempList
         String header = "";
         for(int i = 0; i < itemList.size(); i++) {
@@ -160,7 +162,7 @@ public class sites extends AppCompatActivity {
                         else{
                             category = jsonObj.getJSONObject("props").getString("term");
                         }
-                        String instructor = jsonObj.getJSONObject("siteOwner").getString("userDisplayName");
+                        String instructor = "Instructor: " + jsonObj.getJSONObject("siteOwner").getString("userDisplayName");
                         String titleName = jsonObj.getString("title");
                         Log.e("titleName",titleName);
                         sitelist.add(new ListCell(sitesids.get(i), titleName, category, instructor));
@@ -223,6 +225,7 @@ public class sites extends AppCompatActivity {
                     }
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
+                    b.putString("activityLabelclick", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }

@@ -12,10 +12,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.noellesun.sakai.eachAssign">
+    tools:context="com.example.noellesun.sakai.eachAnnounce">
 
     <TextView
-        android:id="@+id/assign_itemName"
+        android:id="@+id/announcetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -36,7 +36,7 @@
         android:layout_height="400dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/assign_itemName"
+        android:layout_below="@+id/announcetitle"
         android:layout_marginTop="36dp"
         android:layout_x="0px"
         android:layout_y="25px"
@@ -48,9 +48,9 @@
             android:paddingRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_alignLeft="@+id/assign_itemName"
-            android:layout_alignStart="@+id/assign_itemName"
-            android:layout_below="@+id/assign_itemName"
+            android:layout_alignLeft="@+id/announcetitle"
+            android:layout_alignStart="@+id/announcetitle"
+            android:layout_below="@+id/announcetitle"
             android:layout_marginTop="32dp"
             android:text="TextView" />
     </ScrollView>

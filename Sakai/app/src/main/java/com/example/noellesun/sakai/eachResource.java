@@ -54,6 +54,8 @@ public class eachResource extends AppCompatActivity {
         Log.i( "eachResourcestr","in eachresource");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_each_resource);
+        String activityLabel = getIntent().getExtras().getString("activityLabelclick") + "/" + "Resources";
+        setTitle(activityLabel);
         //Get selected assignment's info from Assignment view
         //HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("resource info");
         HashMap<String, String> info = (HashMap<String, String>)getIntent().getSerializableExtra("resource info");
@@ -80,6 +82,7 @@ public class eachResource extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(eachResource.this, PdfViewer.class);
+                    intent.putExtra("url_str", resource_url);
                     startActivity(intent);
                 }
             });
