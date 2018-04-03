@@ -121,7 +121,7 @@ public class eachSite extends AppCompatActivity {
     };
 
     @Override
-    protected  void onActivityResult(int requestCode, int resultCode, Intent data ) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data ) {
         super.onActivityResult(requestCode, resultCode, data);
         // check that it is the SecondActivity with an OK result
         if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
