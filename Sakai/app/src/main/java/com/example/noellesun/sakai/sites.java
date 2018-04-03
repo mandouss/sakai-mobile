@@ -99,14 +99,12 @@ public class sites extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
             moveTaskToBack(true);
-//        Intent intent = new Intent(getApplicationContext(), Login.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtra("EXIT", true);
-//        startActivity(intent);
     }
+
 
     final OnClickListener logout = new OnClickListener() {
         @Override
