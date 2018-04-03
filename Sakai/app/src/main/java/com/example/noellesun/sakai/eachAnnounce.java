@@ -18,13 +18,14 @@ public class eachAnnounce extends AppCompatActivity {
         setContentView(R.layout.activity_each_announce);
         //Get selected assignment's info from Assignment view
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
-        String itemName = info.get("itemName");
-        String modifiedTime = info.get("modifiedTime");
+        String itemName = info.get("title");
+        String modifiedTimeString = info.get("modifiedTimeString");
         String createdBy = info.get("createdBy");
         //parse html formatted text into plain text
         instructions = Html.fromHtml(info.get("instructions")).toString();
         loadText();
     }
+
     @SuppressWarnings("deprecation")
     public static Spanned fromHtml(String html){
         Spanned result;
@@ -35,6 +36,7 @@ public class eachAnnounce extends AppCompatActivity {
         }
         return result;
     }
+
     void loadText(){
         TextView instruct = (TextView) findViewById(R.id.instruction);
         instruct.setText(instructions);
