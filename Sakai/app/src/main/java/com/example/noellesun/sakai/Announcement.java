@@ -146,6 +146,7 @@ public class Announcement extends AppCompatActivity {
 
                         String createdBy = c.getString("createdByDisplayName");
                         String instructions = c.getString("body");
+                        String resource_url = c.getString("entityURL");
                         Log.e("ANNONITEMNAME", itemName);
 
                         //store the variable needed in a hashmap
@@ -157,6 +158,7 @@ public class Announcement extends AppCompatActivity {
                         eachAnnounce.put("millisecTimeString", millisecTimeString);
                         eachAnnounce.put("instructions", instructions);
                         eachAnnounce.put("title", activityLabel);
+                        eachAnnounce.put("resource_url", resource_url);
                         annoList.add(eachAnnounce);
                         Log.i("ANNOLIST",annoList.toString());
                     }
