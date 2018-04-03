@@ -3,34 +3,40 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="18dp">
+
+    >
 
     <TextView
         android:id="@+id/assigntitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="0dip"
+        android:paddingBottom="2dip"
         android:paddingTop="6dip"
         android:textColor="#283593"
+        android:background="#FAFAFA"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingLeft="15dp"
+        />
 
     <TextView
         android:id="@+id/assignsubtitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="6dip"
-        android:paddingTop="0dip"
+        android:paddingTop="2dip"
         android:textColor="#7986CB"
         android:textSize="20sp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        android:paddingLeft="15dp"/>
     <TextView
         android:id="@+id/dueTime"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="6dip"
-        android:paddingTop="0dip"
-        android:textColor="#7986CB"
+        android:paddingTop="2dip"
+        android:textColor="#E57373"
         android:textSize="20sp"
-        android:textStyle="normal" />
+        android:textStyle="bold"
+        android:paddingLeft="15dp"/>
 </LinearLayout>
