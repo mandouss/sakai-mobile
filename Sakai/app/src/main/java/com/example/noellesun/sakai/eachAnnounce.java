@@ -13,6 +13,7 @@ public class eachAnnounce extends AppCompatActivity {
     //String instructions;
     String resource_url;
     String instructions;
+    static String itemName, modifiedTimeString, createdBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +27,18 @@ public class eachAnnounce extends AppCompatActivity {
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
 
         if (info != null) {
-            String itemName = info.get("itemName");
-            String modifiedTimeString = info.get("modifiedTimeString");
+            itemName = info.get("itemName");
+            modifiedTimeString = info.get("modifiedTimeString");
             String millisecTimeString = info.get("millisecTimeString");
-            String createdBy = info.get("createdBy");
+            createdBy = info.get("createdBy");
             //parse html formatted text into plain text
             instructions = Html.fromHtml(info.get("instructions")).toString();
             resource_url = info.get("resource_url");
             // eachAnnounce.put("title", activityLabel);
+            setTitle(itemName);
 
-            Log.e("In each Announce", itemName);
-            Log.e("In each Announce", modifiedTimeString);
+            Log.i("In each Announce", itemName);
+            Log.i("In each Announce", modifiedTimeString);
             Log.e("In each Announce", millisecTimeString);
             Log.e("In each Announce", createdBy);
             Log.e("In each Announce", instructions);
@@ -48,6 +50,7 @@ public class eachAnnounce extends AppCompatActivity {
     }
 
     @SuppressWarnings("deprecation")
+    /*
     public static Spanned fromHtml(String html){
         Spanned result;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -57,9 +60,15 @@ public class eachAnnounce extends AppCompatActivity {
         }
         return result;
     }
+    */
 
     void loadText(){
+        // TextView instruct = (TextView) findViewById(R.id.instruction);
+        // instruct.setText(instructions);
+
+        TextView titleName = (TextView) findViewById(R.id.announcetitle);
         TextView instruct = (TextView) findViewById(R.id.instruction);
+        titleName.setText(itemName);
         instruct.setText(instructions);
     }
 }
