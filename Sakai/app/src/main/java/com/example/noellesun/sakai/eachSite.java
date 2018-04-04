@@ -75,6 +75,9 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toResources = new Intent(eachSite.this, Resources.class);
             toResources.putExtra("SiteID",siteid);
+            // Yunzhen: add user id to access profile page in every activity
+            // the other activities are the same
+            toResources.putExtra("USERID",userid);
             toResources.putExtra("activityLabelclick", activityLabelclick);
             Log.i(TAG, "resouclick");
             startActivityForResult(toResources,ORDINARY_ACTIVITY_RESULT_CODE);
@@ -86,6 +89,7 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toAnnouncement = new Intent(eachSite.this, Announcement.class);
             toAnnouncement.putExtra("SiteID",siteid);
+            toAnnouncement.putExtra("USERID",userid);
             toAnnouncement.putExtra("activityLabelclick", activityLabelclick);
             startActivity(toAnnouncement);
         }
@@ -97,6 +101,7 @@ public class eachSite extends AppCompatActivity {
             Intent toAssignments = new Intent(eachSite.this, Assignment.class);
             toAssignments.putExtra("SiteID",siteid);
             toAssignments.putExtra("activityLabelclick", activityLabelclick);
+            toAssignments.putExtra("USERID", userid);
             Log.i(TAG, "assignclick");
             startActivityForResult(toAssignments,ORDINARY_ACTIVITY_RESULT_CODE);
         }
@@ -115,6 +120,7 @@ public class eachSite extends AppCompatActivity {
             Intent toGradebook = new Intent(eachSite.this, Gradebook.class);
             toGradebook.putExtra("SiteID",siteid);
             toGradebook.putExtra("activityLabelclick", activityLabelclick);
+            toGradebook.putExtra("USERID", userid);
             Log.i(TAG, "gradebookclick");
             startActivityForResult(toGradebook,ORDINARY_ACTIVITY_RESULT_CODE);
         }
