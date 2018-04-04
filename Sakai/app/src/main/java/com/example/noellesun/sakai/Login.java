@@ -57,6 +57,7 @@ public class Login extends AppCompatActivity {
         browser.loadUrl("https://sakai.duke.edu/portal/login");
         Log.i("url", browser.getUrl());
 
+
         browser.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -165,6 +166,16 @@ public class Login extends AppCompatActivity {
             intent.putExtras(b);
             intent.putExtra("ID","Login");
             startActivity(intent);
+
+            //start service TODO: when should the service stop
+            Intent startIntent = new Intent(Login.this, Notification.class);
+            Bundle c=new Bundle();
+            c.putStringArrayList("ID_ARRAY",idarray);
+            startIntent.putExtras(c);
+            Log.d("Login", "startservice");
+            startService(startIntent);
+
+
             return null;
         }
 
