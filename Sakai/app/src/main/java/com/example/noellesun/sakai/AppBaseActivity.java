@@ -17,19 +17,17 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-public abstract class AppBaseActivity extends AppCompatActivity{
+public class AppBaseActivity extends AppCompatActivity{
     private FrameLayout view_stub; //This is the framelayout to keep your content view
-    private NavigationView navigation_view; // The new navigation view from Android Design Library. Can inflate menu resources. Easy
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("AppBaseActivity", "onCreate");
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.app_base_layout);// The base layout that contains your navigation drawer.
         view_stub = (FrameLayout) findViewById(R.id.view_stub);
-        navigation_view = (NavigationView) findViewById(R.id.navi_id);
+        NavigationView navigation_view = (NavigationView) findViewById(R.id.navi_id);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -63,10 +61,15 @@ public abstract class AppBaseActivity extends AppCompatActivity{
                             toSites.putExtra("activityLabelclick",activityLabelclick);
                             startActivity(toSites);
                         }else if(item.getTitle().equals("Other Courses")) {
-                            Intent intent = new Intent();
+                            Intent intent = new Intent();//getBaseContext(), sites.class
                             intent.putExtra("Result", "1");
                             intent.putExtra("activityLabelclick", activityLabelclick);
                             setResult(1, intent);
+                        }else if(item.getTitle().equals("Announcements")){
+                            Intent intent = new Intent(getBaseContext(), Announcement.class);
+                            intent.putExtra("SiteID", siteid);
+                            intent.putExtra("activityLabelclick", activityLabelclick);
+                            startActivity(intent);
                         }
                         finish();
                         return true;
