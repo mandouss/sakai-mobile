@@ -21,6 +21,8 @@ public class AppBaseActivity extends AppCompatActivity{
     private FrameLayout view_stub; //This is the framelayout to keep your content view
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private String siteID;
+    private String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("AppBaseActivity", "onCreate");
@@ -36,7 +38,16 @@ public class AppBaseActivity extends AppCompatActivity{
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_button_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+
     protected void establish_nav(final String siteid, final String activityLabelclick){
+        siteID = siteid;
         NavigationView n = (NavigationView)findViewById(R.id.navi_id);
         n.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -127,6 +138,19 @@ public class AppBaseActivity extends AppCompatActivity{
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        int id = item.getItemId();
+
+        if (id == R.id.mybutton) {
+            // do something here
+            Toast.makeText(getApplicationContext(),"profile clicked",Toast.LENGTH_SHORT).show();
+//            Intent toProfile = new Intent(eachSite.this, Profile.class);
+//            Bundle b = new Bundle();
+//            b.putString("USERID", userid);
+//            toProfile.putExtras(b);
+//            Log.i(TAG, "profilelclick");
+//            startActivityForResult(toProfile,ORDINARY_ACTIVITY_RESULT_CODE);
+        }
+
         // Handle your other action bar items...
 
         return super.onOptionsItemSelected(item);

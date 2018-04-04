@@ -44,9 +44,7 @@ public class Profile extends AppCompatActivity {
         userid = b.getString("USERID");
         Log.e("PROFILE", userid);
         new GetProfile().execute();
-
         findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
-
     }
 
     final View.OnClickListener sitesclick = new View.OnClickListener() {
