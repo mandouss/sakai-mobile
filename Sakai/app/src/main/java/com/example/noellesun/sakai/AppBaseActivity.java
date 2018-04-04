@@ -17,19 +17,19 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-public abstract class AppBaseActivity extends AppCompatActivity{
+public class AppBaseActivity extends AppCompatActivity{
     private FrameLayout view_stub; //This is the framelayout to keep your content view
-    private NavigationView navigation_view; // The new navigation view from Android Design Library. Can inflate menu resources. Easy
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-
+    private String siteID;
+    private String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("AppBaseActivity", "onCreate");
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.app_base_layout);// The base layout that contains your navigation drawer.
         view_stub = (FrameLayout) findViewById(R.id.view_stub);
-        navigation_view = (NavigationView) findViewById(R.id.navi_id);
+        NavigationView navigation_view = (NavigationView) findViewById(R.id.navi_id);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -38,7 +38,16 @@ public abstract class AppBaseActivity extends AppCompatActivity{
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_button_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+
     protected void establish_nav(final String siteid, final String activityLabelclick){
+        siteID = siteid;
         NavigationView n = (NavigationView)findViewById(R.id.navi_id);
         n.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -63,10 +72,15 @@ public abstract class AppBaseActivity extends AppCompatActivity{
                             toSites.putExtra("activityLabelclick",activityLabelclick);
                             startActivity(toSites);
                         }else if(item.getTitle().equals("Other Courses")) {
-                            Intent intent = new Intent();
+                            Intent intent = new Intent();//getBaseContext(), sites.class
                             intent.putExtra("Result", "1");
                             intent.putExtra("activityLabelclick", activityLabelclick);
                             setResult(1, intent);
+                        }else if(item.getTitle().equals("Announcements")){
+                            Intent intent = new Intent(getBaseContext(), Announcement.class);
+                            intent.putExtra("SiteID", siteid);
+                            intent.putExtra("activityLabelclick", activityLabelclick);
+                            startActivity(intent);
                         }
                         finish();
                         return true;
@@ -124,6 +138,19 @@ public abstract class AppBaseActivity extends AppCompatActivity{
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        int id = item.getItemId();
+
+        if (id == R.id.mybutton) {
+            // do something here
+            Toast.makeText(getApplicationContext(),"profile clicked",Toast.LENGTH_SHORT).show();
+//            Intent toProfile = new Intent(eachSite.this, Profile.class);
+//            Bundle b = new Bundle();
+//            b.putString("USERID", userid);
+//            toProfile.putExtras(b);
+//            Log.i(TAG, "profilelclick");
+//            startActivityForResult(toProfile,ORDINARY_ACTIVITY_RESULT_CODE);
+        }
+
         // Handle your other action bar items...
 
         return super.onOptionsItemSelected(item);

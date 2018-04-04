@@ -36,7 +36,6 @@ public class Notification extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
