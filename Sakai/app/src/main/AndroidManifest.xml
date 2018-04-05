@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Assignment"
             android:label="Assignments" />
@@ -48,7 +47,13 @@
 
         <activity
             android:name=".Profile"
-            android:label="Profile"/>
-        <activity android:name=".PdfViewer"></activity>
+            android:label="Profile" />
+        <activity android:name=".PdfViewer" />
+
+        <service
+            android:name=".Notification"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
+
 </manifest>

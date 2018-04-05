@@ -12,6 +12,8 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.widget.AdapterView;
@@ -42,6 +44,31 @@ public class sites extends AppCompatActivity {
     //static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>();
     static ArrayList<ListCell> sitelist = new ArrayList<ListCell>();
     static ArrayList<String> idarray = new ArrayList<>();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_button_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.mybutton) {
+            // do something here
+//            Toast.makeText(getApplicationContext(),"button clicked",Toast.LENGTH_SHORT).show();
+            Intent toProfile = new Intent(getBaseContext(), Profile.class);
+            Bundle b = new Bundle();
+            b.putString("USERID", userid);
+            toProfile.putExtras(b);
+            startActivity(toProfile);
+        }
+
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 
@@ -98,6 +125,15 @@ public class sites extends AppCompatActivity {
         }
 
     }
+
+
+
+    @Override
+    public void onBackPressed() {
+            moveTaskToBack(true);
+    }
+
+
     final OnClickListener logout = new OnClickListener() {
         @Override
         public void onClick(View v) {

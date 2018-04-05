@@ -43,7 +43,11 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.web_layout);
         //Use shib.duke to do the authentication
         WebView browser = (WebView) findViewById(R.id.webview);
@@ -56,6 +60,7 @@ public class Login extends AppCompatActivity {
         browser.loadUrl("https://sakai.duke.edu/portal/logout");
         browser.loadUrl("https://sakai.duke.edu/portal/login");
         Log.i("url", browser.getUrl());
+
 
         browser.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -165,6 +170,16 @@ public class Login extends AppCompatActivity {
             intent.putExtras(b);
             intent.putExtra("ID","Login");
             startActivity(intent);
+
+            //start service TODO: when should the service stop
+            Intent startIntent = new Intent(Login.this, Notification.class);
+            Bundle c=new Bundle();
+            c.putStringArrayList("ID_ARRAY",idarray);
+            startIntent.putExtras(c);
+            Log.d("Login", "startservice");
+            startService(startIntent);
+
+
             return null;
         }
 

@@ -62,7 +62,6 @@ public class Assignment extends AppBaseActivity {
         new Assignment.GetAssign().execute();
         establish_nav(siteid, activityLabelclick);
         setTitle(activityLabel);
-
     }
 
 
