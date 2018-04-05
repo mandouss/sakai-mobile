@@ -125,6 +125,15 @@ public class sites extends AppCompatActivity {
         }
 
     }
+
+
+
+    @Override
+    public void onBackPressed() {
+            moveTaskToBack(true);
+    }
+
+
     final OnClickListener logout = new OnClickListener() {
         @Override
         public void onClick(View v) {

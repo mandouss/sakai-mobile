@@ -91,7 +91,7 @@ public class eachSite extends AppCompatActivity {
             toAnnouncement.putExtra("SiteID",siteid);
             toAnnouncement.putExtra("USERID",userid);
             toAnnouncement.putExtra("activityLabelclick", activityLabelclick);
-            startActivity(toAnnouncement);
+            startActivityForResult(toAnnouncement,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
 
@@ -130,6 +130,8 @@ public class eachSite extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data ) {
         super.onActivityResult(requestCode, resultCode, data);
         // check that it is the SecondActivity with an OK result
+
+        Log.e(TAG, "Return");
         if (requestCode == ORDINARY_ACTIVITY_RESULT_CODE) {
             if (resultCode == 1) {
                 Log.e(TAG, "你进入了Return");
