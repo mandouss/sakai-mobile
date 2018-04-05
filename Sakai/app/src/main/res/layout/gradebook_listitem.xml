@@ -10,6 +10,7 @@
     <TextView
         android:id="@+id/itemName"
         android:layout_width="fill_parent"
+<<<<<<< HEAD
         android:layout_height="40sp"
         android:textColor="#283593"
         android:layout_gravity="center"
@@ -18,6 +19,12 @@
         android:paddingBottom="2dip"
         android:paddingTop="6dip"
         android:textSize="22sp"
+=======
+        android:layout_height="wrap_content"
+        android:textColor="#283593"
+        android:background="#EEEEEE"
+        android:textSize="19sp"
+>>>>>>> dd43d356f95a5a26aef4798e5a0ea52fc69fe77d
         android:textStyle="bold" />
     <TextView
         android:id="@+id/grade"
@@ -29,7 +36,11 @@
         android:paddingBottom="2dip"
         android:paddingTop="6dip"
         android:textColor="#E57373"
+<<<<<<< HEAD
         android:textSize="20sp"
+=======
+        android:textSize="19sp"
+>>>>>>> dd43d356f95a5a26aef4798e5a0ea52fc69fe77d
         android:textStyle="bold" />
 </LinearLayout>
 
