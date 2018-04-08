@@ -117,7 +117,7 @@ public class eachSite extends AppCompatActivity {
     final OnClickListener gradebookclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent toGradebook = new Intent(eachSite.this, Gradebook.class);
+            Intent toGradebook = new Intent(eachSite.this, Lesson.class);
             toGradebook.putExtra("SiteID",siteid);
             toGradebook.putExtra("activityLabelclick", activityLabelclick);
             toGradebook.putExtra("USERID", userid);

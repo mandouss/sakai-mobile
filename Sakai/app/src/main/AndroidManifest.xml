@@ -22,29 +22,24 @@
         <activity
             android:name=".Assignment"
             android:label="Assignments" />
-
         <activity
             android:name=".Resources"
-            android:label="Resources"/>
-
+            android:label="Resources" />
         <activity
             android:name=".Gradebook"
-            android:label="Gradebook"/>
+            android:label="Gradebook" />
         <activity
             android:name=".Announcement"
             android:label="Announcements" />
-
-        <activity android:name=".eachResource"
-                  android:label="Resources"/>
         <activity
-            android:name=".eachSite"
-            />
+            android:name=".eachResource"
+            android:label="Resources" />
+        <activity android:name=".eachSite" />
         <activity
             android:name=".sites"
             android:label="Sites" />
         <activity android:name=".eachAssign" />
         <activity android:name=".eachAnnounce" />
-
         <activity
             android:name=".Profile"
             android:label="Profile" />
@@ -53,7 +48,9 @@
         <service
             android:name=".Notification"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".Lesson"></activity>
     </application>
 
 </manifest>
