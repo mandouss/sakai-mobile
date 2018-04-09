@@ -195,7 +195,7 @@ public class Resources extends AppBaseActivity {
         }
 
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(final Void result) {
             super.onPostExecute(result);
             setTitle(activityLabel);
             if (pDialog.isShowing())
@@ -209,16 +209,19 @@ public class Resources extends AppBaseActivity {
 
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
-                    Intent intent = new Intent(Resources.this, eachResource.class);
-                    //send the resource info to each Resource view
-                    intent.putExtra("resource info", resList.get(position));
-                    intent.putExtra("activityLabelclick", activityLabelclick);
-//                    intent.putExtra("resource_name", );
-                    //intent.putExtra("resource info", resList);
-                    startActivity(intent);
+                    if (!resList.get(position).get("type").equals("collection")) {
+                        Intent intent = new Intent(Resources.this, eachResource.class);
+                        //send the resource info to each Resource view
+                        intent.putExtra("resource info", resList.get(position));
+                        intent.putExtra("activityLabelclick", activityLabelclick);
+                        //                    intent.putExtra("resource_name", );
+                        //intent.putExtra("resource info", resList);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(),"This is a directory, you can't download it", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
-
         }
 
     }
