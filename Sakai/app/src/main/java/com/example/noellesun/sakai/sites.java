@@ -12,6 +12,8 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.widget.AdapterView;
@@ -33,6 +35,7 @@ public class sites extends AppCompatActivity {
     //use static userid and sitesids to keep the original userid and sitesids
     static  String userid; // Ethan: why do we need static
     static ArrayList<String> sitesids;
+    //private ArrayList<HashMap<String, String>> siteList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
     private static String fixurl = "https://sakai.duke.edu/direct/site/";
@@ -41,6 +44,31 @@ public class sites extends AppCompatActivity {
     //static ArrayList<HashMap<String, String>> sitetitleist = new ArrayList<>();
     static ArrayList<ListCell> sitelist = new ArrayList<ListCell>();
     static ArrayList<String> idarray = new ArrayList<>();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_button_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.mybutton) {
+            // do something here
+//            Toast.makeText(getApplicationContext(),"button clicked",Toast.LENGTH_SHORT).show();
+            Intent toProfile = new Intent(getBaseContext(), Profile.class);
+            Bundle b = new Bundle();
+            b.putString("USERID", userid);
+            toProfile.putExtras(b);
+            startActivity(toProfile);
+        }
+
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 
@@ -89,6 +117,7 @@ public class sites extends AppCompatActivity {
                     String [] ids = {userid, temp_lc.getId()};
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
+                    b.putString("activityLabelclick", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }
@@ -96,6 +125,15 @@ public class sites extends AppCompatActivity {
         }
 
     }
+
+
+
+    @Override
+    public void onBackPressed() {
+            moveTaskToBack(true);
+    }
+
+
     final OnClickListener logout = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -110,7 +148,7 @@ public class sites extends AppCompatActivity {
     };
     private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
         ArrayList tempList = new ArrayList();
-        Collections.sort(itemList);
+        Collections.sort(itemList, Collections.reverseOrder());
         //Loops thorough the list and add a section header in tempList
         String header = "";
         for(int i = 0; i < itemList.size(); i++) {
@@ -160,7 +198,7 @@ public class sites extends AppCompatActivity {
                         else{
                             category = jsonObj.getJSONObject("props").getString("term");
                         }
-                        String instructor = jsonObj.getJSONObject("siteOwner").getString("userDisplayName");
+                        String instructor = "Instructor: " + jsonObj.getJSONObject("siteOwner").getString("userDisplayName");
                         String titleName = jsonObj.getString("title");
                         Log.e("titleName",titleName);
                         sitelist.add(new ListCell(sitesids.get(i), titleName, category, instructor));
@@ -223,6 +261,7 @@ public class sites extends AppCompatActivity {
                     }
                     Bundle b = new Bundle();
                     b.putStringArray("IDS",ids);
+                    b.putString("activityLabelclick", temp_lc.getTitlename());
                     intent.putExtras(b);
                     startActivity(intent);
                 }

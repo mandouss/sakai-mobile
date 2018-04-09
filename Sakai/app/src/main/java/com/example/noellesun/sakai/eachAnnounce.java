@@ -10,21 +10,43 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 public class eachAnnounce extends AppCompatActivity {
+    //String instructions;
+    String resource_url;
     String instructions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("eachAnnounceinstr","in eachannounce");
+        Log.i("eachAnnounceinstr", "in eachannounce");
         super.onCreate(savedInstanceState);
+        String activityLabel = getIntent().getExtras().getString("activityLabel");
         setContentView(R.layout.activity_each_announce);
-        //Get selected assignment's info from Assignment view
+        setTitle(activityLabel);
+
+        //Get selected Announcement's info from Announcement view
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
-        String itemName = info.get("itemName");
-        String modifiedTime = info.get("modifiedTime");
-        String createdBy = info.get("createdBy");
-        //parse html formatted text into plain text
-        instructions = Html.fromHtml(info.get("instructions")).toString();
-        loadText();
+
+        if (info != null) {
+            String itemName = info.get("itemName");
+            String modifiedTimeString = info.get("modifiedTimeString");
+            String millisecTimeString = info.get("millisecTimeString");
+            String createdBy = info.get("createdBy");
+            //parse html formatted text into plain text
+            instructions = Html.fromHtml(info.get("instructions")).toString();
+            resource_url = info.get("resource_url");
+            // eachAnnounce.put("title", activityLabel);
+
+            Log.e("In each Announce", itemName);
+            Log.e("In each Announce", modifiedTimeString);
+            Log.e("In each Announce", millisecTimeString);
+            Log.e("In each Announce", createdBy);
+            Log.e("In each Announce", instructions);
+            Log.e("In each Announce", resource_url);
+
+            loadText();
+            // setTitle(activityLabel);
+        }
     }
+
     @SuppressWarnings("deprecation")
     public static Spanned fromHtml(String html){
         Spanned result;
@@ -35,6 +57,7 @@ public class eachAnnounce extends AppCompatActivity {
         }
         return result;
     }
+
     void loadText(){
         TextView instruct = (TextView) findViewById(R.id.instruction);
         instruct.setText(instructions);

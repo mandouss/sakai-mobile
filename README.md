@@ -20,5 +20,10 @@ _**Finish Status in S2**_:
 
 _**To do in S3**_:
 
+_** Todo list**_:
+1. Time String convert into correct time, in year 2018, find out the error using Imported Library Date
+2. Link Hamburgur button to Announcement Page 
+3. Link each_announcement to Announcement Page, rewrite use of item
+
 
 

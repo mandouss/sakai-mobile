@@ -61,16 +61,20 @@ public class Resources extends AppBaseActivity {
     private ArrayList<HashMap<String, String>> resList = new ArrayList<>();
     private ProgressDialog pDialog;
     private ListView lv;
-    //    String fixurl = "https://sakai.duke.edu/access/content/group/";
+//    String fixurl = "https://sakai.duke.edu/access/content/group/";
     String fixurl = "https://sakai.duke.edu/direct/content/site/";
     String cookiestr;
     String siteid;
+    static String activityLabel = "Resources";
+    static String activityLabelclick;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resources);
         lv = (ListView) findViewById(R.id.resourcelist);
         siteid = getIntent().getExtras().getString("SiteID");
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/" + "Resources";
         Log.i("RESOURiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
@@ -79,9 +83,11 @@ public class Resources extends AppBaseActivity {
 
         //});
 
-        establish_nav(siteid);
+        establish_nav(siteid, activityLabelclick);
+        setTitle(activityLabel);
 
     }
+
     final OnClickListener siteClickEvent = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -118,6 +124,7 @@ public class Resources extends AppBaseActivity {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray resources = jsonObj.getJSONArray("content_collection");
+                    //title = resources.getJSONObject(0).getString("entityTitle") + " / " + "Resources";
                     for (int i = 0; i < resources.length(); i++) {
                         JSONObject c = resources.getJSONObject(i);
                         //get variable needed from JSON object
@@ -155,6 +162,7 @@ public class Resources extends AppBaseActivity {
                         eachResource.put("resource_url", resource_url);
                         eachResource.put("type", type);
                         eachResource.put("size", size);
+                        //eachResource.put("title", title);
                         resList.add(eachResource);
                         Log.i("RESLIST", resList.toString());
                     }
@@ -189,10 +197,11 @@ public class Resources extends AppBaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            setTitle(activityLabel);
             if (pDialog.isShowing())
                 pDialog.dismiss();
             //parse data into the resources lists
-            ListAdapter adapter = new SimpleAdapter(Resources.this, resList,
+            final ListAdapter adapter = new SimpleAdapter(Resources.this, resList,
                     R.layout.resource_listitem, new String[]{"itemName", "size",
                     "createdBy"}, new int[]{R.id.itemName, R.id.size, R.id.createdBy});
             lv.setAdapter(adapter);
@@ -203,6 +212,7 @@ public class Resources extends AppBaseActivity {
                     Intent intent = new Intent(Resources.this, eachResource.class);
                     //send the resource info to each Resource view
                     intent.putExtra("resource info", resList.get(position));
+                    intent.putExtra("activityLabelclick", activityLabelclick);
                     //intent.putExtra("resource info", resList);
                     startActivity(intent);
                 }
