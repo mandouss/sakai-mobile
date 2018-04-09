@@ -213,6 +213,7 @@ public class Resources extends AppBaseActivity {
                     //send the resource info to each Resource view
                     intent.putExtra("resource info", resList.get(position));
                     intent.putExtra("activityLabelclick", activityLabelclick);
+//                    intent.putExtra("resource_name", );
                     //intent.putExtra("resource info", resList);
                     startActivity(intent);
                 }
