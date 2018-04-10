@@ -54,6 +54,7 @@
             android:enabled="true"
             android:exported="true" />
 
+        <activity android:name=".Lesson"></activity>
     </application>
 
 </manifest>

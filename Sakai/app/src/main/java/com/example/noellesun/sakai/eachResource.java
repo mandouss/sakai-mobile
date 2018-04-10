@@ -46,6 +46,7 @@ import java.util.HashMap;
 public class eachResource extends AppCompatActivity {
 
     //String instructions;
+    String resource_name;
     String resource_url;
     String size;
 
@@ -55,12 +56,14 @@ public class eachResource extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_each_resource);
         String activityLabel = getIntent().getExtras().getString("activityLabelclick") + "/" + "Resources";
+
         setTitle(activityLabel);
         //Get selected assignment's info from Assignment view
         //HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("resource info");
         HashMap<String, String> info = (HashMap<String, String>)getIntent().getSerializableExtra("resource info");
         if(info != null) {
             String itemName = info.get("itemName");
+            resource_name = itemName;
             String numChildren = info.get("numChildren");
             String createdBy = info.get("createdBy");
             //parse html formatted text into plain text
@@ -102,16 +105,16 @@ public class eachResource extends AppCompatActivity {
     }
 
     void loadText(){
-        TextView url = (TextView) findViewById(R.id.resource_url);
+        TextView url = (TextView) findViewById(R.id.resourceName);
         //url.setAutoLinkMask(Linkify.ALL);
         String new_url = getResources().getString(R.string.res_fir_line);
-        new_url += resource_url;
+        new_url += " " + resource_name;
         url.setText(new_url);
 
         TextView text_size = (TextView) findViewById(R.id.size);
         //url.setAutoLinkMask(Linkify.ALL);
         String new_size = getResources().getString(R.string.res_sec_line);
-        new_size += size;
+        new_size += " " + size;
         Log.e("new size", new_size);
         text_size.setText(new_size);
 
