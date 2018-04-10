@@ -13,20 +13,22 @@ public class eachAnnounce extends AppCompatActivity {
     //String instructions;
     String resource_url;
     String instructions;
+    static String itemName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("eachAnnounceinstr", "in eachannounce");
         super.onCreate(savedInstanceState);
-        String activityLabel = getIntent().getExtras().getString("activityLabel");
+        //String activityLabel = getIntent().getExtras().getString("activityLabel");
         setContentView(R.layout.activity_each_announce);
+        String activityLabel = getIntent().getExtras().getString("activityLabelclick") + "/" + "Announcements";
         setTitle(activityLabel);
 
         //Get selected Announcement's info from Announcement view
         HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
 
         if (info != null) {
-            String itemName = info.get("itemName");
+            itemName = info.get("itemName").toString();
             String modifiedTimeString = info.get("modifiedTimeString");
             String millisecTimeString = info.get("millisecTimeString");
             String createdBy = info.get("createdBy");
@@ -35,16 +37,21 @@ public class eachAnnounce extends AppCompatActivity {
             resource_url = info.get("resource_url");
             // eachAnnounce.put("title", activityLabel);
 
-            Log.e("In each Announce", itemName);
-            Log.e("In each Announce", modifiedTimeString);
-            Log.e("In each Announce", millisecTimeString);
-            Log.e("In each Announce", createdBy);
-            Log.e("In each Announce", instructions);
-            Log.e("In each Announce", resource_url);
+            Log.i("In each Announce", itemName);
+            Log.i("In each Announce", modifiedTimeString);
+            Log.i("In each Announce", millisecTimeString);
+            Log.i("In each Announce", createdBy);
+            Log.i("In each Announce", instructions);
+            Log.i("In each Announce", resource_url);
 
+            setTitle(itemName);
             loadText();
             // setTitle(activityLabel);
         }
+        //else {
+            // test whether its null
+          //  Log.i("Info list is empty", itemName);
+        //}
     }
 
     @SuppressWarnings("deprecation")
@@ -59,7 +66,17 @@ public class eachAnnounce extends AppCompatActivity {
     }
 
     void loadText(){
+
+        TextView titleName = (TextView) findViewById(R.id.anno_title);
+        String new_title = getResources().getString(R.string.anno_fir_line);
+        new_title += itemName;
+        titleName.setText(new_title);
+        Log.e("new itemName", itemName);
+
         TextView instruct = (TextView) findViewById(R.id.instruction);
-        instruct.setText(instructions);
+        String new_instruct = getResources().getString(R.string.anno_sec_line);
+        new_instruct += instructions;
+        Log.e("new instructions", instructions);
+        instruct.setText(new_instruct);
     }
 }
