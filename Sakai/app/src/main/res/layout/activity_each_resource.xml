@@ -32,6 +32,7 @@
             android:text="This is only a demo button to show hardcoded url pdf"
             android:paddingLeft="5dp"
             android:paddingTop="42dp"/>
+
         <TextView
             android:id="@+id/resource_url"
             android:layout_width="wrap_content"

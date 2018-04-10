@@ -51,7 +51,7 @@ public class Announcement extends AppBaseActivity {
         activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
         activityLabel = activityLabelclick + "/" + "Announcements";
         establish_nav(siteid, activityLabelclick);
-        Log.i("ASSIGNiteid:",siteid);
+        Log.i("ANNOUNCEiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
