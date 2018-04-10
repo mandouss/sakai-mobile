@@ -13,38 +13,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ExtraText">
-        <activity android:name=".Login">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" /> <!-- this is the start activity when start up -->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Login"
+            android:label="Login" />
         <activity
             android:name=".Assignment"
             android:label="Assignments" />
-
         <activity
             android:name=".Resources"
-            android:label="Resources"/>
-
+            android:label="Resources" />
         <activity
             android:name=".Gradebook"
-            android:label="Gradebook"/>
+            android:label="Gradebook" />
         <activity
             android:name=".Announcement"
             android:label="Announcements" />
-
-        <activity android:name=".eachResource"
-                  android:label="Resources"/>
         <activity
-            android:name=".eachSite"
-            />
+            android:name=".eachResource"
+            android:label="Resources" />
+        <activity android:name=".eachSite" />
         <activity
             android:name=".sites"
             android:label="Sites" />
         <activity android:name=".eachAssign" />
         <activity android:name=".eachAnnounce" />
-
         <activity
             android:name=".Profile"
             android:label="Profile" />
@@ -53,7 +52,8 @@
         <service
             android:name=".Notification"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
     </application>
 
 </manifest>
