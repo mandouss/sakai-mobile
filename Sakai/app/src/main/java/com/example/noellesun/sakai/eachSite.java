@@ -42,8 +42,6 @@ public class eachSite extends AppCompatActivity {
                 activityLabelclick = b.getString("activityLabelclick");
             }
         }
-
-
         Log.i("EachSite:",siteid);
         //activityLabelclick =  (String) getIntent().getStringExtra("activityLabelclick");
         setTitle(activityLabelclick);
@@ -54,19 +52,18 @@ public class eachSite extends AppCompatActivity {
         findViewById(R.id.Announcements).setOnClickListener(announceclick);
         findViewById(R.id.Gradebook).setOnClickListener(gradebookclick);
         findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
-        findViewById(R.id.profilebtn).setOnClickListener(profilelclick);
+        findViewById(R.id.lessonbtn).setOnClickListener(lessonClick);
     }
     //redirect to profile view, send userid
-    final OnClickListener profilelclick = new OnClickListener() {
+    final OnClickListener lessonClick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent toProfile = new Intent(eachSite.this, Profile.class);
+            Intent toLesson = new Intent(eachSite.this, Lesson.class);
             Bundle b = new Bundle();
-            b.putString("USERID", userid);
-            b.putString("activityLabelclick", activityLabelclick);
-            toProfile.putExtras(b);
-            Log.i(TAG, "profilelclick");
-            startActivityForResult(toProfile,ORDINARY_ACTIVITY_RESULT_CODE);
+            b.putString("siteId", siteid);
+            toLesson.putExtras(b);
+            Log.i(TAG, "LessonClick");
+            startActivityForResult(toLesson,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
     //redirect to resource view, send the selected siteid
