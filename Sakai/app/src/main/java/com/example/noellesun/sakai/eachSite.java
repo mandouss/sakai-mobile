@@ -61,6 +61,7 @@ public class eachSite extends AppCompatActivity {
             Intent toLesson = new Intent(eachSite.this, Lesson.class);
             Bundle b = new Bundle();
             b.putString("siteId", siteid);
+            b.putString("USERID", userid);
             toLesson.putExtras(b);
             Log.i(TAG, "LessonClick");
             startActivityForResult(toLesson,ORDINARY_ACTIVITY_RESULT_CODE);
