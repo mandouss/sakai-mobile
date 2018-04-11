@@ -39,6 +39,7 @@ public class Gradebook extends AppBaseActivity {
     private static String fixurl = "https://sakai.duke.edu/direct/gradebook/site/";
     String cookiestr;
     String siteid;
+    String userid;
     static String activityLabel = "Gradebook";
     static String activityLabelclick;
     //private String [] subtitle = new String[]{null, "Grades:   "};
@@ -52,11 +53,12 @@ public class Gradebook extends AppBaseActivity {
         lv = (ListView) findViewById(R.id.gradebooklist);
         //Get the selected site's siteid from eachSite view
         siteid = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
         //Get the cookie to keep login status
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Gradebook.GetGrade().execute();
-        establish_nav(siteid, activityLabelclick);
+        establish_nav(siteid, userid, activityLabelclick);
     }
     final OnClickListener sitesclick = new OnClickListener() {
         @Override

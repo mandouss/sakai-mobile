@@ -46,8 +46,9 @@ public class AppBaseActivity extends AppCompatActivity{
 
     // handle button activities
 
-    protected void establish_nav(final String siteid, final String activityLabelclick){
+    protected void establish_nav(final String siteid, final String userID, final String activityLabelclick){
         siteID = siteid;
+        userid = userID;
         NavigationView n = (NavigationView)findViewById(R.id.navi_id);
         n.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -72,7 +73,7 @@ public class AppBaseActivity extends AppCompatActivity{
                             toSites.putExtra("activityLabelclick",activityLabelclick);
                             startActivity(toSites);
                         }else if(item.getTitle().equals("Other Courses")) {
-                            Intent intent = new Intent();//getBaseContext(), sites.class
+                            Intent intent = new Intent();
                             intent.putExtra("Result", "1");
                             intent.putExtra("activityLabelclick", activityLabelclick);
                             setResult(1, intent);
@@ -148,13 +149,12 @@ public class AppBaseActivity extends AppCompatActivity{
 
         if (id == R.id.mybutton) {
             // do something here
-            Toast.makeText(getApplicationContext(),"profile clicked",Toast.LENGTH_SHORT).show();
-//            Intent toProfile = new Intent(eachSite.this, Profile.class);
-//            Bundle b = new Bundle();
-//            b.putString("USERID", userid);
-//            toProfile.putExtras(b);
-//            Log.i(TAG, "profilelclick");
-//            startActivityForResult(toProfile,ORDINARY_ACTIVITY_RESULT_CODE);
+//            Toast.makeText(getApplicationContext(),"profile clicked",Toast.LENGTH_SHORT).show();
+            Intent toProfile = new Intent(getBaseContext(), Profile.class);
+            Bundle b = new Bundle();
+            b.putString("USERID", userid);
+            toProfile.putExtras(b);
+            startActivity(toProfile);
         }
 
         // Handle your other action bar items...
