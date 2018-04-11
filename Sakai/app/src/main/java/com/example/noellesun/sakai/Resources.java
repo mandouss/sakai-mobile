@@ -65,6 +65,7 @@ public class Resources extends AppBaseActivity {
     String fixurl = "https://sakai.duke.edu/direct/content/site/";
     String cookiestr;
     String siteid;
+    String userid;
     static String activityLabel = "Resources";
     static String activityLabelclick;
     @Override
@@ -73,6 +74,7 @@ public class Resources extends AppBaseActivity {
         setContentView(R.layout.activity_resources);
         lv = (ListView) findViewById(R.id.resourcelist);
         siteid = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
         activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
         activityLabel = activityLabelclick + "/" + "Resources";
         Log.i("RESOURiteid:",siteid);
@@ -83,7 +85,7 @@ public class Resources extends AppBaseActivity {
 
         //});
 
-        establish_nav(siteid, activityLabelclick);
+        establish_nav(siteid, userid, activityLabelclick);
         setTitle(activityLabel);
 
     }

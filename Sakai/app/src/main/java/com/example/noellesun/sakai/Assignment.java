@@ -43,6 +43,7 @@ public class Assignment extends AppBaseActivity {
     String fixurl = "https://sakai.duke.edu/direct/assignment/site/";
     String cookiestr;
     String siteid;
+    String userid;
     static String activityLabel = "Assignment";
     static String activityLabelclick;
     static ArrayList<ListCellAssign> assignlist = new ArrayList<ListCellAssign>();
@@ -53,6 +54,7 @@ public class Assignment extends AppBaseActivity {
         setContentView(R.layout.activity_assignment);
         lv = (ListView) findViewById(R.id.assignlist);
         siteid = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
         activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
         activityLabel = activityLabelclick + "/"+ "Assignments";
         Log.i("ASSIGNiteid:",siteid);
@@ -60,7 +62,7 @@ public class Assignment extends AppBaseActivity {
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
         new Assignment.GetAssign().execute();
-        establish_nav(siteid, activityLabelclick);
+        establish_nav(siteid, userid, activityLabelclick);
         setTitle(activityLabel);
     }
 
