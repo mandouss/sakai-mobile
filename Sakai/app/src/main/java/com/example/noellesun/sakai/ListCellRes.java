@@ -48,7 +48,7 @@ public class ListCellRes{
             }
         }
 
-        this.hasChildren = false;
+        this.hasChildren = true;
         this.isExpanded = false;
 
         this.level = TOP_LEVEL;

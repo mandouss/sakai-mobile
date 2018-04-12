@@ -251,6 +251,15 @@ public class Resources extends AppBaseActivity {
 
         public ArrayList<ListCellRes> getResCellsData (ArrayList<ListCellRes> ResCellsData){
             int result = traverse(ResCellsData, 0);
+            int i = 0;
+            for(; i < ResCellsData.size(); i++){
+                if(ResCellsData.get(i).getLevel() == 1){
+                    ResCellsData.get(i).setExpanded(true);
+                }
+                else{
+                    ResCellsData.get(i).setExpanded(false);
+                }
+            }
             return ResCellsData;
         }
 
@@ -277,6 +286,7 @@ public class Resources extends AppBaseActivity {
             for(; i < ResCellsData.size(); i++){
                 if(ResCellsData.get(i).getLevel() == 1){
                     ResCells.add(ResCellsData.get(i));
+
                 }
             }
             return ResCells;
