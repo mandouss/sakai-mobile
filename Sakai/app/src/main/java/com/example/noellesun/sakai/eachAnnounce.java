@@ -44,7 +44,7 @@ public class eachAnnounce extends AppCompatActivity {
             Log.i("In each Announce", instructions);
             Log.i("In each Announce", resource_url);
 
-            setTitle(itemName);
+            // setTitle(itemName);
             loadText();
             // setTitle(activityLabel);
         }

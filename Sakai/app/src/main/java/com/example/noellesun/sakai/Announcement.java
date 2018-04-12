@@ -129,6 +129,14 @@ public class Announcement extends AppBaseActivity {
                         eachAnnounce.put("resource_url", resource_url);
                         annoList.add(eachAnnounce);
                         Log.i("ANNOLIST",annoList.toString());
+
+                        Log.i("In each Announce", itemName);
+                        Log.i("In each Announce", modifiedTimeString);
+                        Log.i("In each Announce", millisecTimeString);
+                        Log.i("In each Announce", createdBy);
+                        Log.i("In each Announce", instructions);
+                        Log.i("In each Announce", resource_url);
+
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -175,6 +183,8 @@ public class Announcement extends AppBaseActivity {
                     Intent intent = new Intent(Announcement.this, eachAnnounce.class);
                     //send the announcement info to each Announ view
                     intent.putExtra("Announce info",annoList.get(position));
+                    intent.putExtra("activityLabelclick", activityLabelclick);
+
                     startActivity(intent);
                 }
             });
