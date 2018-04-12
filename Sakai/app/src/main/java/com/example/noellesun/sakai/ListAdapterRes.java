@@ -22,8 +22,8 @@ public class ListAdapterRes extends BaseAdapter {
     private int indentionBase;
 
     public ListAdapterRes(ArrayList<ListCellRes> elements, ArrayList<ListCellRes> elementsData, LayoutInflater inflater) {
-        this.ResCellsData = elements;
-        this.ResCells = elementsData;
+        this.ResCellsData = elementsData;
+        this.ResCells = elements;
         this.inflater = inflater;
         indentionBase = 50;
 
