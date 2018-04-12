@@ -205,6 +205,8 @@ public class Resources extends AppBaseActivity {
                     R.layout.resource_listitem, new String[]{"itemName", "size",
                     "createdBy"}, new int[]{R.id.itemName, R.id.size, R.id.createdBy});
             lv.setAdapter(adapter);
+
+
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 public void onItemClick(AdapterView<?> parent, View view, int position,

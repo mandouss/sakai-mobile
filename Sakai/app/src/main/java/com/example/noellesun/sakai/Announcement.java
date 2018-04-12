@@ -127,6 +127,12 @@ public class Announcement extends AppBaseActivity {
                         eachAnnounce.put("resource_url", resource_url);
                         annoList.add(eachAnnounce);
                         Log.i("ANNOLIST",annoList.toString());
+                        Log.i("In each Announce", itemName);
+                        Log.i("In each Announce", modifiedTimeString);
+                        Log.i("In each Announce", millisecTimeString);
+                        Log.i("In each Announce", createdBy);
+                        Log.i("In each Announce", instructions);
+                        Log.i("In each Announce", resource_url);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -166,6 +172,8 @@ public class Announcement extends AppBaseActivity {
                     R.layout.announce_listitem, new String[]{"itemName","modifiedTimeString",
                     "createdBy"},new int[]{R.id.itemName, R.id.modifiedTime, R.id.createdBy});
             lv.setAdapter(adapter);
+
+            // store info: including activityLabels / -> eachAnnounce
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -173,6 +181,9 @@ public class Announcement extends AppBaseActivity {
                     Intent intent = new Intent(Announcement.this, eachAnnounce.class);
                     //send the announcement info to each Announ view
                     intent.putExtra("Announce info",annoList.get(position));
+                    intent.putExtra("activityLabelclick", activityLabelclick);
+                    // intent.putExtra("itemName", );
+
                     startActivity(intent);
                 }
             });

@@ -25,9 +25,10 @@ public class eachAnnounce extends AppCompatActivity {
         setTitle(activityLabel);
 
         //Get selected Announcement's info from Announcement view
-        HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
+        HashMap<String, String> info = (HashMap<String, String>)getIntent().getSerializableExtra("Announce info");
 
         if (info != null) {
+            Log.i("non-empty info", "info display");
             itemName = info.get("itemName").toString();
             String modifiedTimeString = info.get("modifiedTimeString");
             String millisecTimeString = info.get("millisecTimeString");
@@ -48,10 +49,10 @@ public class eachAnnounce extends AppCompatActivity {
             loadText();
             // setTitle(activityLabel);
         }
-        //else {
+        else {
             // test whether its null
-          //  Log.i("Info list is empty", itemName);
-        //}
+            Log.i("Info list is empty", "fail to pass into info");
+        }
     }
 
     @SuppressWarnings("deprecation")

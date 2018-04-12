@@ -28,6 +28,9 @@ public class eachAssign extends AppCompatActivity {
         instructions = Html.fromHtml(info.get("instructions")).toString();
         String status = info.get("status");
         String title = info.get("title"); //site_title/Assignment
+
+        Log.i("In each Assign", itemName);
+        Log.i("In each Assign", startTime);
         setTitle(title);
         loadText();
     }
