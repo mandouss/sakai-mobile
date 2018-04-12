@@ -25,7 +25,7 @@ public class eachAnnounce extends AppCompatActivity {
         setTitle(activityLabel);
 
         //Get selected Announcement's info from Announcement view
-        HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
+        HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("Announce info");
 
         if (info != null) {
             itemName = info.get("itemName").toString();
@@ -44,7 +44,7 @@ public class eachAnnounce extends AppCompatActivity {
             Log.i("In each Announce", instructions);
             Log.i("In each Announce", resource_url);
 
-            setTitle(itemName);
+            // setTitle(itemName);
             loadText();
             // setTitle(activityLabel);
         }
@@ -69,12 +69,13 @@ public class eachAnnounce extends AppCompatActivity {
 
         TextView titleName = (TextView) findViewById(R.id.anno_title);
         String new_title = getResources().getString(R.string.anno_fir_line);
-        new_title += itemName;
+        new_title = itemName;
         titleName.setText(new_title);
         Log.e("new itemName", itemName);
 
         TextView instruct = (TextView) findViewById(R.id.instruction);
         String new_instruct = getResources().getString(R.string.anno_sec_line);
+        new_instruct += '\n';
         new_instruct += instructions;
         Log.e("new instructions", instructions);
         instruct.setText(new_instruct);
