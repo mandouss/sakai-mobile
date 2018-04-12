@@ -130,7 +130,7 @@ public class Resources extends AppBaseActivity {
 
 
         /********/
-        establish_nav(siteid, activityLabelclick);
+        establish_nav(siteid,userid, activityLabelclick);
         setTitle(activityLabel);
 
     }
