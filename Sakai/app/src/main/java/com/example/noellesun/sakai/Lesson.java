@@ -1,24 +1,18 @@
 package com.example.noellesun.sakai;
-
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Lesson extends AppBaseActivity {
     private ProgressDialog pDialog;
@@ -48,13 +42,11 @@ public class Lesson extends AppBaseActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            //receive userId and siteIs from Login view
             Bundle b = getIntent().getExtras();
             siteId = b.getString("siteId");
             userid = b.getString("USERID");
             HttpHandler sh = new HttpHandler();
             String siteurl = "https://sakai.duke.edu/direct/site/" + siteId + ".json";
-            // Making a request to url and getting response
             final CookieManager cookieManager = CookieManager.getInstance();
             String cookiestr = cookieManager.getCookie("https://sakai.duke.edu/direct/site/");
             String jsonStr = sh.makeServiceCall(siteurl, cookiestr);
@@ -114,10 +106,8 @@ public class Lesson extends AppBaseActivity {
                     super.onPageStarted(view, url, favicon);
                     Log.i("MyApp", view.getUrl());
                 }
-
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     // do your handling codes here, which url is the requested url
-
                     return false; // then it is not handled by default action
                 }
             });
