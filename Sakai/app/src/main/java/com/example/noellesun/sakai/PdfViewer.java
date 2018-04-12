@@ -20,7 +20,6 @@ public class PdfViewer extends AppCompatActivity {
 //        webView.getSettings().setJavaScriptEnabled(true);
 //        String googleDocs = "https://docs.google.com/viewer?url=";
 //        webView.loadUrl(googleDocs + "https://people.duke.edu/~bmr23/ece650/homework/hw1.pdf");
-
         setContentView(R.layout.web_layout);
         DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         //String url = "https://sakai.duke.edu/access/content/group/40068560-0072-4822-b62f-89f3f3d3e900/ECE%20651%20Software%20Engineering.pdf";
@@ -35,5 +34,6 @@ public class PdfViewer extends AppCompatActivity {
         Intent i = new Intent();
         i.setAction(DownloadManager.ACTION_VIEW_DOWNLOADS);
         startActivity(i);
+        finish();
     }
 }
