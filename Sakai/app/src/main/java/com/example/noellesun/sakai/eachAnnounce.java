@@ -25,7 +25,7 @@ public class eachAnnounce extends AppCompatActivity {
         setTitle(activityLabel);
 
         //Get selected Announcement's info from Announcement view
-        HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("announce info");
+        HashMap<String, String> info = (HashMap<String, String>) getIntent().getSerializableExtra("Announce info");
 
         if (info != null) {
             itemName = info.get("itemName").toString();
