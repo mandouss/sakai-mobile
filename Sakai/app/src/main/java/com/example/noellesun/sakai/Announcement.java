@@ -40,6 +40,7 @@ public class Announcement extends AppBaseActivity {
     String fixurl = "https://sakai.duke.edu/direct/announcement/site/";
     String cookiestr;
     String siteid;
+    String userid;
     static String activityLabel = "Announcements";
     static String activityLabelclick ;
     @Override
@@ -48,10 +49,11 @@ public class Announcement extends AppBaseActivity {
         setContentView(R.layout.activity_announcement);
         lv = (ListView) findViewById(R.id.announcelist);
         siteid = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
         activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
         activityLabel = activityLabelclick + "/" + "Announcements";
-        establish_nav(siteid, activityLabelclick);
-        Log.i("ASSIGNiteid:",siteid);
+        establish_nav(siteid, userid, activityLabelclick);
+        Log.i("ANNOUNCEiteid:",siteid);
         //set cookies in order to maintain the same session
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");

@@ -4,4 +4,7 @@
     <string name="close">Close</string>
     <string name="res_fir_line">Resource link: </string>
     <string name="res_sec_line">Resource size: </string>
+    <string name="anno_fir_line">Announcement Title: </string>
+    <string name="anno_sec_line">Instructions: </string>
+    <string name="res_name">Resource name: </string>
 </resources>

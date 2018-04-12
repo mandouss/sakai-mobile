@@ -15,11 +15,11 @@
     tools:context="com.example.noellesun.sakai.eachAnnounce">
 
     <TextView
-        android:id="@+id/announcetitle"
+        android:id="@+id/anno_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
-        android:text="Instructions"
+        android:text="@string/anno_fir_line"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="36dp"
@@ -36,7 +36,7 @@
         android:layout_height="400dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/announcetitle"
+        android:layout_below="@+id/anno_title"
         android:layout_marginTop="36dp"
         android:layout_x="0px"
         android:layout_y="25px"
@@ -48,11 +48,11 @@
             android:paddingRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_alignLeft="@+id/announcetitle"
-            android:layout_alignStart="@+id/announcetitle"
-            android:layout_below="@+id/announcetitle"
+            android:layout_alignLeft="@+id/anno_title"
+            android:layout_alignStart="@+id/anno_title"
+            android:layout_below="@+id/anno_title"
             android:layout_marginTop="32dp"
-            android:text="TextView" />
+            android:text="@string/anno_sec_line" />
     </ScrollView>
 
 </RelativeLayout>
