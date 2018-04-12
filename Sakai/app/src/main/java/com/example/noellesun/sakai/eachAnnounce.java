@@ -69,12 +69,13 @@ public class eachAnnounce extends AppCompatActivity {
 
         TextView titleName = (TextView) findViewById(R.id.anno_title);
         String new_title = getResources().getString(R.string.anno_fir_line);
-        new_title += itemName;
+        new_title = itemName;
         titleName.setText(new_title);
         Log.e("new itemName", itemName);
 
         TextView instruct = (TextView) findViewById(R.id.instruction);
         String new_instruct = getResources().getString(R.string.anno_sec_line);
+        new_instruct += '\n';
         new_instruct += instructions;
         Log.e("new instructions", instructions);
         instruct.setText(new_instruct);
