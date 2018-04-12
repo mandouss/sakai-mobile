@@ -342,9 +342,12 @@ public class Resources extends AppBaseActivity {
                     ListCellRes element = (ListCellRes) adapter.getItem(position);
                     //树中的元素
                     ArrayList<ListCellRes> elements = adapter.getResCells();
+                    Log.i("size " , Integer.toString(elements.size()));
+                    ArrayList<ListCellRes> all_elements = elements;
                     //元素的数据源
+                    //Log.i("elements " , elements.toString());
                     ArrayList<ListCellRes> elementsData = adapter.getResCellsData();
-
+                    //Log.i("elementsData " , elementsData.toString());
                     //点击没有子项的item直接返回
                     if (!element.isHasChildren()) {
 
@@ -363,6 +366,7 @@ public class Resources extends AppBaseActivity {
 
                     if (element.isExpanded()) {
                         element.setExpanded(false);
+                        Log.i("fold " , Integer.toString(element.getResId()));
                         //删除节点内部对应子节点数据，包括子节点的子节点...
                         ArrayList<ListCellRes> elementsToDel = new ArrayList<ListCellRes>();
                         for (int i = position + 1; i < elements.size(); i++) {
@@ -374,15 +378,34 @@ public class Resources extends AppBaseActivity {
                         adapter.notifyDataSetChanged();
                     } else {
                         element.setExpanded(true);
+                        Log.i("Expand " , Integer.toString(element.getResId()));
                         //从数据源中提取子节点数据添加进树，注意这里只是添加了下一级子节点，为了简化逻辑
                         int i = 1;//注意这里的计数器放在for外面才能保证计数有效
-                        for (ListCellRes e : elementsData) {
+                        for (ListCellRes e : all_elements) {
+                            Log.i("Find id " , Integer.toString(e.getResId()));
+                            Log.i("Find pid " , Integer.toString(e.getPid()));
                             if (e.getPid() == element.getResId()) {
                                 e.setExpanded(false);
-                                elements.add(position + i, e);
+                                Log.i("Add " , e.toString());
+                                //elements.add(position + i, e);
+                                elements.add(e);
+                                //Log.i("Add " , Integer.toString(element.getResId()));
                                 i ++;
                             }
                         }
+                        //Log.i("size " , Integer.toString(elements.size()));
+//                        for(; i < all_elements.size(); i++){
+//                            ListCellRes e = adapter.getResCellsData().get(i);
+//                            Log.i("Find id " , Integer.toString(e.getResId()));
+//                            Log.i("Find pid " , Integer.toString(e.getPid()));
+//                            if (e.getPid() == element.getResId()) {
+//                                e.setExpanded(false);
+//                                Log.i("Add " , e.toString());
+//                                elements.add(position + i, e);
+//                                //Log.i("Add " , Integer.toString(element.getResId()));
+//                                //i ++;
+//                            }
+//                        }
                         adapter.notifyDataSetChanged();
                     }
                 }
