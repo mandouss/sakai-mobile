@@ -167,6 +167,8 @@ public class Resources extends AppBaseActivity {
             Log.i("resource_url", url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             Log.e(TAG, "RESOURCEJSON: " + jsonStr);
+            ResCellsData.clear();
+            ResCells.clear();
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -275,6 +277,7 @@ public class Resources extends AppBaseActivity {
                 ResCellsData.get(cur).setHasChildren(true);
             }
             while(c != 0){
+                if(next >= ResCellsData.size()) break;
                 ResCellsData.get(next).setpid(cur);
                 ResCellsData.get(next).setlevel(ResCellsData.get(cur).getLevel()+1);
                 next = traverse(ResCellsData, next);
