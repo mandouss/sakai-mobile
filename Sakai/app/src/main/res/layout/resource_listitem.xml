@@ -20,7 +20,7 @@
         android:layout_weight="0.25"
         android:paddingBottom="2dip"
         android:paddingTop="6dip"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#283593"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_toRightOf="@id/disclosureImg"/>
@@ -32,7 +32,8 @@
         android:layout_weight="0.30"
         android:paddingBottom="2dip"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#7986CB"
+        android:textStyle="normal"
         android:layout_toRightOf="@id/itemName"/>
 
     <TextView
