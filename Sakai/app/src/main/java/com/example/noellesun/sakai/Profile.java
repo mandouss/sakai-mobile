@@ -75,11 +75,11 @@ public class Profile extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Showing progress dialog
-//            pDialog = new ProgressDialog(Profile.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
+            //Showing progress dialog
+            pDialog = new ProgressDialog(Profile.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
         }
 
         @Override
@@ -100,20 +100,7 @@ public class Profile extends AppCompatActivity {
                     jsonemail = jsonObj.getString("email");
                     jsonnickname = jsonObj.getString("nickname");
                     jsondegree = jsonObj.getString("course");
-                    name = (TextView) findViewById(R.id.nameview);
-                    email = (TextView) findViewById(R.id.emailview);
-                    nickname = (TextView) findViewById(R.id.nicknameview);
-                    degree = (TextView) findViewById(R.id.degreeview);
-                    name.setText("!!!!!!!!!!!!");
-                    email.setText("!!!!!!!!!!!!");
-                    nickname.setText("!!!!!!!!!!!!");
-                    degree.setText("!!!!!!!!!!!!");
-//                    name.setText(jsonname);
-//                    email.setText(jsonemail);
-//                    nickname.setText(jsonnickname);
-//                    degree.setText(jsondegree);
 
-//                    loadText();
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
@@ -159,11 +146,20 @@ public class Profile extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+            name = (TextView) findViewById(R.id.nameview);
+            email = (TextView) findViewById(R.id.emailview);
+            nickname = (TextView) findViewById(R.id.nicknameview);
+            degree = (TextView) findViewById(R.id.degreeview);
+
+            name.setText(jsonname);
+            email.setText(jsonemail);
+            nickname.setText(jsonnickname);
+            degree.setText(jsondegree);
             Log.e("postexe", "prepare to list");//not execute this!!???
             super.onPostExecute(result);
-            // Dismiss the progress dialog
-//            if (pDialog.isShowing())
-//                pDialog.dismiss();
+             //Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
         }
 
 
