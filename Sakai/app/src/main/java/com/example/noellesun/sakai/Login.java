@@ -178,7 +178,7 @@ public class Login extends AppCompatActivity {
             startIntent.putExtras(c);
             Log.d("Login", "startservice");
             startService(startIntent);
-
+            finish();
 
             return null;
         }

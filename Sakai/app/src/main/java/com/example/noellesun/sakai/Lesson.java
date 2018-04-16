@@ -49,7 +49,10 @@ public class Lesson extends AppBaseActivity {
             String siteurl = "https://sakai.duke.edu/direct/site/" + siteId + ".json";
             final CookieManager cookieManager = CookieManager.getInstance();
             String cookiestr = cookieManager.getCookie("https://sakai.duke.edu/direct/site/");
+
             String jsonStr = sh.makeServiceCall(siteurl, cookiestr);
+
+
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -61,7 +64,25 @@ public class Lesson extends AppBaseActivity {
                             return null;
                         }
                     }
-                    Log.e("url", lessonURL);
+
+                    if(lessonURL == null){
+                        if (pDialog.isShowing()) {
+                            pDialog.dismiss();
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),
+                                        "This site doesn't have lesson",
+                                        Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                        });
+                        finish();
+                    }
+                    else {
+                        Log.e("url", lessonURL);
+                    }
                 } catch (final JSONException e) {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -99,6 +120,8 @@ public class Lesson extends AppBaseActivity {
             webView.getSettings().setPluginState(WebSettings.PluginState.ON);
             webView.getSettings().setJavaScriptEnabled(true);
             webView.loadUrl(lessonURL);
+            Log.i("debug", "here!!");
+
             establish_nav(siteId, userid, "");
 
             webView.setWebViewClient(new WebViewClient() {

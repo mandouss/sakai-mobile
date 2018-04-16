@@ -33,50 +33,49 @@ public class Profile extends AppCompatActivity {
     String jsonemail;
     String jsonnickname;
     String jsondegree;
+    TextView name,email, nickname,degree;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         final CookieManager cookieManager = CookieManager.getInstance();
         cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        Log.e(TAG,cookiestr);
+        Log.e("PROFILE",cookiestr);
         Bundle b = getIntent().getExtras();
+        findViewById(R.id.lo).setOnClickListener(logout);
+
         userid = b.getString("USERID");
-        Log.e("PROFILE", userid);
+        Log.e("PROFILE!!!!", userid);
         new GetProfile().execute();
 
         //findViewById(R.id.sitesbtn).setOnClickListener(sitesclick);
 
     }
 
-//    final View.OnClickListener sitesclick = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Intent toSites = new Intent(Profile.this, sites.class);
-//            toSites.putExtra("ID","eachSite");
-//            startActivity(toSites);
-//        }
-//    };
-    //parse data into corresponding field
-    void loadText(){
-        TextView name = (TextView) findViewById(R.id.nameview);
-        name.setText(jsonname);
-        Log.i("Name",name.getText().toString());
-        TextView email = (TextView) findViewById(R.id.emailview);
-        email.setText(jsonemail);
-        Log.i("Email",email.getText().toString());
-        TextView nickname = (TextView) findViewById(R.id.nicknameview);
-        nickname.setText(jsonnickname);
-        Log.i("Nickname",nickname.getText().toString());
-        TextView degree = (TextView) findViewById(R.id.degreeview);
-        degree.setText(jsondegree);
-        Log.i("Degree",degree.getText().toString());
-    }
+
+    final View.OnClickListener logout = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.removeAllCookie();
+            cookieManager.removeSessionCookie();//close all activities
+            finishAffinity();
+            System.exit(0);
+
+        }
+    };
+
+//    void loadText(){
+//        Log.i("name!!!!!!!!",jsonname);
+//        Log.i("name!!!!!!!!",jsonemail);
+//        Log.i("name!!!!!!!!",jsonnickname);
+//        Log.i("name!!!!!!!!",jsondegree);
+//    }
     private class GetProfile extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Showing progress dialog
+            //Showing progress dialog
             pDialog = new ProgressDialog(Profile.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
@@ -85,13 +84,15 @@ public class Profile extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
+//            if (pDialog.isShowing())
+//                pDialog.dismiss();
             HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
             String url = fixurl + userid.toString() + ".json";
             String imageurl = fixurl + userid.toString() + "/image";
             String jsonStr = sh.makeServiceCall(url, cookiestr);
-
+            //Log.i("jsonStr!!!!!!!!",jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -99,7 +100,7 @@ public class Profile extends AppCompatActivity {
                     jsonemail = jsonObj.getString("email");
                     jsonnickname = jsonObj.getString("nickname");
                     jsondegree = jsonObj.getString("course");
-                    loadText();
+
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
@@ -145,11 +146,22 @@ public class Profile extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+            name = (TextView) findViewById(R.id.nameview);
+            email = (TextView) findViewById(R.id.emailview);
+            nickname = (TextView) findViewById(R.id.nicknameview);
+            degree = (TextView) findViewById(R.id.degreeview);
+
+            name.setText(jsonname);
+            email.setText(jsonemail);
+            nickname.setText(jsonnickname);
+            degree.setText(jsondegree);
             Log.e("postexe", "prepare to list");//not execute this!!???
             super.onPostExecute(result);
-            // Dismiss the progress dialog
+             //Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
         }
+
+
     }
 }
