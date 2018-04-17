@@ -40,6 +40,7 @@ These are main activities to build the basic app structure:
         Assignment.java         //Assignment
         eachAssign.java         //Each Assignment
         Lesson.java             //Lesson in webview
+        Box.jaca                //Box section
         Notification.java       //Notifications
 
 These are helper and tool activities:
@@ -68,7 +69,7 @@ _**Finish Status in S3**_:
 * Yunzhen: Add hamburger button to the new annoucement sites /Change profile, place it to the top
 * Zifan: Redesign the UI of profile /Adjust some UI of the app/ Create the splash screen for sakai
 * Yichuan: Resource file downloading and view pdf/ Add lesson section
-* Zhengyi: Fix bugs of back button and bugs in annoucement/ Fix bugs of profile crashing, lessons crashing, logout crashing
+* Zhengyi: Fix bugs of back button and bugs in annoucement/ Fix bugs of profile crashing, lessons crashing, logout crashing/ Add box section
 
 _**To do list**_:
 * Chenfan: Change cardview in each site to adapt different sites
@@ -76,7 +77,7 @@ _**To do list**_:
 * Naiyu: Resource UI/ Each assign UI
 * Yunzhen: Add Feedback function/ Add help button
 * Zifan: Resource UI/ Each assign UI
-* Zhengyi: Add box section
+* Zhengyi: Fix box crashing problem
 
 
 ### Sprint 2
