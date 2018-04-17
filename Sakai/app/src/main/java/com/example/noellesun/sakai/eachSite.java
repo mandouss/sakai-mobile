@@ -107,7 +107,12 @@ public class eachSite extends AppCompatActivity {
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            finish();
+            Intent toBox = new Intent(eachSite.this, Box.class);
+            Bundle b = new Bundle();
+            b.putString("siteId", siteid);
+            toBox.putExtras(b);
+            Log.i(TAG, "BoxClick");
+            startActivityForResult(toBox,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
     //redirect to gradebook view, send the selected siteid
