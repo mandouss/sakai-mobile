@@ -48,10 +48,10 @@ public class eachAnnounce extends AppCompatActivity {
             loadText();
             // setTitle(activityLabel);
         }
-        //else {
+        // else {
             // test whether its null
-          //  Log.i("Info list is empty", itemName);
-        //}
+           // Log.i("Info list is empty", itemName);
+        // }
     }
 
     @SuppressWarnings("deprecation")

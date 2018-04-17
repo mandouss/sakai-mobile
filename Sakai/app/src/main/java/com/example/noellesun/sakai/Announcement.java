@@ -102,8 +102,13 @@ public class Announcement extends AppBaseActivity {
                         //get variable needed from JSON object
                         String itemName = c.getString("title");
                         //String modifiedTime = //timestring not displayed, i.e 1521740259718 ->3/22/2018, 1:37:39 PM
-                        long timestamp = c.getInt("createdOn");
+                        String timestampString = c.getString("createdOn");
+                        //Log.i("TimeStamp In each Announce", timestamp);
+                        System.out.println("long timestamp = " + timestampString);
+                        Long timestamp = Long.parseLong(timestampString, 10);
                         Date modifiedTime = new Date(timestamp);
+                        //Log.i("modifiedTime In each Announce", modifiedTime);
+
                         SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy HH:mm aaa", Locale.US);
                         //Date today = Calendar.getInstance().getTime();
                         //String reportDate = df.format(today);
