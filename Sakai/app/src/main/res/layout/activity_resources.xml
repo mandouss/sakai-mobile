@@ -13,49 +13,49 @@
         android:layout_height="match_parent"
         tools:context="sites">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="15dp"
-            android:paddingTop="30dp"
-            android:paddingRight="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+        <!--<TableRow-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:paddingTop="30dp"-->
+            <!--android:paddingRight="30dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true">-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:padding="3dip"
-                android:text="Title"
-                android:gravity="left"
-                android:textAlignment="gravity"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:padding="3dip"
-                android:text="Created by"
-                android:gravity="right"
-                android:textAlignment="gravity"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-            //android:textAlignment="center"
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="3dip"-->
+                <!--android:text="Title"-->
+                <!--android:gravity="left"-->
+                <!--android:textAlignment="gravity"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textStyle="bold" />-->
 
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:padding="3dip"
-                android:text="size"
-                android:gravity="center"
-                android:textAlignment="gravity"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </TableRow>
+            <!--<TextView-->
+                <!--android:layout_width="220dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="3dip"-->
+                <!--android:text="Created by"-->
+                <!--android:gravity="right"-->
+                <!--android:textAlignment="gravity"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textStyle="bold" />-->
+            <!--//android:textAlignment="center"-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="3dip"-->
+                <!--android:text="size"-->
+                <!--android:gravity="center"-->
+                <!--android:textAlignment="gravity"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textStyle="bold" />-->
+        <!--</TableRow>-->
 
 
         <ListView
@@ -64,8 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="67dp" />
+            android:layout_alignParentStart="true"/>
+            <!--android:layout_marginTop="67dp"-->
     </RelativeLayout>
 
 
