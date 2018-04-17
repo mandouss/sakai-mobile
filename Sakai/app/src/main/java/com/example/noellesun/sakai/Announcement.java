@@ -93,50 +93,64 @@ public class Announcement extends AppBaseActivity {
             Log.i("announce_url",url);
             String jsonStr = sh.makeServiceCall(url, cookiestr);
             Log.e(TAG, "ANNOUNCEJSON: " + jsonStr);
+
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     JSONArray announcements = jsonObj.getJSONArray("announcement_collection");
-                    for (int i = 0; i < announcements.length(); i++) {
-                        JSONObject c = announcements.getJSONObject(i);
-                        //get variable needed from JSON object
-                        String itemName = c.getString("title");
-                        //String modifiedTime = //timestring not displayed, i.e 1521740259718 ->3/22/2018, 1:37:39 PM
-                        long timestamp = c.getInt("createdOn");
-                        Date modifiedTime = new Date(timestamp);
-                        SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy HH:mm aaa", Locale.US);
-                        //Date today = Calendar.getInstance().getTime();
-                        //String reportDate = df.format(today);
-                        // format: "display": "Jan 12, 2018 7:00 pm",
-                        // current: 01/21/1970 00:54:21
-                        String modifiedTimeString = df.format(modifiedTime);
-                        String millisecTimeString = new Long(timestamp).toString();
-
-                        String createdBy = c.getString("createdByDisplayName");
-                        String instructions = c.getString("body");
-                        String resource_url = c.getString("entityURL");
-                        Log.e("ANNONITEMNAME", itemName);
-
-                        //store the variable needed in a hashmap
+                    if (announcements.length() == 0){
                         HashMap<String, String> eachAnnounce = new HashMap<>();
-                        eachAnnounce.put("itemName", itemName);
-                        eachAnnounce.put("createdBy", createdBy);
+                        eachAnnounce.put("itemName", "Announcement is empty, please check other module.");
+                        eachAnnounce.put("createdBy","");
                         //eachAnnounce.put("modifiedTimeString", reportDate);   // modifiedTimeString=04/02/2018 17:10:33
-                        eachAnnounce.put("modifiedTimeString", modifiedTimeString);
-                        eachAnnounce.put("millisecTimeString", millisecTimeString);
-                        eachAnnounce.put("instructions", instructions);
+                        eachAnnounce.put("modifiedTimeString", "");
+                        eachAnnounce.put("millisecTimeString", "");
+                        eachAnnounce.put("instructions", "");
                         eachAnnounce.put("title", activityLabel);
-                        eachAnnounce.put("resource_url", resource_url);
+                        eachAnnounce.put("resource_url", "");
                         annoList.add(eachAnnounce);
-                        Log.i("ANNOLIST",annoList.toString());
+                    }else {
+                        for (int i = 0; i < announcements.length(); i++) {
+                            JSONObject c = announcements.getJSONObject(i);
+                            //get variable needed from JSON object
+                            String itemName = c.getString("title");
+                            //String modifiedTime = //timestring not displayed, i.e 1521740259718 ->3/22/2018, 1:37:39 PM
+                            long timestamp = c.getInt("createdOn");
+                            Date modifiedTime = new Date(timestamp);
+                            SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy HH:mm aaa", Locale.US);
+                            //Date today = Calendar.getInstance().getTime();
+                            //String reportDate = df.format(today);
+                            // format: "display": "Jan 12, 2018 7:00 pm",
+                            // current: 01/21/1970 00:54:21
+                            String modifiedTimeString = df.format(modifiedTime);
+                            String millisecTimeString = new Long(timestamp).toString();
 
-                        Log.i("In each Announce", itemName);
-                        Log.i("In each Announce", modifiedTimeString);
-                        Log.i("In each Announce", millisecTimeString);
-                        Log.i("In each Announce", createdBy);
-                        Log.i("In each Announce", instructions);
-                        Log.i("In each Announce", resource_url);
+                            String createdBy = c.getString("createdByDisplayName");
+                            String instructions = c.getString("body");
+                            String resource_url = c.getString("entityURL");
+                            Log.e("ANNONITEMNAME", itemName);
 
+                            //store the variable needed in a hashmap
+                            HashMap<String, String> eachAnnounce = new HashMap<>();
+                            eachAnnounce.put("itemName", itemName);
+                            eachAnnounce.put("createdBy", createdBy);
+                            //eachAnnounce.put("modifiedTimeString", reportDate);   // modifiedTimeString=04/02/2018 17:10:33
+                            eachAnnounce.put("modifiedTimeString", modifiedTimeString);
+                            eachAnnounce.put("millisecTimeString", millisecTimeString);
+                            eachAnnounce.put("instructions", instructions);
+                            eachAnnounce.put("title", activityLabel);
+                            eachAnnounce.put("resource_url", resource_url);
+                            annoList.add(eachAnnounce);
+                            Log.i("ANNOLIST", annoList.toString());
+
+                            Log.i("In each Announce", itemName);
+                            Log.i("In each Announce", modifiedTimeString);
+                            Log.i("In each Announce", millisecTimeString);
+                            Log.i("In each Announce", createdBy);
+                            Log.i("In each Announce", instructions);
+                            Log.i("In each Announce", resource_url);
+
+                        }
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -151,16 +165,26 @@ public class Announcement extends AppBaseActivity {
                     });
                 }
             } else {
+                    HashMap<String, String> eachAnnounce = new HashMap<>();
+                    eachAnnounce.put("itemName", "Announcement is empty, please check other module.");
+                    eachAnnounce.put("createdBy","");
+                    //eachAnnounce.put("modifiedTimeString", reportDate);   // modifiedTimeString=04/02/2018 17:10:33
+                    eachAnnounce.put("modifiedTimeString", "");
+                    eachAnnounce.put("millisecTimeString", "");
+                    eachAnnounce.put("instructions", "");
+                    eachAnnounce.put("title", activityLabel);
+                    eachAnnounce.put("resource_url", "");
+                    annoList.add(eachAnnounce);
                 Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(),
+//                                "Couldn't get json from server. Check LogCat for possible errors!",
+//                                Toast.LENGTH_LONG)
+//                                .show();
+//                    }
+//                });
             }
             Log.e("background","done!");
             return null;
