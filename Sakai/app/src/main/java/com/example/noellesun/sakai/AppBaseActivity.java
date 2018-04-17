@@ -88,6 +88,12 @@ public class AppBaseActivity extends AppCompatActivity{
                             b.putString("siteId", siteid);
                             intent.putExtras(b);
                             startActivity(intent);
+                        }else if(item.getTitle().equals("Box")){
+                            Intent intent = new Intent(getBaseContext(), Box.class);
+                            Bundle b = new Bundle();
+                            b.putString("siteId", siteid);
+                            intent.putExtras(b);
+                            startActivity(intent);
                         }
                         finish();
                         return true;

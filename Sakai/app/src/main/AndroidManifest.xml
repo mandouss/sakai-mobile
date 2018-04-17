@@ -55,6 +55,7 @@
             android:exported="true" />
 
         <activity android:name=".Lesson"></activity>
+        <activity android:name=".Box"></activity>
     </application>
 
 </manifest>
