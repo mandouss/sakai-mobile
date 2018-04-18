@@ -17,12 +17,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Box extends AppBaseActivity {
-    private ProgressDialog pDialog;
-    private ListView lv;
-    private String siteId;
     private String cookiestr;
     private String lessonURL;
-    private String userid;
+    String siteId;
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +29,10 @@ public class Box extends AppBaseActivity {
         WebView webView = (WebView) findViewById(R.id.lesson_WebView);
         webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         webView.getSettings().setJavaScriptEnabled(true);
+        siteId = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
         webView.loadUrl("https://duke.app.box.com/embed_widget/files/0/f/0");
         Log.i("debug", "here!!");
-
         establish_nav(siteId, userid, "");
 
         webView.setWebViewClient(new WebViewClient() {
@@ -49,29 +48,5 @@ public class Box extends AppBaseActivity {
         });
     }
 }
-
-//    private class GetSites extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            // Showing progress dialog
-//            pDialog = new ProgressDialog(Box.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
-//            Log.i("show", "message");
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            super.onPostExecute(result);
-//            // Dismiss the progress dialog
-//            if (pDialog.isShowing()) {
-//                pDialog.dismiss();
-//            }
-//
-//        }
-//    }
-//}
 
 

@@ -84,6 +84,7 @@ public class AppBaseActivity extends AppCompatActivity{
                             startActivity(intent);
                         }else if(item.getTitle().equals("Lesson")){
                             Intent intent = new Intent(getBaseContext(), Lesson.class);
+                            intent.putExtra("activityLabelclick", activityLabelclick);
                             Bundle b = new Bundle();
                             b.putString("siteId", siteid);
                             intent.putExtras(b);
@@ -92,6 +93,8 @@ public class AppBaseActivity extends AppCompatActivity{
                             Intent intent = new Intent(getBaseContext(), Box.class);
                             Bundle b = new Bundle();
                             b.putString("siteId", siteid);
+
+                            intent.putExtra("activityLabelclick", activityLabelclick);
                             intent.putExtras(b);
                             startActivity(intent);
                         }

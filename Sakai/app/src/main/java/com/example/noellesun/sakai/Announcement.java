@@ -61,21 +61,7 @@ public class Announcement extends AppBaseActivity {
         setTitle(activityLabel);
     }
 
-//    final OnClickListener siteClickEvent = new OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Toast.makeText(getApplicationContext(),"sites clicked",Toast.LENGTH_SHORT).show();
-//        }
-//    };
-//    //redirect to sites
-//    final OnClickListener sitesclick = new OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Intent toSites = new Intent(Announcement.this, sites.class);
-//            startActivity(toSites);
-//        }
-//    };
-    // AsuncTask that is used to get json from url
+
     private class GetAnnounce extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -161,9 +147,12 @@ public class Announcement extends AppBaseActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                "This course don't have annoucement",
                                 Toast.LENGTH_LONG)
                                 .show();
+                        if (pDialog.isShowing())
+                            pDialog.dismiss();
+                        finish();
                     }
                 });
             }

@@ -24,6 +24,8 @@ public class Lesson extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        siteId = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
         super.onCreate(savedInstanceState);
         new Lesson.GetSites().execute();
     }
