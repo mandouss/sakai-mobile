@@ -25,7 +25,7 @@ public class ListAdapterRes extends BaseAdapter {
         this.ResCellsData = elementsData;
         this.ResCells = elements;
         this.inflater = inflater;
-        indentionBase = 50;
+        indentionBase = 20;
 
     }
 
@@ -77,14 +77,14 @@ public class ListAdapterRes extends BaseAdapter {
         holder.createdBy.setText(element.getRescreatedBy());
         holder.size.setText(element.getRessize());
         if (element.isHasChildren() && !element.isExpanded()) {
-            //holder.disclosureImg.setImageResource(R.drawable.close);
+            holder.disclosureImg.setImageResource(R.mipmap.ic_res);
             //这里要主动设置一下icon可见，因为convertView有可能是重用了"设置了不可见"的view，下同。
             holder.disclosureImg.setVisibility(View.VISIBLE);
         } else if (element.isHasChildren() && element.isExpanded()) {
-            //holder.disclosureImg.setImageResource(R.drawable.open);
+            holder.disclosureImg.setImageResource(R.mipmap.ic_res);
             holder.disclosureImg.setVisibility(View.VISIBLE);
         } else if (!element.isHasChildren()) {
-            //holder.disclosureImg.setImageResource(R.drawable.close);
+            holder.disclosureImg.setImageResource(R.mipmap.ic_res);
             holder.disclosureImg.setVisibility(View.INVISIBLE);
         }
         return convertView;
