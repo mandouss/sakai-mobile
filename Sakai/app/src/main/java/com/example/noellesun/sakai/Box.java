@@ -23,6 +23,8 @@ public class Box extends AppBaseActivity {
     private String cookiestr;
     private String lessonURL;
     private String userid;
+    static String activityLabel = "Box";
+    static String activityLabelclick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,12 @@ public class Box extends AppBaseActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://sakaiboxintegrator.tk");
         Log.i("debug", "here!!");
-        Bundle b = getIntent().getExtras();
-        siteId = b.getString("siteId");
-        userid = b.getString("USERID");
-        establish_nav(siteId, userid, "");
+        siteId = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/"+ "Box";
+        establish_nav(siteId, userid, activityLabelclick);
+        setTitle(activityLabel);
 
         webView.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -57,29 +61,5 @@ public class Box extends AppBaseActivity {
         });
     }
 }
-
-//    private class GetSites extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            // Showing progress dialog
-//            pDialog = new ProgressDialog(Box.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
-//            Log.i("show", "message");
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            super.onPostExecute(result);
-//            // Dismiss the progress dialog
-//            if (pDialog.isShowing()) {
-//                pDialog.dismiss();
-//            }
-//
-//        }
-//    }
-//}
 
 
