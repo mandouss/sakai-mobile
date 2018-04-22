@@ -23,18 +23,30 @@ public class Box extends AppBaseActivity {
     private String cookiestr;
     private String lessonURL;
     private String userid;
+    static String activityLabel = "Box";
+    static String activityLabelclick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
+        final CookieManager cookieManager = CookieManager.getInstance();
+        String cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
+        HttpHandler sh = new HttpHandler();
+        String jsonStr = sh.makeServiceCall("https://sakai.duke.edu/direct/membership.json",cookiestr);
+        Log.e("userinfo", "Response from url: " + jsonStr);
+
         WebView webView = (WebView) findViewById(R.id.lesson_WebView);
         webView.getSettings().setPluginState(WebSettings.PluginState.ON);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("https://duke.app.box.com/embed_widget/files/0/f/0");
+        webView.loadUrl("https://sakaiboxintegrator.tk");
         Log.i("debug", "here!!");
-
-        establish_nav(siteId, userid, "");
+        siteId = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/"+ "Box";
+        establish_nav(siteId, userid, activityLabelclick);
+        setTitle(activityLabel);
 
         webView.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -49,29 +61,5 @@ public class Box extends AppBaseActivity {
         });
     }
 }
-
-//    private class GetSites extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            // Showing progress dialog
-//            pDialog = new ProgressDialog(Box.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
-//            Log.i("show", "message");
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            super.onPostExecute(result);
-//            // Dismiss the progress dialog
-//            if (pDialog.isShowing()) {
-//                pDialog.dismiss();
-//            }
-//
-//        }
-//    }
-//}
 
 

@@ -21,9 +21,15 @@ public class Lesson extends AppBaseActivity {
     private String cookiestr;
     private String lessonURL;
     private String userid;
+    static String activityLabel = "Lessons";
+    static String activityLabelclick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        siteId = getIntent().getExtras().getString("SiteID");
+        userid = getIntent().getExtras().getString("USERID");
+        activityLabelclick = (String)getIntent().getExtras().getString("activityLabelclick");
+        activityLabel = activityLabelclick + "/"+ "Lessons";
         super.onCreate(savedInstanceState);
         new Lesson.GetSites().execute();
     }
@@ -42,15 +48,13 @@ public class Lesson extends AppBaseActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            Bundle b = getIntent().getExtras();
-            siteId = b.getString("siteId");
-            userid = b.getString("USERID");
             HttpHandler sh = new HttpHandler();
             String siteurl = "https://sakai.duke.edu/direct/site/" + siteId + ".json";
             final CookieManager cookieManager = CookieManager.getInstance();
             String cookiestr = cookieManager.getCookie("https://sakai.duke.edu/direct/site/");
 
             String jsonStr = sh.makeServiceCall(siteurl, cookiestr);
+
 
 
             if (jsonStr != null) {
@@ -121,8 +125,8 @@ public class Lesson extends AppBaseActivity {
             webView.getSettings().setJavaScriptEnabled(true);
             webView.loadUrl(lessonURL);
             Log.i("debug", "here!!");
-
-            establish_nav(siteId, userid, "");
+            establish_nav(siteId, userid, activityLabelclick);
+            setTitle(activityLabel);
 
             webView.setWebViewClient(new WebViewClient() {
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
