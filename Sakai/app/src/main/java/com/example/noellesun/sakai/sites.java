@@ -80,20 +80,20 @@ public class sites extends AppCompatActivity {
         Log.i("siteList",Integer.toString(sitelist.size()));
 
         final CookieManager cookieManager = CookieManager.getInstance();
-        cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        Log.i(TAG,cookiestr);
-        // from login activity
-        if(getIntent().getExtras().getString("ID").equals("Login")){
-            Bundle b = getIntent().getExtras();
-            Log.i("Sites:", "got intent");
-            idarray = b.getStringArrayList("ID_ARRAY");
-            userid = idarray.get(0);
-            idarray.remove(0);
-            sitesids = idarray;
-            Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
-            Log.i("Here:", "I am here!");
-            new GetSites().execute();
-            //sort site by term;
+            cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
+            Log.i(TAG,cookiestr);
+            // from login activity
+            if(getIntent().getExtras().getString("ID").equals("Login")){
+                Bundle b = getIntent().getExtras();
+                Log.i("Sites:", "got intent");
+                idarray = b.getStringArrayList("ID_ARRAY");
+                userid = idarray.get(0);
+                idarray.remove(0);
+                sitesids = idarray;
+                Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
+                Log.i("Here:", "I am here!");
+                new GetSites().execute();
+                //sort site by term;
         }
         else{  // Ethan: do not need? If we need it we can write abstraction to reuse code
             Log.i("redirect","From other activities!");

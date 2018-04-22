@@ -92,7 +92,7 @@ public class Profile extends AppCompatActivity {
             String url = fixurl + userid.toString() + ".json";
             String imageurl = fixurl + userid.toString() + "/image";
             String jsonStr = sh.makeServiceCall(url, cookiestr);
-            //Log.i("jsonStr!!!!!!!!",jsonStr);
+            Log.i("jsonStr!!!!!!!!",jsonStr);
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);

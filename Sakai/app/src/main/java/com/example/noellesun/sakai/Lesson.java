@@ -55,6 +55,7 @@ public class Lesson extends AppBaseActivity {
             String jsonStr = sh.makeServiceCall(siteurl, cookiestr);
 
 
+
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
