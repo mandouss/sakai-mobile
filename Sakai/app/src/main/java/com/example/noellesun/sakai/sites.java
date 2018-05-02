@@ -79,22 +79,21 @@ public class sites extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.list);
         Log.i("siteList",Integer.toString(sitelist.size()));
 
-        findViewById(R.id.lo).setOnClickListener(logout);
         final CookieManager cookieManager = CookieManager.getInstance();
-        cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
-        Log.i(TAG,cookiestr);
-        // from login activity
-        if(getIntent().getExtras().getString("ID").equals("Login")){
-            Bundle b = getIntent().getExtras();
-            Log.i("Sites:", "got intent");
-            idarray = b.getStringArrayList("ID_ARRAY");
-            userid = idarray.get(0);
-            idarray.remove(0);
-            sitesids = idarray;
-            Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
-            Log.i("Here:", "I am here!");
-            new GetSites().execute();
-            //sort site by term;
+            cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
+            Log.i(TAG,cookiestr);
+            // from login activity
+            if(getIntent().getExtras().getString("ID").equals("Login")){
+                Bundle b = getIntent().getExtras();
+                Log.i("Sites:", "got intent");
+                idarray = b.getStringArrayList("ID_ARRAY");
+                userid = idarray.get(0);
+                idarray.remove(0);
+                sitesids = idarray;
+                Toast.makeText(getApplicationContext(), userid, Toast.LENGTH_LONG).show();
+                Log.i("Here:", "I am here!");
+                new GetSites().execute();
+                //sort site by term;
         }
         else{  // Ethan: do not need? If we need it we can write abstraction to reuse code
             Log.i("redirect","From other activities!");
@@ -134,18 +133,7 @@ public class sites extends AppCompatActivity {
     }
 
 
-    final OnClickListener logout = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            final CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.removeAllCookie();
-            cookieManager.removeSessionCookie();//close all activities
-            System.exit(0);
-//            Intent intent = new Intent(getBaseContext(), Login.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//close all activities
-//            startActivity(intent);
-        }
-    };
+
     private ArrayList sortAndAddSections(ArrayList<ListCell> itemList) {
         ArrayList tempList = new ArrayList();
         Collections.sort(itemList, Collections.reverseOrder());

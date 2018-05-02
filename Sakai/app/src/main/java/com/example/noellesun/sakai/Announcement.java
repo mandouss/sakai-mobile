@@ -61,21 +61,7 @@ public class Announcement extends AppBaseActivity {
         setTitle(activityLabel);
     }
 
-//    final OnClickListener siteClickEvent = new OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Toast.makeText(getApplicationContext(),"sites clicked",Toast.LENGTH_SHORT).show();
-//        }
-//    };
-//    //redirect to sites
-//    final OnClickListener sitesclick = new OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Intent toSites = new Intent(Announcement.this, sites.class);
-//            startActivity(toSites);
-//        }
-//    };
-    // AsuncTask that is used to get json from url
+
     private class GetAnnounce extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -102,8 +88,13 @@ public class Announcement extends AppBaseActivity {
                         //get variable needed from JSON object
                         String itemName = c.getString("title");
                         //String modifiedTime = //timestring not displayed, i.e 1521740259718 ->3/22/2018, 1:37:39 PM
-                        long timestamp = c.getInt("createdOn");
+                        String timestampString = c.getString("createdOn");
+                        //Log.i("TimeStamp In each Announce", timestamp);
+                        System.out.println("long timestamp = " + timestampString);
+                        Long timestamp = Long.parseLong(timestampString, 10);
                         Date modifiedTime = new Date(timestamp);
+                        //Log.i("modifiedTime In each Announce", modifiedTime);
+
                         SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy HH:mm aaa", Locale.US);
                         //Date today = Calendar.getInstance().getTime();
                         //String reportDate = df.format(today);
@@ -129,6 +120,14 @@ public class Announcement extends AppBaseActivity {
                         eachAnnounce.put("resource_url", resource_url);
                         annoList.add(eachAnnounce);
                         Log.i("ANNOLIST",annoList.toString());
+
+                        Log.i("In each Announce", itemName);
+                        Log.i("In each Announce", modifiedTimeString);
+                        Log.i("In each Announce", millisecTimeString);
+                        Log.i("In each Announce", createdBy);
+                        Log.i("In each Announce", instructions);
+                        Log.i("In each Announce", resource_url);
+
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -148,9 +147,12 @@ public class Announcement extends AppBaseActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                "This course don't have annoucement",
                                 Toast.LENGTH_LONG)
                                 .show();
+                        if (pDialog.isShowing())
+                            pDialog.dismiss();
+                        finish();
                     }
                 });
             }
@@ -175,6 +177,8 @@ public class Announcement extends AppBaseActivity {
                     Intent intent = new Intent(Announcement.this, eachAnnounce.class);
                     //send the announcement info to each Announ view
                     intent.putExtra("Announce info",annoList.get(position));
+                    intent.putExtra("activityLabelclick", activityLabelclick);
+
                     startActivity(intent);
                 }
             });

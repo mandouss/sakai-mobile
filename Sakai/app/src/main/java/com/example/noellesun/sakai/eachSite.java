@@ -60,9 +60,10 @@ public class eachSite extends AppCompatActivity {
         public void onClick(View v) {
             Intent toLesson = new Intent(eachSite.this, Lesson.class);
             Bundle b = new Bundle();
-            b.putString("siteId", siteid);
-            b.putString("USERID", userid);
-            toLesson.putExtras(b);
+
+            toLesson.putExtra("SiteID",siteid);
+            toLesson.putExtra("USERID",userid);
+            toLesson.putExtra("activityLabelclick", activityLabelclick);
             Log.i(TAG, "LessonClick");
             startActivityForResult(toLesson,ORDINARY_ACTIVITY_RESULT_CODE);
         }
@@ -108,7 +109,14 @@ public class eachSite extends AppCompatActivity {
     final OnClickListener sitesclick = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            finish();
+            Intent toBox = new Intent(eachSite.this, Box.class);
+            Bundle b = new Bundle();
+            b.putString("siteId", siteid);
+            toBox.putExtra("SiteID",siteid);
+            toBox.putExtra("USERID",userid);
+            toBox.putExtra("activityLabelclick", activityLabelclick);
+            Log.i(TAG, "BoxClick");
+            startActivityForResult(toBox,ORDINARY_ACTIVITY_RESULT_CODE);
         }
     };
     //redirect to gradebook view, send the selected siteid

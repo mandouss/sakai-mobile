@@ -1,6 +1,86 @@
 # Sakai android app
 
-## Sprint 2
+This is the android app for Duke Sakai website. User can use this app to view
+sites informations.
+
+## Basic Functions
+1. Allowed user use their Duke netID and passwd to login
+2. User can view their assignments
+3. User can view their lessons
+4. User can view the Reources and Download the file in reources in Android download 
+manager
+5. User can view their grades
+6. User can view the annoucement
+7. User can view Box content in the app
+8. User can view their profile
+
+## Development Setup
+1. Sownload Android Studio.
+2. Clone the project.
+3. Open "./Sakai" as project in Android Studio.
+4. Make sure connected to Internet and wait for gradle build finish.
+5. If you don't have a android device, select emulator to run it.
+6. Else use USB cable to connect your device and allow debug mode in your device 
+and select your device in Android Studio to run it.
+
+## Code structure
+
+These are main activities to build the basic app structure:
+        
+        AppBaseActivity.java    //base activity template
+        Login.java              //Login activity
+        Profile.java            //Profile activity
+        sites.java              //activity shows every sites
+        eachSite.java           //Activity shows content in each sites
+        Announcement.java       //Announcements
+        eachAnnounce.java       //Each Announcement
+        Gradebook.java          //Activity shows the gradebook
+        Resources.java          //Activity show resources
+        eachResource.java       //Activity show each resource
+        Assignment.java         //Assignment
+        eachAssign.java         //Each Assignment
+        Lesson.java             //Lesson in webview
+        Box.jaca                //Box section
+        Notification.java       //Notifications
+
+These are helper and tool activities:
+        
+        ListAdapterRes.java 
+        ListCellRes.java
+        PdfViewer.java        
+        ListAdapter.java
+        ListCell.java
+        HttpHandler.java
+        SplashActivity.java 
+        ListAdapterAssign.java 
+        ListCellAssign.java 
+        ResClickListener.java
+
+
+## Work status
+### Sprint 3
+_**Finish Status in S3**_:
+
+* Chenfan: Add notification
+* Lei: Add announcement and each announcement section
+* Naiyu: Upgrade the UI of gradebook/ The change to the UI of assignment/ design the UI for the announcement.
+* Sifan: Resource file downloading and view pdf/ Change resources to adapt folders
+* Siyue: reorder list/ new layout of assignment(open and close)/ Dynamic title(show each course's name)/ Change resources to adapt folders
+* Yunzhen: Add hamburger button to the new annoucement sites /Change profile, place it to the top
+* Zifan: Redesign the UI of profile /Adjust some UI of the app/ Create the splash screen for sakai
+* Yichuan: Resource file downloading and view pdf/ Add lesson section
+* Zhengyi: Fix bugs of back button and bugs in annoucement/ Fix bugs of profile crashing, lessons crashing, logout crashing/ Add box section
+
+_**To do list**_:
+* Chenfan: Change cardview in each site to adapt different sites
+* Lei: Fix bugs of announcement and each announcement section
+* Naiyu: Resource UI/ Each assign UI
+* Yunzhen: Add Feedback function/ Add help button
+* Zifan: Resource UI/ Each assign UI
+* Zhengyi: Fix box crashing problem
+
+
+### Sprint 2
 
 _**Finish Status in S2**_:
 1. Review all original code, restructure some code, add some comments (Yichuan Shi)
@@ -20,7 +100,7 @@ _**Finish Status in S2**_:
 
 _**To do in S3**_:
 
-_** Todo list**_:
+_**Todo list**_:
 1. Time String convert into correct time, in year 2018, find out the error using Imported Library Date
 2. Link Hamburgur button to Announcement Page 
 3. Link each_announcement to Announcement Page, rewrite use of item

@@ -61,31 +61,56 @@ public class AppBaseActivity extends AppCompatActivity{
                             Intent toAssignment = new Intent(getBaseContext(), Assignment.class);
                             toAssignment.putExtra("SiteID",siteid);
                             toAssignment.putExtra("activityLabelclick",activityLabelclick);
+                            Bundle b = new Bundle();
+                            b.putString("USERID", userid);
+                            toAssignment.putExtras(b);
                             startActivity(toAssignment);
                         }else if(item.getTitle().equals("Gradebook")) {
                             Intent toSites = new Intent(getBaseContext(), Gradebook.class);
                             toSites.putExtra("SiteID",siteid);
                             toSites.putExtra("activityLabelclick",activityLabelclick);
+                            Bundle b = new Bundle();
+                            b.putString("USERID", userid);
+                            toSites.putExtras(b);
                             startActivity(toSites);
                         }else if(item.getTitle().equals("Resources")) {
                             Intent toSites = new Intent(getBaseContext(), Resources.class);
                             toSites.putExtra("SiteID",siteid);
                             toSites.putExtra("activityLabelclick",activityLabelclick);
+                            Bundle b = new Bundle();
+                            b.putString("USERID", userid);
+                            toSites.putExtras(b);
                             startActivity(toSites);
                         }else if(item.getTitle().equals("Other Courses")) {
                             Intent intent = new Intent();
                             intent.putExtra("Result", "1");
                             intent.putExtra("activityLabelclick", activityLabelclick);
+                            Bundle b = new Bundle();
+                            b.putString("USERID", userid);
+                            intent.putExtras(b);
                             setResult(1, intent);
                         }else if(item.getTitle().equals("Announcements")){
                             Intent intent = new Intent(getBaseContext(), Announcement.class);
                             intent.putExtra("SiteID", siteid);
                             intent.putExtra("activityLabelclick", activityLabelclick);
+                            Bundle b = new Bundle();
+                            b.putString("USERID", userid);
+                            intent.putExtras(b);
                             startActivity(intent);
                         }else if(item.getTitle().equals("Lesson")){
                             Intent intent = new Intent(getBaseContext(), Lesson.class);
+                            intent.putExtra("SiteID",siteid);
+                            intent.putExtra("activityLabelclick",activityLabelclick);
                             Bundle b = new Bundle();
-                            b.putString("siteId", siteid);
+                            b.putString("USERID", userid);
+                            intent.putExtras(b);
+                            startActivity(intent);
+                        }else if(item.getTitle().equals("Box")){
+                            Intent intent = new Intent(getBaseContext(), Box.class);
+                            intent.putExtra("SiteID",siteid);
+                            intent.putExtra("activityLabelclick",activityLabelclick);
+                            Bundle b = new Bundle();
+                            b.putString("USERID", userid);
                             intent.putExtras(b);
                             startActivity(intent);
                         }

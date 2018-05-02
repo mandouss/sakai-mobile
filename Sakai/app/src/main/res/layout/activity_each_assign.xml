@@ -12,23 +12,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.example.noellesun.sakai.eachAssign">
 
     <TextView
         android:id="@+id/assign_itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
         android:text="Instructions"
-        android:textSize="18sp"
+        android:textColor="#283593"
+        android:gravity="center"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:background="#FFFFFF"
         tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp" />
+        tools:layout_editor_absoluteY="16dp" />
 
     <ScrollView
         android:id="@+id/textAreaScroller"
@@ -40,6 +38,7 @@
         android:layout_marginTop="36dp"
         android:layout_x="0px"
         android:layout_y="25px"
+        android:background="#F5F5F5"
         android:scrollbars="vertical">
 
         <TextView
@@ -50,10 +49,13 @@
             android:layout_alignStart="@+id/assign_itemName"
             android:layout_below="@+id/assign_itemName"
             android:layout_marginTop="32dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="TextView" />
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="TextView"
+            android:textColor="#424242"
+            android:textSize="20dp" />
     </ScrollView>
+
 
 </RelativeLayout>
     <android.support.design.widget.NavigationView
