@@ -37,20 +37,27 @@ public class Login extends AppCompatActivity {
     ArrayList<String> idarray = new ArrayList<>();
     private ProgressDialog pDialog;
     private String TAG = Login.class.getSimpleName();
+    private WebView browser;
     String target = "site:";
     String cookiestr;
     String basic = "https://shib.oit.duke.edu/idp/authn/external?";
 
     @Override
+    public void onBackPressed() {
+        if (browser.canGoBack()) {
+            browser.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.web_layout);
         //Use shib.duke to do the authentication
-        WebView browser = (WebView) findViewById(R.id.webview);
+        browser = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = browser.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //set cookie to maintain the session
@@ -82,6 +89,7 @@ public class Login extends AppCompatActivity {
                 }
                 return false; // then it is not handled by default action
             }
+
         });
 
     }
@@ -447,7 +455,13 @@ public class Login extends AppCompatActivity {
                 "        }, 250);\n" +
                 "      }\n" +
                 "    </script>\n" +
-                "</div></form>\n" +
+                "</div>" +
+                "<div class=\"smaller\">\n" +
+                "   For assistance, please visit \n" +
+                "   <a href=\"https://oit.duke.edu/help\" target=\"_blank\">oit.duke.edu/help\n" +
+                "   <i class=\"fa fa-external-link-square\" aria-hidden=\"true\"></i></a>&nbsp;\n" +
+                "</div>" +
+                "</form>\n" +
                 "     </div>\n" +
                 "   </div>\n" +
                 " </div>\n" +
