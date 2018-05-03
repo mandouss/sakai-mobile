@@ -31,7 +31,7 @@ public class Box extends AppBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
         final CookieManager cookieManager = CookieManager.getInstance();
-        String cookiestr = cookieManager.getCookie("https://sakai.duke.edu/portal");
+        String cookiestr = cookieManager.getCookie("https://sakaiboxintegrator.tk");
         HttpHandler sh = new HttpHandler();
         String jsonStr = sh.makeServiceCall("https://sakai.duke.edu/direct/membership.json",cookiestr);
         Log.e("userinfo", "Response from url: " + jsonStr);

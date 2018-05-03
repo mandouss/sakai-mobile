@@ -23,6 +23,7 @@ public class AppBaseActivity extends AppCompatActivity{
     private ActionBarDrawerToggle mDrawerToggle;
     private String siteID;
     private String userid;
+    private final static int ORDINARY_ACTIVITY_RESULT_CODE = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("AppBaseActivity", "onCreate");
@@ -64,7 +65,7 @@ public class AppBaseActivity extends AppCompatActivity{
                             Bundle b = new Bundle();
                             b.putString("USERID", userid);
                             toAssignment.putExtras(b);
-                            startActivity(toAssignment);
+                            startActivityForResult(toAssignment,ORDINARY_ACTIVITY_RESULT_CODE);
                         }else if(item.getTitle().equals("Gradebook")) {
                             Intent toSites = new Intent(getBaseContext(), Gradebook.class);
                             toSites.putExtra("SiteID",siteid);

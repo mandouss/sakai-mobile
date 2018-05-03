@@ -457,8 +457,13 @@ public class Login extends AppCompatActivity {
                 "    </script>\n" +
                 "</div>" +
                 "<div class=\"smaller\">\n" +
-                "   For assistance, please visit \n" +
-                "   <a href=\"https://oit.duke.edu/help\" target=\"_blank\">oit.duke.edu/help\n" +
+                "   For assistance, " +
+                "   <a href=\"https://support.sakai.duke.edu/sakai-training-and-support/\" target=\"_blank\">Click Here\n" +
+                "   <i class=\"fa fa-external-link-square\" aria-hidden=\"true\"></i></a>&nbsp;\n" +
+                "</div>" +
+                "<div class=\"smaller\">\n" +
+                "   Any feedback?  " +
+                "   <a href=\"https://sakai.duke.edu/\" target=\"_blank\">Click Here\n" +
                 "   <i class=\"fa fa-external-link-square\" aria-hidden=\"true\"></i></a>&nbsp;\n" +
                 "</div>" +
                 "</form>\n" +
